@@ -1,0 +1,23 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "npm",
+  "homepage": "https://github.com/danielfasure/job_tracker#readme",
+  "bugs": {
+    "url": "https://github.com/danielfasure/job_tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielfasure/job_tracker.git"
+  },
+  "author": "daniel fasure",
+  "type": "module",
+  "main": "./backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "express": "^5.2.1"
+  }
+}
