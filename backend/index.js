@@ -8,7 +8,8 @@ const port = 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-app.use(express.static("frontend"))
+app.use(express.static("frontend"));
+
 
 
 
@@ -26,14 +27,18 @@ app.get("/home",(req,res)=>{
 
 });
 
-app.get("/",(req,res)=>{
+
+// withoutmiddle ware 
+/*app.get("/",(req,res)=>{
     res.sendFile("/frontend/index.html");
   
-});
-app.get("/")
+}); */
+
+//app.get("/")
 
 app.listen(port,()=>{
     console.log(`services running on host port ${port}`);
+
 
 });
 
