@@ -1,10 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "node:url";
-const __dirname =dirname(fileURLToPath(import.meta.url));
-const __parentDirectory = path.join(__dirname, "..");
+
 
 const app = express();
 const port = 3000;
@@ -14,8 +10,24 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(express.static("frontend"))
 
+
+
+app.post("/submit",(req,res)=>{
+  const  username = req.body.username;
+ const   password = req.body.password;
+ res.render("application_tracker.ejs",{
+    daytype:username,
+    day_password:password
+    });
+})
+
+app.get("/home",(req,res)=>{
+ res.render("index.ejs");
+
+});
+
 app.get("/",(req,res)=>{
-    res.sendFile(__parentDirectory+"/frontend/index.html");
+    res.sendFile("/frontend/index.html");
   
 });
 app.get("/")
