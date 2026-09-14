@@ -28,8 +28,7 @@ client.connect();
 
 
 
-let jobs = []
-let job = {}
+
 function query(req, res) {
 
     client.query("SELECT * FROM jobinfo", (err, result) => {
