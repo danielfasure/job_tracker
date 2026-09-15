@@ -1,10 +1,19 @@
-import { getAllJobs } from "../services/jobService.js";
+import { getAllJobs } from "../services/JobServices.js";
 
-export async function showJobs(req, res) {
+export async function ShowJobs(req, res) {
 
     const jobs = await getAllJobs();
 
     res.render("jobs", {
-        jobs: jobs
+        job: jobs
     });
+}
+
+export async function HomePage(req,res){
+    res.render("index")
+
+}
+
+export async function TrackerPage(req,res){
+    res.render("application_tracker")
 }

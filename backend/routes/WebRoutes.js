@@ -1,14 +1,23 @@
 import express from "express";
 
 import {
-    showJobs,
-    showJob
-} from "../controllers/webController.js";
+    ShowJobs,
+    HomePage,
+    TrackerPage
+    
+
+   // showJob
+} from "../controllers/WebController.js";
 
 const router = express.Router();
+router.use(express.static("frontend"));
 
-router.get("/jobs", showJobs);
+router.get("/jobs", ShowJobs);
 
-router.get("/jobs/:id", showJob);
+router.get("/home",HomePage)
+
+router.get("/job_dashboard",TrackerPage)
+
+//router.get("/jobs/:id", showJob);
 
 export default router;

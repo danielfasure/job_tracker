@@ -2,7 +2,7 @@ import express from "express";
 import pool from "./db.js";
 
 
-import webRoutes from "./routes/webRoutes.js";
+import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
  const port =3000;
 
@@ -31,7 +31,7 @@ app.set("views", "./views");
 app.listen(port,()=>{
     console.log("http://localhost/"+port)
 })
-
+/*
 app.get("/job", async (req, res) => {
     const result = await pool.query("SELECT * FROM jobinfo");
 
@@ -86,3 +86,4 @@ app.delete("/users/:id", async (req, res) => {
 
     res.status(204).send();
 });
+*/

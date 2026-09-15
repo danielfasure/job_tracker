@@ -1,0 +1,16 @@
+
+<%- include('partials/header.ejs') %>
+
+<section class="col-12 my-5 mx-5 text-center card ">
+<% if (job) { %>
+ <% job.forEach(jobs => { %>
+  <li >  <%= jobs.jobname  %></li>
+  <li><%= jobs.jobdescripton %></li>
+  <li> <%= jobs.datewhenapplied %></li>
+ <% }) %>
+<% } %>
+<a type="button" href="/portal"> </a>
+<a type="button" href="/home">return  </a>
+
+</section>
+
