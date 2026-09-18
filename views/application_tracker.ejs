@@ -1,56 +1,72 @@
 <%- include("partials/header.ejs") %>
 
 <div class="container">
-  
-    <div class="my-5  mx-auto border bg-light application_tracker col-6 ">
-     <h1 class="text-center fw-bold fs-2 mb-5"> Application Tracker  </h1>
-    <div class=" row mx-5 my-5">
+ 
+
+    <div class="my-2  mx-auto border bg-light application_tracker col-6 ">
+     <h1 class="text-center fw-bold fs-2 mb-3"> Application Tracker  </h1>
+       <% if (stat) { %>
+    <div class=" row mb-5 g-2 mx-auto">
 
 
 
-        <div class=" col-lg-6 col-sm-12  ">
+        <div class=" col-lg-3 col-sm-12  ">
 
- <p class="fs-5"> Jobs applied for ? </p>
+ <p class="fs-5"> Jobs applied for <%= stat.TotalNumberOfApplication %> </p>
         </div>
-         <div class="col-lg-6 col-sm-12">
+         <div class="col-lg-3 col-sm-12 mx-auto">
 
-    <p class="fs-5"> Interviews secured ?</p>
+    <p class="fs-5"> Interviews secured <%= stat.NumberOfInterviewsActive %></p>
         </div>
-         <div class="col-lg-6 col-sm-12">
-  <p class="fs-5"> Assigments set ? </p>
-
-        </div>
-         <div class=" col-lg-6 col-sm-12">
-<p class="fs-5"> current streak? </p>
+       
+         <div class=" col-lg-3 col-sm-12 ms-auto">
+<p class="fs-5"> current streak<%=stat.DaysLogedIn %> </p>
 
         </div>
 
 
     </div>
+    
+
+<%   }else {  %>
+    <div class="col-5 mx-auto card">
+        <h1> currently you have no stats set once you use the application that should change </h1>
+     
+
+
     </div>
+
+   
+
+
+
+    <% } %>
+    </div>
+
     <div class="job_tracker_portal border bg-light col-6  my-5 text-center mx-auto">
-<h1 class="fs-2 fw-bold my-5">Job Adder  </h1>
+<h1 class="fs-2 fw-bold my-2">Job Adder  </h1>
 <form class="  row g-5 my-auto mx-auto" action="/api/jobs/createjobs" method="POST">
 
 <div class=" form-group col-sm-12 col-lg-5">
     
-    <label class="form-label" for ="CompanyName">company name </label>
-    <input type = "text" class="form-control" id ="CompanyName" name = "jobname">
+    <label class="form-label" for ="CompanyNameid">company name </label>
+    <input type = "text" class="form-control" id ="CompanyNameid" name = "CompanyName">
 </div>
 <div class=" form-group col-lg-5 ms-auto">
-    <label class="form-label" for ="JobTitle">Job title  </label>
-    <input type="text" id="JobTitle" class="form-control" name="JobTitle">
+    <label class="form-label" for ="JobTitleid">Job title  </label>
+    <input type="text" id="JobTitleid" class="form-control" name="JobTitle">
 
 </div>
 <div class="col-sm-12 col-lg-12 ">
-    <label class="form-label " for ="JobDesc">Date when you applied </label>
-    <input type="date" id="JobDesc" name="datewhenapplied" class="form-control col-4">
+    <label class="form-label " for ="companydateappliedid">Application Sent Date  </label>
+    <input type="date" id ="companydateappliedid" name="companydateapplied" class="form-control col-4">
 </div>
 <div class="col-12 ">
-    <label for ="JobDesc">job description </label>
-    <input type="text" id="JobDesc" name="jobdescripton" class="form-control h-100 ">
+    <label for ="companydescription">job description </label>
+    <input type="text" id="companydescription" name="jobdescription" class="form-control h-100 ">
 </div>
 <div class="col-12 mt-5 m-auto text-center">
+    <input type="hidden" name="userid" value="<%= userid %>">
   <button class="m-auto btn btn-primary "type="submit"> add to tracker  </button>
 
 </div>
@@ -66,7 +82,7 @@
 
    
     </div>
-    <h2 class="text-center m-auto my-5" ><a href="/tracker">view applications</a></h2>
-   <h1 class="text-center m-auto my-5"> <a  href="/home"> Return Home </a></h1>
+    <h2 class="text-center m-auto my-5" ><a href="/jobs">view applications</a></h2>
+   <h1 class="text-center m-auto my-5"> <a  href="/job_dashboard"> Return Home </a></h1>
 
 <%- include("partials/footer.ejs") %>

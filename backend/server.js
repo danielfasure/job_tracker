@@ -1,5 +1,7 @@
 import express from "express";
-import pool from "./db.js";
+import "dotenv/config";
+import session  from "express-session";
+
 
 
 import webRoutes from "./routes/WebRoutes.js";
@@ -11,6 +13,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use("/", webRoutes);
 app.use("/api", apiRoutes);
 

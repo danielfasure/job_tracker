@@ -1,19 +1,32 @@
+import "dotenv/config";
 import pool from "../db.js";
 
 export async function getAllJobs() {
 
     const result = await pool.query(
-        "SELECT * FROM jobinfo"
+        'SELECT * FROM "JobTracker"'
     );
 
     return result.rows;
 }
 
-export async function CreateJob(jobname,jobdescripton,datewhenapplied){
+export async function getUserJobs(id) {
 
+    const result = await pool.query(
+        'SELECT * FROM "JobTracker" WHERE "Userid"=$1',[id]
+    );
+
+    return result.rows;
+}
+
+
+export async function CreateJob(CompanyName,jobdescription,JobTitle,companydateapplied,Userid){
     
+
     const result =  await pool.query(
-        "INSERT INTO jobinfo (jobname,jobdescripton,datewhenapplied)  VALUES ($1, $2, $3) ",[jobname,jobdescripton,datewhenapplied]
+        'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid")  VALUES ($1, $2, $3, $4,$5)' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid]
     )
     return result.rows[0]
 }
+
+

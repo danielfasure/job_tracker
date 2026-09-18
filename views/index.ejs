@@ -10,48 +10,51 @@
     
 <div class=" mx-5  text-center login_div bg-light   "  >
  <h1 class="text-center fw-bold fs-4  text-center "> Login  page  </h1>
-<form class="  row  my-2  mx-auto" action="/portal" method="POST" >
+<form class="  row  my-2  mx-auto" action="/api/user/loginuser" method="POST" >
  
         <div class=" form-group  col-lg-6 col-12">
 
         <label for ="Username" class="form-label"> Username </label>
 
-        <input class="form-control  " type="text" id="Username" name="username">
+        <input class="form-control  " type="text" id="Username" name="Username">
         </div>
           <div class=" form-group col-lg-6 col-12">
         <label for ="Passwordlogin" class="form-label"> Password </label>
 
-        <input class="form-control " type="password" id="Passwordlogin" name="password">
+        <input class="form-control " type="password" id="Passwordlogin" name="Password">
         </div>
+   
          <div class="col-12 mt-5 m-auto text-center">
  <input type="submit" class="btn btn-primary" > 
 
 </div>
+
 </form>  
 <button class=" btn m-auto mt-5 text-center col-lg-3 change_register_button">Change to Register Page   </button>
 
 </div>
+
 <div class="mx-auto  register_div my-5 bg-light text-center hidden ">
 <h1 class="fs-4 fw-bold  mb-5"> Register page </h1>
-<form class="  row my-5  mx-5" action="/portal" method="POST">
+<form class="  row my-5  mx-5" action="/api/user/createuser" method="POST">
      <div class=" form-group col-sm-12 col-lg-6 ">
         <label for ="usernameregister" class="form-label col-2"> username </label>
-        <input class=" col-2 form-control my-2" id ="usernameregister" name="username">
+        <input class=" col-2 form-control my-2" id ="usernameregister" name="Username">
 
     </div>
      <div class=" form-group col-sm-12 col-lg-6 ">
         <label for ="passwordregister" class="form-label"> password </label>
-        <input class="form-control my-2" id ="passwordregister" name="password"> 
+        <input class="form-control my-2" id ="passwordregister" name="Password"> 
 
     </div>
     <div class=" form-group col-sm-12 col-lg-6 my-5">
         <label for ="passwordregister2" class="form-label"> password again  </label>
-        <input class="form-control my-2" id = "passwordregister2" name="password2">
+        <input class="form-control my-2" id = "passwordregister2" name="Password2">
 
     </div>
       <div class=" form-group col-sm-12 col-lg-6 my-5 ">
-        <label for ="email" class="form-label"> email  </label>
-        <input class="form-control my-2" id ="email">
+        <label for ="emailid" class="form-label"> email  </label>
+        <input class="form-control my-2" id ="emailid" name="Email">
 
     </div>
     <div class="col-12 mt-5 m-auto text-center">

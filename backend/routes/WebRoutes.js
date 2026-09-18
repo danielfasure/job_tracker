@@ -3,7 +3,9 @@ import express from "express";
 import {
     ShowJobs,
     HomePage,
-    TrackerPage
+    TrackerPage,
+    login,
+    register
     
 
    // showJob
@@ -17,6 +19,8 @@ router.get("/jobs", ShowJobs);
 router.get("/home",HomePage)
 
 router.get("/job_dashboard",TrackerPage)
+router.get("/login",login)
+router.get("/register",register)
 
 //router.get("/jobs/:id", showJob);
 

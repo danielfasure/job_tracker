@@ -1,16 +1,39 @@
 
 <%- include('partials/header.ejs') %>
 
-<section class="col-12 my-5 mx-5 text-center card ">
+<section class="col-6 my-5 mx-auto text-center card ">
 <% if (job) { %>
- <% job.forEach(jobs => { %>
-  <li >  <%= jobs.jobname  %></li>
-  <li><%= jobs.jobdescripton %></li>
-  <li> <%= jobs.datewhenapplied %></li>
- <% }) %>
-<% } %>
-<a type="button" href="/portal"> </a>
-<a type="button" href="/home">return  </a>
+ <% job.forEach(jobs => { %><div class="row">
+
+  <div class=" row mx-5 my-5">
+
+
+
+        <div class=" col-lg-6 col-sm-12  ">
+
+ <p class="fs-5">  <%= jobs.JobTitle  %> </p>
+        </div>
+         <div class="col-lg-6 col-sm-12 ">
+
+    <p class="fs-5"> <%= jobs.jobdescripton %></p>
+        </div>
+         <div class="col-lg-6 col-sm-12 mx-auto">
+  <p class="fs-5"> <%= jobs.datewhenapplied %></p>
+
+        </div>
+
+
+    </div>
+    
+ <% })%>
+
+<%   }else {  %>
+
+    <h1 class="my-5 mx-auto col-6"> add jobs to see info here</h1>
+    <%  }%>
+
+<a type="button" href="/job_dashboard">return  </a>
 
 </section>
 
+<%- include('partials/footer.ejs') %>
