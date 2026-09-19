@@ -15,24 +15,28 @@
         </div>
          <div class="col-lg-6 col-sm-12 ">
 
-    <p class="fs-5"> <%= jobs.jobdescripton %></p>
+    <p class="fs-5"> <%=  jobs.JobDescripton %></p>
         </div>
          <div class="col-lg-6 col-sm-12 mx-auto">
-  <p class="fs-5"> <%= jobs.datewhenapplied %></p>
+  <p class="fs-5"> <%= new Date(jobs.DateCreated).toLocaleDateString('en-GB')  %></p>
+
+        </div>
+           <div class="col-lg-6 col-sm-12 mx-auto">
+  <p class="fs-5"> <%= jobs.CompanyName %></p>
 
         </div>
 
 
     </div>
     
- <% })%>
+ <% });%>
 
 <%   }else {  %>
 
     <h1 class="my-5 mx-auto col-6"> add jobs to see info here</h1>
-    <%  }%>
+    <%  };%>
 
-<a type="button" href="/job_dashboard">return  </a>
+<a type="button" href="/home">return  </a>
 
 </section>
 

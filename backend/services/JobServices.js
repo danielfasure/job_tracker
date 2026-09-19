@@ -11,9 +11,9 @@ export async function getAllJobs() {
 }
 
 export async function getUserJobs(id) {
-
+     const value = parseInt(id.replace(":", ""));
     const result = await pool.query(
-        'SELECT * FROM "JobTracker" WHERE "Userid"=$1',[id]
+        'SELECT * FROM "JobTracker" WHERE "Jobuserid"=$1',[value]
     );
 
     return result.rows;

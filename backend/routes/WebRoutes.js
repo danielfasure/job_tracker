@@ -3,7 +3,7 @@ import express from "express";
 import {
     ShowJobs,
     HomePage,
-    TrackerPage,
+  ShowUserJobs,
     login,
     register
     
@@ -14,14 +14,14 @@ import {
 const router = express.Router();
 router.use(express.static("frontend"));
 
-router.get("/jobs", ShowJobs);
+
 
 router.get("/home",HomePage)
 
-router.get("/job_dashboard",TrackerPage)
+
 router.get("/login",login)
 router.get("/register",register)
 
-//router.get("/jobs/:id", showJob);
+router.get("/jobs/:userid", ShowUserJobs);
 
 export default router;

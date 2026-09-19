@@ -2,7 +2,7 @@ import express from "express";
 import "dotenv/config";
 import session  from "express-session";
 
-
+import bcrypt from "bcrypt";
 
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
