@@ -9,7 +9,7 @@ import {
 
 import { 
   setUser,
-  getuserid,checkuser,addUserStats
+  getuserid,checkuser,setUserFirstStats
   
 } 
   from "../services/userServices.js";
@@ -24,25 +24,31 @@ export async function getJobs(req, res) {
 }
 
 export async function RegisterMaker(req,res) {
-  const {Username,Password,Password2,Email}=req.body;
-  if(Password===Password2){
-    const response = await setUser(Username,Password,Email);
-  const userid=response.id ;
-  req.session.user = {
-    username: Username,
-    email: Email,
-    userid:userid
-};
-const createstats = addUserStats(userid)
+const { Username, Password, Password2, Email } = req.body;
 
-res.redirect(`/register`);
-  }else{
-
-    res.redirect('/home');
-  }
-
-
+if (Password !== Password2) {
+    return res.json({
+        message: "Could not add user: passwords do not match"
+    });
 }
+
+const createuser = await setUser(Username, Password, Email);
+
+if (createuser === false) {
+    return res.json({
+        message: "Username already exists"
+    });
+}
+
+const createstat = await setUserFirstStats(Username);
+
+return res.json({
+    createstat,
+    createuser
+});
+}
+
+
 
 export async function Loginchecker(req,res){
   const{Username,Password}= req.body;

@@ -5,7 +5,7 @@ import {
     HomePage,
   ShowUserJobs,
     login,
-    register
+    register,authorizeduser
     
 
    // showJob
@@ -17,9 +17,9 @@ router.use(express.static("frontend"));
 
 
 router.get("/home",HomePage)
+router.get("/applicationportal",authorizeduser)
 
-
-router.get("/login",login)
+router.post("/login",authorizeduser)
 router.get("/register",register)
 
 router.get("/jobs/:userid", ShowUserJobs);

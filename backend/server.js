@@ -3,9 +3,12 @@ import "dotenv/config";
 import session  from "express-session";
 
 import bcrypt from "bcrypt";
-
+import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
+
+import configurePassport from "./services/passport.js"
+
  const port =3000;
 
 const app = express();
@@ -14,10 +17,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: 'your-secret-key',
+    secret: 'great',
     resave: false,
     saveUninitialized: false
 }));
+app.use(passport.initialize())
+app.use(passport.session())
 app.use("/", webRoutes);
 app.use("/api", apiRoutes);
 
@@ -32,8 +37,7 @@ app.use(logger);
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
-
+configurePassport();
 
 app.listen(port,()=>{
     console.log("http://localhost/"+port)

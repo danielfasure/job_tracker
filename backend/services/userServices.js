@@ -1,10 +1,19 @@
 import "dotenv/config";
 import pool from "../db.js";
 import bcrypt, { hash } from "bcrypt";
+import { Strategy } from "passport-local";
 
 const saltRounds =10;
 
-export async function addUserStats(userid) {
+export async function setUserFirstStats(Username) {
+    const result = await pool.query(
+        'SELECT id FROM "JobUser" WHERE "Username"= $1',[Username]
+    )
+    if (result.rows.length === 0) {
+    return false;
+}
+const id = result.rows[0].id;
+    
     const DaysLogedIn = 1;
    
     const MostJobsAppliedInADay =0;
@@ -13,10 +22,11 @@ export async function addUserStats(userid) {
       const NumberOfInterviewsActive=0;
      
  
-const result = await pool.query(
-    `INSERT INTO "UserStats" ("DaysLogedIn","MostJobsAppliedInADay","NumberOfInterviewsActive","TotalNumberOfApplication","ActiveApplication","userid") VALUES ($1,$2,$3,$4,$5,$6)` ,[DaysLogedIn,MostJobsAppliedInADay,NumberOfInterviewsActive,TotalNumberOfApplication,ActiveApplication,userid]
+const result2 = await pool.query(
+    `INSERT INTO "UserStats" ("DaysLogedIn","MostJobsAppliedInADay","NumberOfInterviewsActive","TotalNumberOfApplication","ActiveApplication","userid") VALUES ($1,$2,$3,$4,$5,$6) RETURNING *` ,[DaysLogedIn,MostJobsAppliedInADay,NumberOfInterviewsActive,TotalNumberOfApplication,ActiveApplication,id]
     
 )
+return result2.rows[0]
 }
 
 export async function getUserStats(userid) {
@@ -41,7 +51,7 @@ export async function checkuser(Username,Password)
     );
     let verify ;
    
-    if(result.rows.length===0){
+    if(result.rows[0].length===0){
         verify= {verify:"no"
     };
 
@@ -77,6 +87,15 @@ export async function checkuser(Username,Password)
 
 export async function setUser(Username, Password, Email) {
 
+    const check= await pool.query(
+        'SELECT * FROM "JobUser" WHERE "Username" = $1',
+        [Username]
+    );
+    if (check.rows.length>0){
+        return "false";
+    }
+
+
     const hash = await bcrypt.hash(Password, saltRounds);
 
     await pool.query(
@@ -84,10 +103,10 @@ export async function setUser(Username, Password, Email) {
         [Username, hash, Email]
     );
 
-    const userid = await pool.query(
-        'SELECT id FROM "JobUser" WHERE "Username" = $1',
+    const user= await pool.query(
+        'SELECT * FROM "JobUser" WHERE "Username" = $1',
         [Username]
     );
 
-    return userid.rows[0];
+    return user.rows[0];
 }
