@@ -1,11 +1,11 @@
 import express from "express";
 
 import {
-    ShowJobs,
+   
     HomePage,
-  ShowUserJobs,
-    login,
-    register,authorizeduser
+     applicationPagemaker,
+    authorizeduser,register,
+    ShowUserapplication
     
 
    // showJob
@@ -17,11 +17,11 @@ router.use(express.static("frontend"));
 
 
 router.get("/home",HomePage)
-router.get("/applicationportal",authorizeduser)
+router.get("/applicationportal",applicationPagemaker)
 
-router.post("/login",authorizeduser)
-router.get("/register",register)
+router.post("/login",applicationPagemaker)
+router.post("/register",register)
 
-router.get("/jobs/:userid", ShowUserJobs);
+router.post("/jobs/:userid", ShowUserapplication);
 
 export default router;

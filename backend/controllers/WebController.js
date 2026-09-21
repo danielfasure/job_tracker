@@ -1,58 +1,61 @@
-import { getAllJobs , getUserJobs } from "../services/JobServices.js";
-import {getUserStats} from "../services/userServices.js";
+import {  getUserJobs } from "../services/JobServices.js";
+import {getUserStats,authenticateUser,setUser,setUserFirstStats} from "../services/userServices.js";
 
 
 
 
-export async function ShowJobs(req, res) {
+export async function ShowUserapplication(req, res) {
 
-    const jobs = await getAllJobs();
-
-    res.render("jobs", {
-        job: jobs
-    });
-}
-export async function ShowUserJobs(req, res) {
-
-    const jobs = await getUserJobs(req.params.userid);
+    const jobs = await getUserJobs(req.userd);
 
     res.render("jobs", {
         job: jobs
       
     });
 }
-export async function HomePage(req,res){
-    res.render("index")
+export  function HomePage(req,res){
+
+    res.render("index");
 
 }
 
-
+// connect to my post router this function will go inisde the database and set user and add stats with the user and will  render the application pass in the user id
 export async function register(req,res) {
-  
-  const response = await getUserStats(userid);
+    console.log("REGISTER");
+    console.log(req.method);
+    console.log(req.headers["content-type"]);
+    console.log(req.body);
+
+  const {Username ,Password,Email} = req.body;
+  const user =await setUser(Username,Password,Email);
+  if (user===false){
+    res.redirect("/home")
+  }
+  const response = await setUserFirstStats(user.id);
 
 
-console.log("USERID:", userid);
+
 
   res.render("application_tracker",{
     stat: response,
-    userid:userid
+    userid:user.id
 
   });
 
 
 }
-export async function login(req,res){
-  if (req.session.user===null){
-   return res.redirect(`/home`)
-  }
+export async function applicationPagemaker(req,res){
 
+  
+  if (!req.session.user) {
+    return res.redirect("/home");
+}
    
    const userid =req.session.user.id;
   const response = await getUserStats(userid);
-  console.log("SESSION USER:", req.session.user);
+
 console.log("USERID:", userid);
-req.login(user)
+
  res.render("application_tracker",{
     stat: response,
     userid:userid
@@ -64,13 +67,9 @@ req.login(user)
 
 
 
-export async function authorizeduser(req,res) {
-  if (req.isAuthenticated()){
-    res.redirect("/application_tracker")
-
-  }else{
-    res.redirect(`/home`)
-  }
+export async function authorizeduser() {
+  authenticateUser();
+  
   
 }
 

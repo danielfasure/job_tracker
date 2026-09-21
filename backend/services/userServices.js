@@ -1,7 +1,7 @@
 import "dotenv/config";
 import pool from "../db.js";
 import bcrypt, { hash } from "bcrypt";
-import { Strategy } from "passport-local";
+import  passport from "passport";
 
 const saltRounds =10;
 
@@ -78,7 +78,12 @@ export async function checkuser(Username,Password)
         }
 
 
-
+ export async function authenticateUser() {
+ passport.authenticate("local", {
+        successRedirect: "/application_tracker",
+        failureRedirect: "/home"
+    })
+}
 
       
      
@@ -92,7 +97,7 @@ export async function setUser(Username, Password, Email) {
         [Username]
     );
     if (check.rows.length>0){
-        return "false";
+        return false;
     }
 
 
