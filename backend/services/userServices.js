@@ -5,13 +5,11 @@ import  passport from "passport";
 
 const saltRounds =10;
 
-export async function setUserFirstStats(Username) {
+export async function setUserFirstStats(userid) {
     const result = await pool.query(
-        'SELECT id FROM "JobUser" WHERE "Username"= $1',[Username]
+        'SELECT * FROM "JobUser" WHERE "id"= $1',[userid]
     )
-    if (result.rows.length === 0) {
-    return false;
-}
+    
 const id = result.rows[0].id;
     
     const DaysLogedIn = 1;

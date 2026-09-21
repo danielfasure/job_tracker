@@ -82,7 +82,12 @@
 
    
     </div>
-    <button><a href="./jobs/:<%= userid %>">view applications</a></button>
-   <button><a  href="./home"> logout </a></button>
+
+    <button class="btn btn-success mx-auto text-center"><a href="./jobs/:<%= userid %>">view applications</a></button>
+   <form action="/logout" method="POST"  class="mx-auto text-center">
+    <button type="submit" class="btn btn-danger mx-auto">
+        Logout
+    </button>
+</form>
 
 <%- include("partials/footer.ejs") %>

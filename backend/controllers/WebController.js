@@ -5,8 +5,8 @@ import {getUserStats,authenticateUser,setUser,setUserFirstStats} from "../servic
 
 
 export async function ShowUserapplication(req, res) {
-
-    const jobs = await getUserJobs(req.userd);
+const userid =req.user.id;
+    const jobs = await getUserJobs(userid);
 
     res.render("jobs", {
         job: jobs
@@ -22,39 +22,35 @@ export  function HomePage(req,res){
 // connect to my post router this function will go inisde the database and set user and add stats with the user and will  render the application pass in the user id
 export async function register(req,res) {
     console.log("REGISTER");
-    console.log(req.method);
-    console.log(req.headers["content-type"]);
-    console.log(req.body);
+   
 
   const {Username ,Password,Email} = req.body;
   const user =await setUser(Username,Password,Email);
   if (user===false){
     res.redirect("/home")
   }
+  console.log(user)
   const response = await setUserFirstStats(user.id);
 
 
 
-
-  res.render("application_tracker",{
-    stat: response,
-    userid:user.id
-
-  });
+ console.log(response);
+  res.redirect("/home");
 
 
 }
 export async function applicationPagemaker(req,res){
 
   
-  if (!req.session.user) {
+  if (!req.user) {
     return res.redirect("/home");
 }
    
-   const userid =req.session.user.id;
+   const userid =req.user.id;
   const response = await getUserStats(userid);
 
 console.log("USERID:", userid);
+console.log(response);
 
  res.render("application_tracker",{
     stat: response,
@@ -67,9 +63,15 @@ console.log("USERID:", userid);
 
 
 
-export async function authorizeduser() {
-  authenticateUser();
+export async function logout(req,res,next) {
   
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+
+        res.redirect("/home");
+    });
   
 }
 

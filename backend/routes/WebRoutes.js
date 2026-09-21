@@ -1,11 +1,11 @@
 import express from "express";
-
+import  passport from "passport";
 import {
    
     HomePage,
      applicationPagemaker,
-    authorizeduser,register,
-    ShowUserapplication
+    register,
+    ShowUserapplication,logout
     
 
    // showJob
@@ -19,8 +19,12 @@ router.use(express.static("frontend"));
 router.get("/home",HomePage)
 router.get("/applicationportal",applicationPagemaker)
 
-router.post("/login",applicationPagemaker)
+router.post("/login",passport.authenticate("local", {
+        successRedirect: "/applicationportal",
+        failureRedirect: "/home"
+    }))
 router.post("/register",register)
+router.post("/logout",logout)
 
 router.post("/jobs/:userid", ShowUserapplication);
 
