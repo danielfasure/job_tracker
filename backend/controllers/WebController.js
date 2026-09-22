@@ -1,5 +1,6 @@
 import {  getUserJobs } from "../services/JobServices.js";
-import {getUserStats,authenticateUser,setUser,setUserFirstStats} from "../services/userServices.js";
+import {setUser} from "../services/userServices.js";
+import {updateLoginStats, setUserFirstStats,getUserStats} from "../services/StatsUser.js";
 
 
 
@@ -47,6 +48,7 @@ export async function applicationPagemaker(req,res){
 }
    
    const userid =req.user.id;
+    await updateLoginStats(userid);
   const response = await getUserStats(userid);
 
 console.log("USERID:", userid);

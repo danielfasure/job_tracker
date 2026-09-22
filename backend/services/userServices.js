@@ -76,12 +76,7 @@ export async function checkuser(Username,Password)
         }
 
 
- export async function authenticateUser() {
- passport.authenticate("local", {
-        successRedirect: "/application_tracker",
-        failureRedirect: "/home"
-    })
-}
+
 
       
      
