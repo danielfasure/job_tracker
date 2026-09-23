@@ -1,4 +1,4 @@
-import {  getUserJobs } from "../services/JobServices.js";
+import {  getUserJobs,createJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats} from "../services/StatsUser.js";
 
@@ -26,24 +26,54 @@ export async function register(req,res) {
    
 
   const {Username ,Password,Email} = req.body;
-  const user =await setUser(Username,Password,Email);
-  if (user===false){
-    res.redirect("/home")
+  const User =await setUser(Username,Password,Email);
+  if (User===false){
+    console.log("Failed to add user");
+   return  res.redirect("/home")
   }
-  console.log(user)
-  const response = await setUserFirstStats(user.id);
+  req.login(User,async (err)=>{
+    if (err) {
+        console.log("Error logging in user:", err);
+        return res.redirect("/home")
+    }
+    console.log("User logged in successfully:", req.user);
+   
 
 
 
- console.log(response);
-  res.redirect("/home");
+ 
+ 
+    
+  
+  
+  console.log("User ID:", req.user.id);
+ const stats =await setUserFirstStats(req.user.id);
+
+console.log("Successfully added stats",stats);
+
+ console.log("successfully added user and stats",req.user.id);
+  return res.redirect("/applicationportal");
+  }); 
+
+ 
+}
+export async function CreateJob(req,res){
+  const {JobTitle,CompanyName,JobDescription,DateCreated} = req.body;
+  const userid = req.user.id;
+  const job = await createJobs(JobTitle,CompanyName,JobDescription,DateCreated,userid);
+  console.log("Successfully added job",job);
+  res.redirect("/applicationportal");
 
 
 }
+
+
+
 export async function applicationPagemaker(req,res){
 
   
-  if (!req.user) {
+  if (!req.isAuthenticated()) {
+    console.log("User not authenticated, redirecting to home page");
     return res.redirect("/home");
 }
    

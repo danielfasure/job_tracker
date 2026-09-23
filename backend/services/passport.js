@@ -8,10 +8,9 @@ export default function configurePassport() {
 
 passport.use(
     new LocalStrategy(
-        {
-            usernameField: "Username",
-            passwordField: "Password"
-        },
+       { usernameField: "Username",
+        passwordField: "Password"
+    },
         async (Username, Password, done) => {
 
             try {
@@ -23,7 +22,8 @@ passport.use(
                 if (result.rows.length === 0) {
                     return done(null, false);
                 }
-
+                    console.log("LOGIN USERNAME:", Username);
+                    console.log("USER FOUND:", result.rows.length);
                 const user = result.rows[0];
 
                 const match = await bcrypt.compare(

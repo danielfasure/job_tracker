@@ -1,5 +1,5 @@
 import {
-    CreateJob,
+   
     getAllJobs,
     
 
@@ -76,7 +76,7 @@ export async function createJob(req,res){
   const {CompanyName,JobTitle,jobdescription,companydateapplied,userid} = req.body;
   
 
-  const worked= CreateJob(CompanyName,jobdescription,JobTitle,companydateapplied,userid);
+  //const worked= CreateJob(CompanyName,jobdescription,JobTitle,companydateapplied,userid);
    res.redirect(`/login`)
 
 

@@ -5,7 +5,7 @@ import {
     HomePage,
      applicationPagemaker,
     register,
-    ShowUserapplication,logout
+    ShowUserapplication,logout,CreateJob
     
 
    // showJob
@@ -25,6 +25,7 @@ router.post("/login",passport.authenticate("local", {
     }))
 router.post("/register",register)
 router.post("/logout",logout)
+router.post("/createjob",CreateJob)
 
 router.post("/jobs/:userid", ShowUserapplication);
 

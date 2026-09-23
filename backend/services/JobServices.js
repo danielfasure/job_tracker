@@ -20,7 +20,7 @@ export async function getUserJobs(id) {
 }
 
 
-export async function CreateJob(CompanyName,jobdescription,JobTitle,companydateapplied,Userid){
+export async function createJobs(CompanyName,jobdescription,JobTitle,companydateapplied,Userid){
     
 
     const result =  await pool.query(

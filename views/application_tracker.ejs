@@ -12,15 +12,23 @@
 
         <div class=" col-lg-3 col-sm-12  ">
 
- <p class="fs-5"> Jobs applied for <%= stat.TotalNumberOfApplication %> </p>
+ <p class="fs-5">  Total Jobs applied for <br><%= stat.TotalNumberOfApplication %> </p>
         </div>
          <div class="col-lg-3 col-sm-12 mx-auto">
 
-    <p class="fs-5"> Interviews secured <%= stat.NumberOfInterviewsActive %></p>
+    <p class="fs-5"> Interviews currently active  <br><%= stat.NumberOfInterviewsActive %></p>
         </div>
        
          <div class=" col-lg-3 col-sm-12 ms-auto">
-<p class="fs-5"> current streak<%=stat.DaysLogedIn %> </p>
+<p class="fs-5"> total login days<br><%=stat.TotalLoginDays %> </p>
+
+        </div>
+        <div class=" col-lg-3 col-sm-12 ms-auto">
+<p class="fs-5"> first login date<br> <%= new Date(stat.FirstLoginDate).toLocaleDateString("en-GB") %> </p>
+
+        </div>
+        <div class=" col-lg-3 col-sm-12 mx-auto">
+<p class="fs-5"> login streak<br> <%=stat.LoginStreak %> </p>
 
         </div>
 
@@ -82,8 +90,9 @@
 
    
     </div>
-
+<div class=" text-center my-5">
     <button class="btn btn-success mx-auto text-center"><a href="./jobs/:<%= userid %>">view applications</a></button>
+</div>
    <form action="/logout" method="POST"  class="mx-auto text-center">
     <button type="submit" class="btn btn-danger mx-auto">
         Logout
