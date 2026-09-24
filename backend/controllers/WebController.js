@@ -1,6 +1,6 @@
 import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
-import {updateLoginStats, setUserFirstStats,getUserStats} from "../services/StatsUser.js";
+import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 
 
 
@@ -58,6 +58,10 @@ console.log("Successfully added stats",stats);
  
 }
 export async function CreateJob(req,res){
+  if (!req.isAuthenticated()) {
+    console.log("User not authenticated, redirecting to home page");
+    return res.redirect("/home");
+}
   const { JobTitle, CompanyName, JobDescription, DateCreated } = req.body;
   const userid = req.user.id;
  const job = await CreateJobs(
@@ -69,12 +73,22 @@ export async function CreateJob(req,res){
 );
 
   console.log("Successfully added job",job);
+  increaseapplicationcount(userid);
   res.redirect("/applicationportal");
 
 
 }
+export async function removeJob(req,res){
+  if (!req.isAuthenticated()) {
+    console.log("User not authenticated, redirecting to home page");
+    return res.redirect("/home");
+}
+  const { jobId } = req.body;
+ 
+  const result = await decreaseapplicationcount(jobId);
+  console.log("Successfully removed job",result);
 
-
+}
 
 export async function applicationPagemaker(req,res){
 
@@ -89,7 +103,7 @@ export async function applicationPagemaker(req,res){
   const response = await getUserStats(userid);
 
 
-console.log("USERID:", userid);
+
 console.log(response);
  const userjobs=await getUserJobs(userid);
 if (!userjobs) {
@@ -104,6 +118,26 @@ console.log("User jobs:", userjobs);
     applications:userjobs
 
   });
+
+}
+export async function statsPage(req,res){
+  if (!req.isAuthenticated()) {
+    console.log("User not authenticated, redirecting to home page");
+    return res.redirect("/home");
+}
+
+const userstats=await getUserStats(req.user.id);
+res.render("statistics",{
+  stat:userstats } );
+
+
+}
+export async function  settingPage(req,res){
+   if (!req.isAuthenticated()) {
+    console.log("User not authenticated, redirecting to home page");
+    return res.redirect("/home");
+}
+res.render("setting", { user: req.user });
 
 }
 
@@ -121,4 +155,5 @@ export async function logout(req,res,next) {
     });
   
 }
+
 

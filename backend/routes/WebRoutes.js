@@ -5,7 +5,8 @@ import {
     HomePage,
      applicationPagemaker,
     register,
-    ShowUserapplication,logout,CreateJob
+    ShowUserapplication,logout,CreateJob,
+    statsPage,settingPage
     
 
    // showJob
@@ -18,6 +19,8 @@ router.use(express.static("frontend"));
 
 router.get("/home",HomePage)
 router.get("/applicationportal",applicationPagemaker)
+router.get("/statistics",statsPage)
+router.get("/setting",settingPage)
 
 router.post("/login",passport.authenticate("local", {
         successRedirect: "/applicationportal",

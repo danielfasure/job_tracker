@@ -1,0 +1,53 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+<div class="container">
+ 
+
+    <div class="my-2  mx-auto border bg-light application_tracker col-8 ">
+     <h1 class="text-center fw-bold fs-2 mb-3"> User Settings </h1>
+       <% if (user) { %>
+    <div class=" row mb-5 g-2 mx-auto">
+
+
+
+        <div class=" col-lg-4 col-sm-12  ">
+
+ <h1 class="fs-5"> current user  <br></h1><p> <%= user.Username %> </p></h1>
+ 
+ <button type="button" class="Username" value="edit" id="edit_username_button">
+    <i class="bi bi-pencil-square"></i>
+</button>
+
+        </div>
+         <div class="col-lg-4 col-sm-12 mx-auto">
+
+    <h1 class="fs-5"> current email  <br> </h1><p> <%= user.Email %> </p></h1>
+   
+        <button type="button" class="Email" value="edit" id="edit_email_button">
+    <i class="bi bi-pencil-square"></i>
+</button>
+
+        </div>
+     <div class=" col-2 mx-2 my-auto">
+        <button type="button" class="Email mx-auto" value="submit" id="submituser_button">
+<i class="bi bi-check-circle mx-auto"></i>
+</button>
+
+
+    </div>
+    
+
+<%   }else {  %>
+    <div class="col-5 mx-auto card">
+        <h1> currently you have no stats set once you use the application that should change </h1>
+     
+
+
+    </div>
+
+   
+
+
+
+    <% } %>
+    </div>

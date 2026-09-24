@@ -1,0 +1,52 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+<div class="container">
+ 
+
+    <div class="my-2  mx-auto border bg-light application_tracker col-8 ">
+     <h1 class="text-center fw-bold fs-2 mb-3"> Application Tracker  </h1>
+       <% if (stat) { %>
+    <div class=" row mb-5 g-2 mx-auto">
+
+
+
+        <div class=" col-lg-3 col-sm-12  ">
+
+ <p class="fs-5">  Total Jobs applied for <br><%= stat.TotalNumberOfApplication %> </p>
+        </div>
+         <div class="col-lg-3 col-sm-12 mx-auto">
+
+    <p class="fs-5"> Interviews currently active  <br><%= stat.NumberOfInterviewsActive %></p>
+        </div>
+       
+         <div class=" col-lg-3 col-sm-12 ms-auto">
+<p class="fs-5"> total login days<br><%=stat.TotalLoginDays %> </p>
+
+        </div>
+        <div class=" col-lg-3 col-sm-12 ms-auto">
+<p class="fs-5"> first login date<br> <%= new Date(stat.FirstLoginDate).toLocaleDateString("en-GB") %> </p>
+
+        </div>
+        <div class=" col-lg-3 col-sm-12 mx-auto">
+<p class="fs-5 text-center"> login streak<br> <%=stat.LoginStreak %> </p>
+
+        </div>
+
+
+    </div>
+    
+
+<%   }else {  %>
+    <div class="col-5 mx-auto card">
+        <h1> currently you have no stats set once you use the application that should change </h1>
+     
+
+
+    </div>
+
+   
+
+
+
+    <% } %>
+    </div>
