@@ -1,0 +1,40 @@
+<div class="job_list border bg-light col-6  my-5 text-center mx-auto hidden">
+ <% if (Array.isArray(applications) && applications.length > 0) { %>
+
+    <% applications.forEach(application => { %>
+
+        <div class="row mx-5 my-5">
+
+            <div class="col-lg-6 col-sm-12">
+                <p class="fs-5">
+                    <%= application.JobTitle %>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+                <p class="fs-5">
+                    <%= application.JobDescription %>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+                <p class="fs-5">
+                    <%= new Date(application.DateCreated).toLocaleDateString('en-GB') %>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+                <p class="fs-5">
+                    <%= application.CompanyName %>
+                </p>
+            </div>
+
+        </div>
+
+    <% }); %>
+
+<% } else { %>
+
+    <p>No applications set.</p>
+
+<% } %>

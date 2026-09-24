@@ -11,22 +11,28 @@ export async function getAllJobs() {
 }
 
 export async function getUserJobs(id) {
-     const value = parseInt(id.replace(":", ""));
+  
     const result = await pool.query(
-        'SELECT * FROM "JobTracker" WHERE "Jobuserid"=$1',[value]
+        'SELECT * FROM "JobTracker" WHERE "Jobuserid"=$1',[id]
     );
 
     return result.rows;
 }
 
 
-export async function createJobs(CompanyName,jobdescription,JobTitle,companydateapplied,Userid){
+export async function CreateJobs(
+    CompanyName,
+    jobdescription,
+    JobTitle,
+    companydateapplied,
+    Userid
+){
     
 
     const result =  await pool.query(
-        'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid")  VALUES ($1, $2, $3, $4,$5)' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid]
+        'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid")  VALUES ($1, $2, $3, $4,$5)  RETURNING * ' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid]
     )
-    return result.rows[0]
+    return result.rows
 }
 
 

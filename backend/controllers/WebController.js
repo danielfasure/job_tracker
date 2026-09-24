@@ -1,4 +1,4 @@
-import {  getUserJobs,createJobs } from "../services/JobServices.js";
+import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats} from "../services/StatsUser.js";
 
@@ -58,9 +58,16 @@ console.log("Successfully added stats",stats);
  
 }
 export async function CreateJob(req,res){
-  const {JobTitle,CompanyName,JobDescription,DateCreated} = req.body;
+  const { JobTitle, CompanyName, JobDescription, DateCreated } = req.body;
   const userid = req.user.id;
-  const job = await createJobs(JobTitle,CompanyName,JobDescription,DateCreated,userid);
+ const job = await CreateJobs(
+    CompanyName,
+    JobDescription,
+    JobTitle,
+    DateCreated,
+    userid
+);
+
   console.log("Successfully added job",job);
   res.redirect("/applicationportal");
 
@@ -81,12 +88,20 @@ export async function applicationPagemaker(req,res){
     await updateLoginStats(userid);
   const response = await getUserStats(userid);
 
+
 console.log("USERID:", userid);
 console.log(response);
-
+ const userjobs=await getUserJobs(userid);
+if (!userjobs) {
+  return res.render("application_tracker", {
+    stat: response,
+    userid:userid,});
+  }
+console.log("User jobs:", userjobs);
  res.render("application_tracker",{
     stat: response,
-    userid:userid
+    userid:userid,
+    applications:userjobs
 
   });
 
