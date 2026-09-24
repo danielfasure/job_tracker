@@ -8,7 +8,7 @@
        <% if (stat) { %>
     <div class=" row mb-5 g-2 mx-auto">
         <div class=" col-lg-5 col-sm-12 ms-auto">
-<p class="fs-5"> first login date<br> <%= new Date(stat.FirstLoginDate).toLocaleDateString("en-GB") %> </p>
+<p class="fs-5"> total login days<br><%=stat.TotalLoginDays %> <i class="bi-person-circle"></i> </p>
 
         </div>
         <div class=" col-lg-5 col-sm-12 mx-auto">
@@ -36,7 +36,9 @@
     </div>
 
     <div class="job_tracker_portal border bg-light col-8  my-5 text-center mx-auto" id ="add_job">
-<h1 class="fs-2 fw-bold my-2">Job Adder  </h1>
+<h1 class="fs-2 fw-bold my-2">
+    <i class="bi bi-briefcase-fill"></i><br>
+     </h1>
 <form class="  row g-5 my-auto mx-auto" action="/createjob" method="POST">
 
 <div class=" form-group col-sm-12 col-lg-5">
@@ -59,7 +61,7 @@
 </div>
 <div class="col-12 mt-5 m-auto text-center">
   
-  <button class="m-auto btn btn-primary "type="submit"> add to tracker  </button>
+ <i class="bi bi-plus-circle" type ="submit"></i>  
 
 </div>
 </form>
@@ -70,7 +72,7 @@
 
   <div class="job_list border bg-light col-8  my-5 text-center mx-auto">
     
-<h1 class="fs-2 fw-bold my-2">Job List  </h1>
+<h1 class="fs-2 fw-bold my-2"> <i class="bi bi-briefcase-fill"></i>  </h1>
 <div class="text-center my-5  "id="viewApplication">
    <% if (Array.isArray(applications) && applications.length > 0) { %>
 
@@ -112,12 +114,10 @@
 
 <% } %>
 </div>
-
+<p><i class="bi bi-card-list" id ="viewApplicationbutton"></p></i>
   </div>
 
-  <div class=" text-center my-5">
-    <button class="btn btn-success mx-auto text-center" id ="viewApplicationbutton">toggle applications</button>
-</div>
+ 
 
 
    
