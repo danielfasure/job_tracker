@@ -1,52 +1,165 @@
 <%- include("partials/header.ejs") %>
 <%- include("partials/navbar.ejs") %>
 <div class="container">
- 
 
-    <div class="my-2  mx-auto border bg-light application_tracker col-8 ">
-     <h1 class="text-center fw-bold fs-2 mb-3"> Application Tracker  </h1>
-       <% if (stat) { %>
-    <div class=" row mb-5 g-2 mx-auto">
+    <div class="application-tracker-card my-4 mx-auto">
 
+        <!-- Header -->
+        <div class="tracker-header text-center">
 
+            <i class="bi bi-bar-chart-fill tracker-icon"></i>
 
-        <div class=" col-lg-3 col-sm-12  ">
+            <h1 class="fw-bold fs-2">
+                Application Tracker
+            </h1>
 
- <p class="fs-5">  Total Jobs applied for <br><%= stat.TotalNumberOfApplication %>  <i class="bi-briefcase"></i></p>
-        </div>
-         <div class="col-lg-3 col-sm-12 mx-auto">
-
-    <p class="fs-5"> Interviews currently active  <br><%= stat.NumberOfInterviewsActive %> <i class="bi-chat-left-text"></i></p>
-        </div>
-       
-         <div class=" col-lg-3 col-sm-12 ms-auto">
-<p class="fs-5"> total login days<br><%=stat.TotalLoginDays %> <i class="bi-person-circle"></i> </p>
-
-        </div>
-        <div class=" col-lg-3 col-sm-12 ms-auto">
-<p class="fs-5"> first login date<br> <%= new Date(stat.FirstLoginDate).toLocaleDateString("en-GB") %> <i class="bi-calendar-week"></i></p>
-
-        </div>
-        <div class=" col-lg-3 col-sm-12 mx-auto">
-<p class="fs-5 text-center"> login streak<br> <%=stat.LoginStreak %>  <i class="bi-fire"></i></p>
+            <p class="text-muted">
+                Overview of your job applications
+            </p>
 
         </div>
 
+
+        <% if (stat) { %>
+
+        <div class="stats-grid">
+
+
+            <!-- Total Applications -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-briefcase-fill"></i>
+                </div>
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Total Jobs Applied
+                    </span>
+
+                    <span class="stat-value">
+                        <%= stat.TotalNumberOfApplication %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Active Interviews -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-chat-left-text-fill"></i>
+                </div>
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Active Interviews
+                    </span>
+
+                    <span class="stat-value">
+                        <%= stat.NumberOfInterviewsActive %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Login Days -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Total Login Days
+                    </span>
+
+                    <span class="stat-value">
+                        <%= stat.TotalLoginDays %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- First Login -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-calendar-week"></i>
+                </div>
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        First Login
+                    </span>
+
+                    <span class="stat-value stat-date">
+                        <%= new Date(stat.FirstLoginDate).toLocaleDateString("en-GB") %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Login Streak -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-fire"></i>
+                </div>
+
+                <div class="stat-info">
+
+                    <span class="stat-label">
+                        Login Streak
+                    </span>
+
+                    <span class="stat-value">
+                        <%= stat.LoginStreak %>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <% } else { %>
+
+
+        <!-- No stats -->
+        <div class="stats-empty text-center">
+
+            <i class="bi bi-emoji-tear"></i>
+
+            <h2>
+                No Statistics Yet
+            </h2>
+
+            <p>
+                Your statistics will appear here once you start using the application.
+            </p>
+
+        </div>
+
+
+        <% } %>
 
     </div>
-    
 
-<%   }else {  %>
-    <div class="col-5 mx-auto card">
-        <h1> currently you have no stats set once you use the application that should change </h1>
-      <i class="bi bi-emoji-tear"></i>  
-
-
-    </div>
-
-   
-
-
-
-    <% } %>
-    </div>
+</div>
+<%- include("partials/footer.ejs") %>

@@ -1,53 +1,154 @@
 <%- include("partials/header.ejs") %>
 <%- include("partials/navbar.ejs") %>
+```html
 <div class="container">
- 
 
-    <div class="my-2  mx-auto border bg-light application_tracker col-8 ">
-     <h1 class="text-center fw-bold fs-2 mb-3"> User Settings </h1>
-       <% if (user) { %>
-    <div class=" row mb-5 g-2 mx-auto">
+    <div class="user-settings-card my-4 mx-auto">
+
+        <div class="settings-header text-center">
+            <i class="bi bi-gear-fill settings-icon"></i>
+
+            <h1 class="fw-bold fs-2">
+                User Settings
+            </h1>
+
+            <p class="text-muted">
+                Manage your account details
+            </p>
+        </div>
 
 
+        <% if (user) { %>
 
-        <div class=" col-lg-4 col-sm-12  ">
+        <form action="/updatesettings" method="POST" id="settings_form">
 
- <h1 class="fs-5"> edit password <br></h1>
- 
- <button type="button" class="password" value="edit" id="edit_password_button">
-    <i class="bi bi-pencil-square"></i>
-</button>
+            <div class="settings-list">
+
+                <!-- Password -->
+                <div class="settings-item">
+
+                    <div class="settings-item-info">
+
+                        <div class="settings-item-icon">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+
+                        <div class="settings-field">
+
+                            <h2>
+                                Password
+                            </h2>
+
+                            <p id="password_display">
+                                Your password is hidden
+                            </p>
+
+                            <input
+                                type="password"
+                                name="Password"
+                                id="password_input"
+                                class="form-control hidden"
+                                placeholder="Enter new password"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary"
+                        id="edit_password_button"
+                    >
+                        <i class="bi bi-pencil-square"></i>
+                        Edit
+                    </button>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="settings-item">
+
+                    <div class="settings-item-info">
+
+                        <div class="settings-item-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+
+                        <div class="settings-field">
+
+                            <h2>
+                                Email
+                            </h2>
+
+                            <p id="email_display">
+                                <%= user.Email %>
+                            </p>
+
+                            <input
+                                type="email"
+                                name="Email"
+                                id="email_input"
+                                class="form-control hidden"
+                                value="<%= user.Email %>"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary"
+                        id="edit_email_button"
+                    >
+                        <i class="bi bi-pencil-square"></i>
+                        Edit
+                    </button>
+
+                </div>
+
+
+                <!-- Save -->
+                <div class="settings-save text-center">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="submituser_button"
+                    >
+                        <i class="bi bi-check-circle"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <% } else { %>
+
+        <div class="settings-empty text-center">
+
+            <i class="bi bi-person-x"></i>
+
+            <h2>
+                No user settings available
+            </h2>
+
+            <p>
+                Your account settings will appear here once your account has been set up.
+            </p>
 
         </div>
-         <div class="col-lg-4 col-sm-12 mx-auto">
 
-    <h1 class="fs-5"> current email  <br> </h1><p> <%= user.Email %> </p></h1>
-   
-        <button type="button" class="Email" value="edit" id="edit_email_button">
-    <i class="bi bi-pencil-square"></i>
-</button>
-
-        </div>
-     <div class=" col-2 mx-2 my-auto">save changes
-        <button type="button" class="Email mx-auto" value="submit" id="submituser_button">
-<i class="bi bi-check-circle mx-auto"></i>
-</button>
-
-
-    </div>
-    
-
-<%   }else {  %>
-    <div class="col-5 mx-auto card">
-        <h1> currently you have no stats set once you use the application that should change </h1>
-     
-
+        <% } %>
 
     </div>
 
-   
+</div>
 
-
-
-    <% } %>
-    </div>
+<%- include("partials/footer.ejs") %>

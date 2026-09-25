@@ -2,119 +2,341 @@
 <%- include("partials/navbar.ejs") %>
 <div class="container">
  
+<div class="top-stats-card my-3 mx-auto">
 
-    <div class="my-2  mx-auto border bg-light application_tracker col-4 ">
-     <h1 class="text-center fw-bold fs-2 mb-3"> Application Tracker  </h1>
-       <% if (stat) { %>
-    <div class=" row mb-5 g-2 mx-auto">
-        <div class=" col-lg-5 col-sm-12 ms-auto">
-<p class="fs-5"> total login days<br><%=stat.TotalLoginDays %> <i class="bi-person-circle"></i> </p>
+    <div class="top-stats-header text-center">
 
-        </div>
-        <div class=" col-lg-5 col-sm-12 mx-auto">
-<p class="fs-5 text-center"> login streak<br> <%=stat.LoginStreak %> </p>
+        <i class="bi bi-activity"></i>
 
-        </div>
-
-
-    </div>
-    
-
-<%   }else {  %>
-    <div class="col-5 mx-auto card">
-        <h1> currently you have no stats set once you use the application that should change </h1>
-     
-
+        <h1>
+            Application Tracker
+        </h1>
 
     </div>
 
-   
+
+    <% if (stat) { %>
+
+    <div class="top-stats-grid">
+
+        <!-- Login Days -->
+        <div class="top-stat">
+
+            <div class="top-stat-icon">
+                <i class="bi bi-person-check-fill"></i>
+            </div>
+
+            <div>
+                <span class="top-stat-label">
+                    Login Days
+                </span>
+
+                <span class="top-stat-value">
+                    <%= stat.TotalLoginDays %>
+                </span>
+            </div>
+
+        </div>
 
 
+        <!-- Login Streak -->
+        <div class="top-stat">
+
+            <div class="top-stat-icon">
+                <i class="bi bi-fire"></i>
+            </div>
+
+            <div>
+                <span class="top-stat-label">
+                    Login Streak
+                </span>
+
+                <span class="top-stat-value">
+                    <%= stat.LoginStreak %>
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <% } else { %>
+
+    <div class="top-stats-empty text-center">
+
+        <i class="bi bi-emoji-tear"></i>
+
+        <p>
+            No statistics available yet.
+        </p>
+
+    </div>
 
     <% } %>
+
+</div>
+ 
+
+  <div class="job_tracker_portal border bg-light my-5 text-center mx-auto" id="add_job">
+
+    <div class="add-job-header text-center">
+        <i class="bi bi-briefcase-plus-fill add-job-icon"></i>
+
+        <h1 class="fs-2 fw-bold">
+            Add Job Application
+        </h1>
+
+        <p class="text-muted">
+            Add a new job application to your tracker
+        </p>
     </div>
 
-    <div class="job_tracker_portal border bg-light col-8  my-5 text-center mx-auto" id ="add_job">
-<h1 class="fs-2 fw-bold my-2">
-    <i class="bi bi-briefcase-fill"></i><br>
-     </h1>
-<form class="  row g-5 my-auto mx-auto" action="/createjob" method="POST">
 
-<div class=" form-group col-sm-12 col-lg-5">
-    
-    <label class="form-label" for ="CompanyNameid">company name </label>
-    <input type = "text" class="form-control" id ="CompanyNameid" name = "CompanyName">
-</div>
-<div class=" form-group col-lg-5 ms-auto">
-    <label class="form-label" for ="JobTitleid">Job title  </label>
-    <input type="text" id="JobTitleid" class="form-control" name="JobTitle">
+    <form
+        class="add-job-form"
+        action="/createjob"
+        method="POST"
+    >
 
-</div>
-<div class="col-sm-12 col-lg-12 ">
-    <label class="form-label " for ="companydateappliedid">Application Sent Date  </label>
-    <input type="date" id ="companydateappliedid" name="DateCreated" class="form-control col-4">
-</div>
-<div class="col-12 ">
-    <label for ="companydescription">job description </label>
-    <input type="text" id="companydescription" name="JobDescription" class="form-control h-100 ">
-</div>
-<div class="col-12 mt-5 m-auto text-center">
-  
- <i class="bi bi-plus-circle" type ="submit"></i>  
+        <!-- Company -->
+        <div class="form-group">
 
-</div>
-</form>
+            <label
+                class="form-label"
+                for="CompanyNameid"
+            >
+                <i class="bi bi-building"></i>
+                Company Name
+            </label>
 
-    
-
-    </div>
-
-  <div class="job_list border bg-light col-8  my-5 text-center mx-auto">
-    
-<h1 class="fs-2 fw-bold my-2"> <i class="bi bi-briefcase-fill"></i>  </h1>
-<div class="text-center my-5  "id="viewApplication">
-   <% if (Array.isArray(applications) && applications.length > 0) { %>
-
-    <% applications.forEach(application => { %>
-
-        <div class="row mx-5 my-5">
-
-            <div class="col-lg-6 col-sm-12">
-                <p class="fs-5">
-                <h1 class="fs-4">Title </h1><br>   <%= application.JobTitle %>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-sm-12">
-                <p class="fs-5">
-                  <h1 class="fs-4"> Description </h1><br> <%= application.JobDescription %>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-sm-12">
-                <p class="fs-5">
-                <h1 class="fs-4"> Date Applied </h1>   <br> <%= new Date(application.DateCreated).toLocaleDateString('en-GB') %>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-sm-12">
-                <p class="fs-5">
-                <h1 class="fs-4"> Company Name </h1>   <br> <%= application.CompanyName %>
-                </p>
-            </div>
+            <input
+                type="text"
+                class="form-control"
+                id="CompanyNameid"
+                name="CompanyName"
+                placeholder="e.g. Microsoft"
+                required
+            >
 
         </div>
 
-    <% }); %>
 
-<% } else { %>
+        <!-- Job title -->
+        <div class="form-group">
 
-    <p>No applications set.</p>
+            <label
+                class="form-label"
+                for="JobTitleid"
+            >
+                <i class="bi bi-briefcase"></i>
+                Job Title
+            </label>
 
-<% } %>
+            <input
+                type="text"
+                class="form-control"
+                id="JobTitleid"
+                name="JobTitle"
+                placeholder="e.g. Junior Software Developer"
+                required
+            >
+
+        </div>
+
+
+        <!-- Date -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="companydateappliedid"
+            >
+                <i class="bi bi-calendar3"></i>
+                Application Sent Date
+            </label>
+
+            <input
+                type="date"
+                id="companydateappliedid"
+                name="DateCreated"
+                class="form-control"
+                required
+            >
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="companydescription"
+            >
+                <i class="bi bi-card-text"></i>
+                Job Description
+            </label>
+
+            <textarea
+                id="companydescription"
+                name="JobDescription"
+                class="form-control"
+                rows="5"
+                placeholder="Add details about the role..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- Submit -->
+        <div class="text-center mx-auto my-4">
+
+            <button
+                type="submit"
+                class="btn btn-primary add-job-button"
+            >
+                <i class="bi bi-plus-circle"></i>
+                Add Job
+            </button>
+
+        </div>
+
+    </form>
+
 </div>
+
+ <div class="job_list border bg-light my-5 text-center mx-auto">
+
+    <h1 class="fs-2 fw-bold my-2">
+        <i class="bi bi-briefcase-fill"></i>
+    </h1>
+
+    <div class="text-center my-5" id="viewApplication">
+
+        <% if (Array.isArray(applications) && applications.length > 0) { %>
+
+        <div class="applications-list">
+
+            <% applications.forEach((application, index) => { %>
+
+            <div class="application-card">
+
+                <!-- Header -->
+                <button
+                    class="application-header"
+                    type="button"
+                    data-application="<%= index %>"
+                >
+
+                    <div class="application-main-info">
+
+                        <div>
+                            <span class="application-label">
+                                Job Title
+                            </span>
+
+                            <h2 class="application-title">
+                                <%= application.JobTitle %>
+                            </h2>
+                        </div>
+
+                        <div>
+                            <span class="application-label">
+                                Company
+                            </span>
+
+                            <p class="application-company">
+                                <i class="bi bi-building"></i>
+                                <%= application.CompanyName %>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <i class="bi bi-chevron-down application-chevron"></i>
+
+                </button>
+
+
+                <!-- Expanded details -->
+                <div
+                    class="application-details"
+                    data-details="<%= index %>"
+                >
+
+                    <div class="application-detail">
+
+                        <span class="application-label">
+                            <i class="bi bi-card-text"></i>
+                            Description
+                        </span>
+
+                        <p>
+                            <%= application.JobDescription %>
+                        </p>
+
+                    </div>
+
+
+                    <div class="application-detail">
+
+                        <span class="application-label">
+                            <i class="bi bi-calendar3"></i>
+                            Date Applied
+                        </span>
+
+                        <p>
+                            <%= new Date(application.DateCreated).toLocaleDateString('en-GB') %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Delete -->
+                    <div class="application-actions">
+
+                        <form
+                            action="/deletejob"
+                            method="POST"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="jobid"
+                                value="<%= application.id %>"
+                            >
+
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger"
+                            >
+                                <i class="bi bi-trash3"></i>
+                                Delete Application
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% }); %>
+
+        </div>
+
+        <% } else { %>
+
+            <p>No applications set.</p>
+
+        <% } %>
+
+    </div>
 <p><i class="bi bi-card-list" id ="viewApplicationbutton"></p></i>
+</div>
+
   </div>
 
  
@@ -125,11 +347,7 @@
    
   
 
-   <form action="/logout" method="POST"  class="mx-auto text-center">
-    <button type="submit" class="btn btn-danger mx-auto">
-        Logout
-    </button>
-</form>
+
     
 
 <%- include("partials/footer.ejs") %>
