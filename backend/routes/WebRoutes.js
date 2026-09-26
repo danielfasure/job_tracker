@@ -18,6 +18,7 @@ router.use(express.static("frontend"));
 
 
 router.get("/home",HomePage)
+router.get("/",HomePage)
 router.get("/applicationportal",applicationPagemaker)
 router.get("/statistics",statsPage)
 router.get("/setting",settingPage)
