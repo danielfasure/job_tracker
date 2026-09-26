@@ -2,14 +2,14 @@ import express from "express";
 import "dotenv/config";
 import session  from "express-session";
 
-import bcrypt from "bcrypt";
+
 import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
 
 import configurePassport from "./services/passport.js"
 
- const port =3000;
+
 
 const app = express();
 app.use(express.static("public"));
@@ -40,9 +40,12 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 configurePassport();
 
-app.listen(port,()=>{
-    console.log("http://localhost/"+port)
-})
+if (process.env.NODE_ENV !== "production") {
+    app.listen(3000, () => {
+        console.log("http://localhost:3000");
+    });
+}
+export default app;
 /*
 app.get("/job", async (req, res) => {
     const result = await pool.query("SELECT * FROM jobinfo");
