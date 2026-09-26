@@ -3,6 +3,9 @@ import "dotenv/config";
 import session  from "express-session";
 
 
+import path from "path";
+import { fileURLToPath } from "url";
+
 import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
@@ -10,9 +13,13 @@ import apiRoutes from "./routes/apiRoutes.js";
 import configurePassport from "./services/passport.js"
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.join(__dirname, "..");
+
 
 const app = express();
-app.use(express.static("public"));
+app.use(express.static(path.join(projectRoot, "frontend")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +44,7 @@ function logger(req, res, next) {
 app.use(logger);
 
 app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", path.join(projectRoot, "views"));
 configurePassport();
 
 if (process.env.NODE_ENV !== "production") {
