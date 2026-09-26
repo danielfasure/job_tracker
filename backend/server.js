@@ -29,29 +29,31 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-app.use(passport.initialize())
-app.use(passport.session())
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+configurePassport();
+
 app.use("/", webRoutes);
 app.use("/api", apiRoutes);
 
 function logger(req, res, next) {
     console.log(req.method, req.url);
-
     next();
 }
-
 
 app.use(logger);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(projectRoot, "views"));
-configurePassport();
 
 if (process.env.NODE_ENV !== "production") {
     app.listen(3000, () => {
         console.log("http://localhost:3000");
     });
 }
+
 export default app;
 /*
 app.get("/job", async (req, res) => {
