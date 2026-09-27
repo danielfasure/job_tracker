@@ -3,7 +3,7 @@ import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 import  passport from "passport";
 import jwt from "jsonwebtoken";
-import {Authenticate, requireAuth} from "../services/authservices.js";
+import {Authentication, requireAuth} from "../services/authservices.js";
 
 
 
@@ -23,7 +23,7 @@ export  function HomePage(req,res){
 
 }
 export function LoginPage(req, res, next) {
-     Authenticate()
+     Authentication()
 
         const token = jwt.sign(
             {
