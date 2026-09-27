@@ -1,6 +1,8 @@
 import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
+import  passport from "passport";
+
 
 
 
@@ -19,6 +21,53 @@ export  function HomePage(req,res){
     res.render("index");
 
 }
+export function LoginPage(req,res,next){
+
+ passport.authenticate("local", (err, user, info) => {
+
+        if (err) {
+            return next(err);
+        }
+
+        if (!user) {
+            return res.redirect("/home");
+        }
+
+        req.logIn(user, (err) => {
+
+            if (err) {
+                return next(err);
+            }
+
+            console.log("AFTER LOGIN SESSION:");
+            console.log(req.session);
+
+            console.log("AUTH:", req.isAuthenticated());
+            console.log("USER:", req.user);
+            console.log("SESSION ID AFTER LOGIN:", req.sessionID);
+console.log("COOKIE AFTER LOGIN:", req.headers.cookie);
+
+            req.session.save((err) => {
+
+                if (err) {
+                    console.error("SESSION SAVE ERROR:", err);
+                    return next(err);
+                }
+
+                console.log("SESSION SAVED:");
+                console.log(req.session);
+
+                res.redirect("/applicationportal");
+            });
+        });
+
+    })(req, res, next);
+
+
+}
+ 
+
+
 
 // connect to my post router this function will go inisde the database and set user and add stats with the user and will  render the application pass in the user id
 export async function register(req,res) {

@@ -1,12 +1,12 @@
 import express from "express";
-import  passport from "passport";
+
 import {
    
     HomePage,
      applicationPagemaker,
     register,
     ShowUserapplication,logout,CreateJob,
-    statsPage,settingPage
+    statsPage,settingPage,LoginPage
     
 
    // showJob
@@ -23,10 +23,7 @@ router.get("/applicationportal",applicationPagemaker)
 router.get("/statistics",statsPage)
 router.get("/setting",settingPage)
 
-router.post("/login",passport.authenticate("local", {
-        successRedirect: "/applicationportal",
-        failureRedirect: "/home"
-    }))
+router.post("/login",LoginPage)
 router.post("/register",register)
 router.post("/logout",logout)
 router.post("/createjob",CreateJob)
