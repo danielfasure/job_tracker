@@ -43,7 +43,7 @@ export function LoginPage(req, res, next) {
         });
 
         return res.redirect("/applicationportal");
-      }(req, res, next);
+      }
 
 
 

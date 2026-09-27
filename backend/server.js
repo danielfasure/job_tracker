@@ -10,7 +10,8 @@ import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
 
-import configurePassport from "./services/passport.js"
+import configurePassport from "./services/passport.js";
+import cookieParser from "cookie-parser";;
 
 
 const __filename = fileURLToPath(import.meta.url);
