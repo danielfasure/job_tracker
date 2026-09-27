@@ -19,25 +19,38 @@ const projectRoot = path.join(__dirname, "..");
 
 
 const app = express();
-app.set("trust proxy", 1);
+
 app.use(express.static(path.join(projectRoot, "frontend")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
+/*app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
-}));
+}));*/
+//app.set("trust proxy", 1);
+/*app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+         maxAge: 1000 * 60 * 60 * 24
+    }
+}));*/
 console.log("SESSION SECRET:", process.env.SESSION_SECRET);
+configurePassport();
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-configurePassport();
+
+
 function logger(req, res, next) {
     console.log("REQUEST:", req.method, req.url);
-    console.log("SESSION:", req.session);
-    console.log("USER:", req.user);
+   
    
    
 

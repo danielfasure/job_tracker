@@ -44,11 +44,11 @@ passport.use(
     )
 );
 
-   passport.serializeUser((user, done) => {
+  /* passport.serializeUser((user, done) => {
     console.log("SERIALIZE:", user.id);
     done(null, user.id);
 });
-
+*//*
 passport.deserializeUser(async (id, done) => {
 
     console.log("DESERIALIZE:", id);
@@ -73,6 +73,6 @@ passport.deserializeUser(async (id, done) => {
     }
 });
     return passport;
-
+*/
 
 }

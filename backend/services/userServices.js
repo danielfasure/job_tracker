@@ -2,6 +2,7 @@ import "dotenv/config";
 import pool from "../db.js";
 import bcrypt, { hash } from "bcrypt";
 import  passport from "passport";
+import cookieParser from "cookie-parser";
 
 const saltRounds =10;
 
