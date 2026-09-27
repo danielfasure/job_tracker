@@ -5,11 +5,12 @@
         <span class="sidebar-text">Dashboard</span>
     </a>
 
+    <% if (typeof userid!== 'undefined' && userid){ %>
     <a href="#viewApplication" class="sidebar-link">
         <i class="bi bi-briefcase sidebar-icon"></i>
         <span class="sidebar-text">Jobs</span>
     </a>
-
+   
     <a href="#add_job" class="sidebar-link">
         <i class="bi bi-plus-circle sidebar-icon"></i>
         <span class="sidebar-text">Add Job</span>
@@ -29,6 +30,6 @@
         <i class="bi bi-door-open sidebar-icon"></i>
         <span>Logout</span>
     </button>
-
+     <% } %>
 </form>
 </nav>

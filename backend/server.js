@@ -19,6 +19,7 @@ const projectRoot = path.join(__dirname, "..");
 
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.static(path.join(projectRoot, "frontend")));
 
 app.use(express.json());
@@ -29,21 +30,30 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-
+console.log("SESSION SECRET:", process.env.SESSION_SECRET);
 app.use(passport.initialize());
 app.use(passport.session());
-
 configurePassport();
-
-app.use("/", webRoutes);
-app.use("/api", apiRoutes);
-
 function logger(req, res, next) {
-    console.log(req.method, req.url);
+    console.log("REQUEST:", req.method, req.url);
+    console.log("SESSION:", req.session);
+    console.log("USER:", req.user);
+   
+   
+
     next();
 }
 
 app.use(logger);
+
+
+// Required when running behind Vercel's proxy
+
+
+app.use("/", webRoutes);
+app.use("/api", apiRoutes);
+
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(projectRoot, "views"));

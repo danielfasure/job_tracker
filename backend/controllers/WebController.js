@@ -1,6 +1,8 @@
 import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
+import  passport from "passport";
+
 
 
 
@@ -19,6 +21,36 @@ export  function HomePage(req,res){
     res.render("index");
 
 }
+export function LoginPage(req,res,next){
+
+ passport.authenticate("local", (err, user, info) => {
+
+       if (err) return next(err);
+       
+        if (!user) return res.redirect("/home");
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+
+            // Force session save to DB and await completion before responding
+            req.session.save((err) => {
+                if (err) {
+                    console.error("SESSION SAVE ERROR:", err);
+                    return next(err);
+                }
+
+                console.log("SESSION SAVED:", req.sessionID);
+                
+                // Now render or respond
+                applicationPagemaker(req, res);
+            });
+        });
+    })(req, res, next);
+
+}
+ 
+
+
 
 // connect to my post router this function will go inisde the database and set user and add stats with the user and will  render the application pass in the user id
 export async function register(req,res) {
@@ -104,7 +136,7 @@ export async function applicationPagemaker(req,res){
 
 
 
-console.log(response);
+
  const userjobs=await getUserJobs(userid);
 if (!userjobs) {
   return res.render("application_tracker", {
@@ -133,6 +165,7 @@ res.render("statistics",{
 
 }
 export async function  settingPage(req,res){
+  console.log("useris",req.user);
    if (!req.isAuthenticated()) {
     console.log("User not authenticated, redirecting to home page");
     return res.redirect("/home");

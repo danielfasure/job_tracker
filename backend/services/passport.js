@@ -44,29 +44,34 @@ passport.use(
     )
 );
 
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    });
+   passport.serializeUser((user, done) => {
+    console.log("SERIALIZE:", user.id);
+    done(null, user.id);
+});
 
-    passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id, done) => {
 
-        try {
-            const result = await pool.query(
-                'SELECT * FROM "JobUser" WHERE "id" = $1',
-                [id]
-            );
+    console.log("DESERIALIZE:", id);
 
-            if (result.rows.length === 0) {
-                return done(null, false);
-            }
+    try {
+        const result = await pool.query(
+            'SELECT * FROM "JobUser" WHERE "id" = $1',
+            [id]
+        );
 
-            done(null, result.rows[0]);
+        console.log("DESERIALIZE FOUND:", result.rows.length);
 
-        } catch (error) {
-            done(error);
+        if (result.rows.length === 0) {
+            return done(null, false);
         }
-    });
 
+        done(null, result.rows[0]);
+
+    } catch (error) {
+        console.error("DESERIALIZE ERROR:", error);
+        done(error);
+    }
+});
     return passport;
 
 
