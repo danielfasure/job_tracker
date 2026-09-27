@@ -2,7 +2,8 @@ import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
 import {setUser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 import  passport from "passport";
-
+import jwt from "jsonwebtoken";
+import {Authenticate, requireAuth} from "../services/authservices.js";
 
 
 
@@ -21,34 +22,30 @@ export  function HomePage(req,res){
     res.render("index");
 
 }
-export function LoginPage(req,res,next){
+export function LoginPage(req, res, next) {
+     Authenticate()
 
- passport.authenticate("local", (err, user, info) => {
+        const token = jwt.sign(
+            {
+                userId: user.id
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1d"
+            }
+        );
 
-       if (err) return next(err);
-       
-        if (!user) return res.redirect("/home");
-
-        req.logIn(user, (err) => {
-            if (err) return next(err);
-
-            // Force session save to DB and await completion before responding
-            req.session.save((err) => {
-                if (err) {
-                    console.error("SESSION SAVE ERROR:", err);
-                    return next(err);
-                }
-
-                console.log("SESSION SAVED:", req.sessionID);
-                
-                // Now render or respond
-                applicationPagemaker(req, res);
-            });
+        res.cookie("authToken", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 1000 * 60 * 60 * 24
         });
-    })(req, res, next);
 
-}
- 
+        return res.redirect("/applicationportal");
+      }(req, res, next);
+
+
 
 
 
@@ -122,13 +119,10 @@ export async function removeJob(req,res){
 
 }
 
-export async function applicationPagemaker(req,res){
+export async function applicationPagemaker(req,res,next){
 
+ await requireAuth(req,res,next)
   
-  if (!req.isAuthenticated()) {
-    console.log("User not authenticated, redirecting to home page");
-    return res.redirect("/home");
-}
    
    const userid =req.user.id;
     await updateLoginStats(userid);
