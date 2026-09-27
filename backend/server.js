@@ -28,14 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      secure: process.env.NODE_ENV === "production", // true in production
-      sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
-}
-})
-);
+    saveUninitialized: false
+}));
+console.log("SESSION SECRET:", process.env.SESSION_SECRET);
 app.use(passport.initialize());
 app.use(passport.session());
 configurePassport();
