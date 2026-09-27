@@ -25,44 +25,27 @@ export function LoginPage(req,res,next){
 
  passport.authenticate("local", (err, user, info) => {
 
-        if (err) {
-            return next(err);
-        }
-
-        if (!user) {
-            return res.redirect("/home");
-        }
+       if (err) return next(err);
+       
+        if (!user) return res.redirect("/home");
 
         req.logIn(user, (err) => {
+            if (err) return next(err);
 
-            if (err) {
-                return next(err);
-            }
-
-            console.log("AFTER LOGIN SESSION:");
-            console.log(req.session);
-
-            console.log("AUTH:", req.isAuthenticated());
-            console.log("USER:", req.user);
-            console.log("SESSION ID AFTER LOGIN:", req.sessionID);
-console.log("COOKIE AFTER LOGIN:", req.headers.cookie);
-
+            // Force session save to DB and await completion before responding
             req.session.save((err) => {
-
                 if (err) {
                     console.error("SESSION SAVE ERROR:", err);
                     return next(err);
                 }
 
-                console.log("SESSION SAVED:");
-                console.log(req.session);
-
-                res.redirect("/applicationportal");
+                console.log("SESSION SAVED:", req.sessionID);
+                
+                // Now render or respond
+                applicationPagemaker(req, res);
             });
         });
-
     })(req, res, next);
-
 
 }
  
@@ -153,7 +136,7 @@ export async function applicationPagemaker(req,res){
 
 
 
-console.log(response);
+
  const userjobs=await getUserJobs(userid);
 if (!userjobs) {
   return res.render("application_tracker", {
@@ -182,6 +165,7 @@ res.render("statistics",{
 
 }
 export async function  settingPage(req,res){
+  console.log("useris",req.user);
    if (!req.isAuthenticated()) {
     console.log("User not authenticated, redirecting to home page");
     return res.redirect("/home");
