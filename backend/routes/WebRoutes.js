@@ -4,9 +4,9 @@ import {
    
    
     
-    register,
-    ShowUserapplication,logout,CreateJob,
-    statsPage,settingPage
+    
+    ShowUserapplication,CreateJob,
+    
     
 
    // showJob
@@ -25,9 +25,9 @@ router.get("/applicationportal",pageController.applicationPage)
 router.get("/statistics",pageController.statsPage)
 router.get("/setting",pageController.settingPage)
 
-router.post("/login",LoginPage)
-router.post("/register",register)
-router.post("/logout",logout)
+router.post("/login",pageController.HomePage)
+router.post("/register",pageController.HomePage)
+router.post("/logout",pageController.logout)
 router.post("/createjob",CreateJob)
 
 router.post("/jobs/:userid", ShowUserapplication);
