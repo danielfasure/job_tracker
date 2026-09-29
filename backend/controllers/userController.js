@@ -1,3 +1,9 @@
+import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
+import {setUser} from "../services/userServices.js";
+import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
+import  passport from "passport";
+import jwt from "jsonwebtoken";
+import {Authentication, requireAuth} from "../services/authservices.js";
 
 export async function register(req,res) {
     console.log("REGISTER");
@@ -35,3 +41,7 @@ console.log("Successfully added stats",stats);
 
  
 }
+
+
+
+    

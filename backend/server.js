@@ -10,7 +10,7 @@ import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
 import apiRoutes from "./routes/apiRoutes.js";
 
-import configurePassport from "./services/passport.js";
+
 import cookieParser from "cookie-parser";;
 
 
@@ -43,9 +43,8 @@ app.use(express.urlencoded({ extended: true }));
     }
 }));*/
 console.log("SESSION SECRET:", process.env.SESSION_SECRET);
-configurePassport();
 app.use(cookieParser());
-app.use(passport.initialize());
+
 
 
 

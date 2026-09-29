@@ -3,55 +3,34 @@ import passport from "passport";
 
 
 
-export function Authentication(req, res, next) {
+    export async function loginToken(req,res){
+     const token= await pool.query('SELECT * FROM "Token" WHERE "userId" = $1',[userid]
 
-    passport.authenticate("local",{session: false}, (err, user, info) => {
 
-        if (err) {
-            return next(err);
-        }
-
-        if (!user) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid username or password"
-            });
-        }
-
-        const token = jwt.sign(
-            {
-                userId: user.id
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1d"
-            }
         );
+    if (!token.id===undefined ) {
+            console.log("token")
+            res.redirect("/")
+    }   
 
-        res.cookie("authToken", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 1000 * 60 * 60 * 24
-        });
+    }
 
-        return res.redirect("/applicationportal");
 
-    })(req, res, next);
-}
+
     export async function requireAuth(req, res, next) {
 
     try {
 
-        const token = req.cookies.authToken;
+        const token = req.cookies.jwt;
 
-        if (!token) {
-            return res.redirect("/home");
-        }
+      
 
         const decoded = jwt.verify(
             token,
-            process.env.JWT_SECRET
+            process.env.ACESSS_TOKEN_SECRET,
+            (err,decoded)=>{
+                req.user= decoded.id
+            }
         );
 
         const result = await pool.query(

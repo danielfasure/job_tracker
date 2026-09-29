@@ -1,8 +1,8 @@
 import "dotenv/config";
 import pool from "../db.js";
 import bcrypt, { hash } from "bcrypt";
-import  passport from "passport";
-import cookieParser from "cookie-parser";
+
+
 
 const saltRounds =10;
 
@@ -43,38 +43,6 @@ export async function getuserid(username) {{
     return result.rows[0];
 }
 }
-export async function checkuser(Username,Password)
-{
-    const result = await pool.query(
-        'SELECT * FROM "JobUser" WHERE "Username"=$1',[Username]
-    );
-    let verify ;
-   
-    if(result.rows[0].length===0){
-        verify= {verify:"no"
-    };
-
-        }
-              const storeduser= result.rows[0]    ;
-                 const stored_password=  storeduser.Password;
-
-            
-    try {
-        const match = await bcrypt.compare(Password, stored_password);
-
-        if (match) {
-            return { verify: "yes" };
-        }
-
-        return { verify: "no" };
-
-    } catch (err) {
-        console.log("error occurred", err);
-        return { verify: "no" };
-    }
-  
-
-        }
 
 
 
@@ -108,4 +76,16 @@ export async function setUser(Username, Password, Email) {
     );
 
     return user.rows[0];
+}
+export async function getuser(username){
+    const user= await pool.query(
+        'SELECT * FROM "JobUser" WHERE "Username" = $1',
+        [username]
+    );
+
+    return user.rows[0];
+
+
+
+
 }
