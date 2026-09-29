@@ -2,12 +2,10 @@ import pool from "../db.js";
 import passport from "passport";
 
 
-export async function Authentication() {
 
+export function Authentication(req, res, next) {
 
-
-
-passport.authenticate("local", (err, user, info) => {
+    passport.authenticate("local",{session: false}, (err, user, info) => {
 
         if (err) {
             return next(err);
@@ -37,9 +35,10 @@ passport.authenticate("local", (err, user, info) => {
             maxAge: 1000 * 60 * 60 * 24
         });
 
-        return res.redirect("/applicationportal")})
-    
-    }
+        return res.redirect("/applicationportal");
+
+    })(req, res, next);
+}
     export async function requireAuth(req, res, next) {
 
     try {
@@ -68,7 +67,7 @@ passport.authenticate("local", (err, user, info) => {
 
         req.user = user;
 
-        next();
+        return user.id;
 
     } catch (error) {
 

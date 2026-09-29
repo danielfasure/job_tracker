@@ -23,24 +23,9 @@ export  function HomePage(req,res){
 
 }
 export function LoginPage(req, res, next) {
-     Authentication()
+     Authentication(req,res,next)
 
-        const token = jwt.sign(
-            {
-                userId: user.id
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1d"
-            }
-        );
-
-        res.cookie("authToken", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 1000 * 60 * 60 * 24
-        });
+        
 
         return res.redirect("/applicationportal");
       }
@@ -120,30 +105,36 @@ export async function removeJob(req,res){
 }
 
 export async function applicationPagemaker(req,res,next){
+try {
+       const waiting =await requireAuth(req,res,next)
+       console.log(waiting)
+        const userid = waiting;
 
- await requireAuth(req,res,next)
-  
-   
-   const userid =req.user.id;
-    await updateLoginStats(userid);
-  const response = await getUserStats(userid);
+        await updateLoginStats(userid);
 
+        const response = await getUserStats(userid);
 
+        const userjobs = await getUserJobs(userid);
 
+        if (!userjobs) {
+            return res.render("application_tracker", {
+                stat: response,
+                userid: userid
+            });
+        }
 
- const userjobs=await getUserJobs(userid);
-if (!userjobs) {
-  return res.render("application_tracker", {
-    stat: response,
-    userid:userid,});
-  }
-console.log("User jobs:", userjobs);
- res.render("application_tracker",{
-    stat: response,
-    userid:userid,
-    applications:userjobs
+        console.log("User jobs:", userjobs);
 
-  });
+        return res.render("application_tracker", {
+            stat: response,
+            userid: userid,
+            applications: userjobs
+        });
+
+    } catch (error) {
+        console.error("Application page error:", error);
+        next(error);
+    }
 
 }
 export async function statsPage(req,res){

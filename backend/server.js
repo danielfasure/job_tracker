@@ -46,7 +46,7 @@ console.log("SESSION SECRET:", process.env.SESSION_SECRET);
 configurePassport();
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 
 function logger(req, res, next) {
