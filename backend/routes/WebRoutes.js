@@ -2,26 +2,28 @@ import express from "express";
 
 import {
    
-    HomePage,
-     applicationPagemaker,
+   
+    
     register,
     ShowUserapplication,logout,CreateJob,
-    statsPage,settingPage,LoginPage
+    statsPage,settingPage
     
 
    // showJob
 } from "../controllers/WebController.js";
+
+import * as pageController from "../controllers/pageController.js"
 
 const router = express.Router();
 router.use(express.static("frontend"));
 
 
 
-router.get("/home",HomePage)
-router.get("/",HomePage)
-router.get("/applicationportal",applicationPagemaker)
-router.get("/statistics",statsPage)
-router.get("/setting",settingPage)
+router.get("/home",pageController.HomePage)
+router.get("/",pageController.HomePage)
+router.get("/applicationportal",pageController.applicationPage)
+router.get("/statistics",pageController.statsPage)
+router.get("/setting",pageController.settingPage)
 
 router.post("/login",LoginPage)
 router.post("/register",register)

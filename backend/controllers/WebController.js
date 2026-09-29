@@ -7,7 +7,7 @@ import {Authentication, requireAuth} from "../services/authservices.js";
 
 
 
-
+//application page rendering 
 export async function ShowUserapplication(req, res) {
 const userid =req.user.id;
     const jobs = await getUserJobs(userid);
@@ -17,23 +17,18 @@ const userid =req.user.id;
       
     });
 }
-export  function HomePage(req,res){
-
-    res.render("index");
-
-}
-export function LoginPage(req, res, next) {
-     Authentication(req,res,next)
-
-        
-
-        return res.redirect("/applicationportal");
-      }
 
 
 
 
 
+
+
+
+
+
+
+// login and register controlller 
 // connect to my post router this function will go inisde the database and set user and add stats with the user and will  render the application pass in the user id
 export async function register(req,res) {
     console.log("REGISTER");
@@ -71,6 +66,8 @@ console.log("Successfully added stats",stats);
 
  
 }
+
+// creation and deletion controllers 
 export async function CreateJob(req,res){
   if (!req.isAuthenticated()) {
     console.log("User not authenticated, redirecting to home page");
@@ -104,51 +101,9 @@ export async function removeJob(req,res){
 
 }
 
-export async function applicationPagemaker(req,res,next){
-try {
-       const waiting =await requireAuth(req,res,next)
-       console.log(waiting)
-        const userid = waiting;
-
-        await updateLoginStats(userid);
-
-        const response = await getUserStats(userid);
-
-        const userjobs = await getUserJobs(userid);
-
-        if (!userjobs) {
-            return res.render("application_tracker", {
-                stat: response,
-                userid: userid
-            });
-        }
-
-        console.log("User jobs:", userjobs);
-
-        return res.render("application_tracker", {
-            stat: response,
-            userid: userid,
-            applications: userjobs
-        });
-
-    } catch (error) {
-        console.error("Application page error:", error);
-        next(error);
-    }
-
-}
-export async function statsPage(req,res){
-  if (!req.isAuthenticated()) {
-    console.log("User not authenticated, redirecting to home page");
-    return res.redirect("/home");
-}
-
-const userstats=await getUserStats(req.user.id);
-res.render("statistics",{
-  stat:userstats } );
 
 
-}
+
 export async function  settingPage(req,res){
   console.log("useris",req.user);
    if (!req.isAuthenticated()) {
