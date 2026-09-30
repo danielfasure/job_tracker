@@ -1,7 +1,7 @@
 import "dotenv/config";
 import pool from "../db.js";
 import bcrypt, { hash } from "bcrypt";
-
+import jwt from "jsonwebtoken";
 
 
 const saltRounds =10;
@@ -43,6 +43,14 @@ export async function getuserid(username) {{
     return result.rows[0];
 }
 }
+export async function getuser(username) {{
+    const result = await pool.query(
+        'SELECT * FROM "JobUser" WHERE "Username"= $1',[username]
+    )
+    return result.rows[0];
+}
+}
+
 
 
 
@@ -75,17 +83,7 @@ export async function setUser(Username, Password, Email) {
         [Username]
     );
 
-    return user.rows[0];
-}
-export async function getuser(username){
-    const user= await pool.query(
-        'SELECT * FROM "JobUser" WHERE "Username" = $1',
-        [username]
-    );
+
 
     return user.rows[0];
-
-
-
-
 }

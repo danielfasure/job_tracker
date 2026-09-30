@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 
 import passport from "passport";
 import webRoutes from "./routes/WebRoutes.js";
-import apiRoutes from "./routes/apiRoutes.js";
+//import apiRoutes from "./routes/apiRoutes.js";
 
 
 import cookieParser from "cookie-parser";;

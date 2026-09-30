@@ -1,18 +1,9 @@
 import express from "express";
 
-import {
-   
-   
-    
-    
-    ShowUserapplication,CreateJob,
-    
-    
-
-   // showJob
-} from "../controllers/WebController.js";
 
 import * as pageController from "../controllers/pageController.js"
+import * as UserController from "../controllers/userController.js"
+import {requireAuth} from "../middleware/authMiddleware.js"
 
 const router = express.Router();
 router.use(express.static("frontend"));
@@ -21,15 +12,13 @@ router.use(express.static("frontend"));
 
 router.get("/home",pageController.HomePage)
 router.get("/",pageController.HomePage)
-router.get("/applicationportal",pageController.applicationPage)
-router.get("/statistics",pageController.statsPage)
-router.get("/setting",pageController.settingPage)
+router.get("/applicationportal",requireAuth,pageController.applicationPage)
+router.get("/statistics",requireAuth,pageController.statsPage)
+router.get("/setting",requireAuth,pageController.settingPage)
 
-router.post("/login",pageController.HomePage)
-router.post("/register",pageController.HomePage)
+router.post("/login",UserController.Loginchecker)
+router.post("/register",UserController.register)
 router.post("/logout",pageController.logout)
-router.post("/createjob",CreateJob)
 
-router.post("/jobs/:userid", ShowUserapplication);
 
 export default router;

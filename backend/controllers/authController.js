@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 import {Authentication, requireAuth} from "../services/authservices.js";
 
 
-export async function Login(req,res){
+export async function Loginchecker(req,res){
     try {
         const {Username,Password}= req.body
 

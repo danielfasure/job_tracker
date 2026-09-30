@@ -1,9 +1,9 @@
 import {  getUserJobs,CreateJobs } from "../services/JobServices.js";
-import {setUser} from "../services/userServices.js";
+import {setUser,getuser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
-import  passport from "passport";
+
 import jwt from "jsonwebtoken";
-import {Authentication, requireAuth} from "../services/authservices.js";
+import bcrypt from "bcrypt";
 
 export async function register(req,res) {
     console.log("REGISTER");
@@ -15,21 +15,8 @@ export async function register(req,res) {
     console.log("Failed to add user");
    return  res.redirect("/home")
   }
-  req.login(User,async (err)=>{
-    if (err) {
-        console.log("Error logging in user:", err);
-        return res.redirect("/home")
-    }
-    console.log("User logged in successfully:", req.user);
-   
 
 
-
- 
- 
-    
-  
-  
   console.log("User ID:", req.user.id);
  const stats =await setUserFirstStats(req.user.id);
 
@@ -37,11 +24,53 @@ console.log("Successfully added stats",stats);
 
  console.log("successfully added user and stats",req.user.id);
   return res.redirect("/applicationportal");
-  }); 
+  
 
  
 }
+export async function Loginchecker(req,res){
+    try {
+        const {Username,Password}= req.body
+        const user =  await getuser(Username)
+        console.log(Password)
 
+        console.log(user.Password)
+        const match = await bcrypt.compare(Password,user.Password)
+        if (match){
+            const accessToken = jwt.sign({
+            "userid":user.id},
+            process.env.ACESSS_TOKEN_SECRET,
+            {expiresIn:'30s'})
+            res.cookie("acessToken", accessToken, {
+              httpOnly: true,
+             maxAge: 2 * 60 * 1000 //2min
+            });
+
+         const refreshToken = jwt.sign({
+            "userid":user.id},
+            process.env.REFRESH_TOKEN_SECRET,
+            {expiresIn:'1d'});
+            res.cookie("jwt", refreshToken, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 //1 day
+});
+  return res.redirect("/applicationportal");
+
+
+        }
+        res.redirect("/")
+        
+
+    } catch (error) {
+        console.error(error)
+        res.render("/")
+    }
+
+
+
+
+
+}
 
 
     
