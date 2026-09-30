@@ -9,12 +9,12 @@ import {
 
 import { 
   setUser,
-  getuserid,checkuser,setUserFirstStats
+  getuserid,setUserFirstStats
   
 } 
   from "../services/userServices.js";
 
-
+/*
 export async function getJobs(req, res) {
 
     const jobs = await getAllJobs();
@@ -83,7 +83,7 @@ export async function createJob(req,res){
 }
 
 
-
+*/
 
 
 

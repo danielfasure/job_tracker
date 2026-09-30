@@ -64,7 +64,7 @@ app.use(logger);
 
 
 app.use("/", webRoutes);
-app.use("/api", apiRoutes);
+//app.use("/api", apiRoutes);
 
 
 
