@@ -1,6 +1,7 @@
 import {  getUserJobs, } from "../services/JobServices.js";
 
 import {getUserStats} from "../services/StatsUser.js";
+import {getuserbyId} from "../services/userServices.js";
 
 
 export function HomePage(req, res) {
@@ -18,14 +19,17 @@ export async function profilePage(req, res, next) {
 
 export async function applicationPage(req, res) {
     try {
+        
         const userid = req.user.id;
+        console.log("User ID:", userid);
 
         const stats = await getUserStats(userid);
         const jobs = await getUserJobs(userid);
+        
 
         return res.render("application_tracker", {
             stat: stats,
-            userid,
+            userid: userid,
             applications: jobs
         });
 
@@ -48,28 +52,46 @@ export async function statsPage(req,res){
 
     res.render("statistics",
         {
-    stat:userstats
+    stat:userstats,
+    userid:userid
  } );
 
 
 
-}catch(erorr){
+}catch(error){
        console.error(error);
-     res.render("error", {
-        message: error.message
+
+       try{
+        userid= req.user.id;
+
+         res.render("error", {
+        message: error.message,userid:userid
     });
-}
+       }
+       catch{
+        console.error("Error retrieving user ID:", error);
+          res.render("error", {
+        message: error.message
+       });
+       
+
 
  
+}
+}
 }
 
 
 export async function  settingPage(req,res){
   try{
-  User=  await getuser(req.user.id) 
-  res.render("setting", { user: User});
+  
+ const userid=    req.user.id;
+ console.log("User ID:", userid);
 
-  }catch(erorr){
+  const User=  await getuserbyId(userid) 
+  res.render("setting", { user: User, userid: User.id });
+
+  }catch(error){
     console.error(error);
     res.render("error",{
         message: error.message
@@ -78,14 +100,3 @@ export async function  settingPage(req,res){
 
 }
 
-export async function logout(req,res,next) {
-  
-    req.logout((err) => {
-        if (err) {
-            return next(err);
-        }
-
-        res.redirect("/home");
-    });
-  
-}

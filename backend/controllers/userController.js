@@ -38,8 +38,8 @@ export async function Loginchecker(req,res){
         const match = await bcrypt.compare(Password,user.Password)
         if (match){
             const accessToken = jwt.sign({
-            "userid":user.id},
-            process.env.ACESSS_TOKEN_SECRET,
+            "id":user.id},
+            process.env.ACCESS_TOKEN_SECRET,
             {expiresIn:'30s'})
             res.cookie("acessToken", accessToken, {
               httpOnly: true,
@@ -47,7 +47,7 @@ export async function Loginchecker(req,res){
             });
 
          const refreshToken = jwt.sign({
-            "userid":user.id},
+            "id":user.id},
             process.env.REFRESH_TOKEN_SECRET,
             {expiresIn:'1d'});
             res.cookie("jwt", refreshToken, {
@@ -71,6 +71,17 @@ export async function Loginchecker(req,res){
 
 
 }
+
+export async function logout(req,res) {
+  
+   
+
+    res.clearCookie("acessToken");
+    res.clearCookie("jwt");
+
+    return res.redirect("/");
+}
+  
 
 
     

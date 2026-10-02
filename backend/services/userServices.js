@@ -51,6 +51,15 @@ export async function getuser(username) {{
 }
 }
 
+export async function getuserbyId(userId) {{
+    const result = await pool.query(
+        'SELECT * FROM "JobUser" WHERE "id"= $1',[userId]
+    )
+    return result.rows[0];
+}
+}
+
+
 
 
 

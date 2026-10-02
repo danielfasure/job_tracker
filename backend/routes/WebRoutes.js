@@ -18,7 +18,7 @@ router.get("/setting",requireAuth,pageController.settingPage)
 
 router.post("/login",UserController.Loginchecker)
 router.post("/register",UserController.register)
-router.post("/logout",pageController.logout)
+router.post("/logout",UserController.logout)
 
 
 export default router;
