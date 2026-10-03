@@ -20,6 +20,7 @@ router.post("/login",UserController.Loginchecker)
 router.post("/register",UserController.register)
 router.post("/logout",UserController.logout)
 router.post("/createjob",requireAuth,jobController.CreateJob)
+router.post("/creatextrajob",requireAuth,jobController.extraJobInfo)
 
 
 export default router;

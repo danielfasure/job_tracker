@@ -20,7 +20,7 @@ export async function getUserJobs(id) {
 }
 
 
-export async function CreateJobs(
+export async function CreateMinimumJob(
     CompanyName,
     jobdescription,
     JobTitle,

@@ -1,0 +1,124 @@
+ <div class="job_extra_adder border bg-light my-5 text-center mx-auto" id="add_job">
+
+    <div class="add-job-header text-center">
+        <i class="bi bi-briefcase-plus-fill add-job-icon"></i>
+
+        <h1 class="fs-2 fw-bold">
+            current Job 
+        </h1>
+
+        <p class="text-muted">
+            Add a extra job info
+        </p>
+    </div>
+
+
+    <form
+        class="add-job-form"
+        action="/creatextrajob"
+        method="POST"
+    >
+
+        <!-- Company -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="CompanyNameid"
+            >
+                <i class="bi bi-building"></i>
+                Company Name
+            </label>
+
+            <p
+                class="form-control"
+                id="CompanyNameid"
+                name="CompanyName"
+            >
+        
+        </p>
+
+        </div>
+
+
+        <!-- Job title -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="JobTitleid"
+            >
+                <i class="bi bi-briefcase"></i>
+                Job Title
+            </label>
+
+            <p
+              
+                class="form-control"
+                id="JobTitleid"
+                name="JobTitle"
+            ></p>
+
+        </div>
+
+
+        <!-- Date -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="ApplicationRoundid"
+            >
+                <i class="bi bi-calendar3"></i>
+                Application round
+            </label>
+
+            <input
+                type="number"
+                id="ApplicationRoundid"
+                name="ApplicationRound"
+                class="form-control"
+                required
+            >
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="Status"
+            >
+                <i class="bi bi-card-text"></i>
+                Job Description
+            </label>
+
+            <input 
+                id="Statusid"
+                name="Status"
+                class="form-control"
+               
+                placeholder="current status "
+            >
+
+        </div>
+
+
+        <!-- Submit -->
+        <div class="text-center mx-auto my-4">
+
+            <button
+                type="submit"
+                class="btn btn-primary add-job-button"
+            >
+                <i class="bi bi-plus-circle"></i>
+                Add Job
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

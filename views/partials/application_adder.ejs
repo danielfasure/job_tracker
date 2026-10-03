@@ -1,0 +1,127 @@
+ <div class="job_tracker_portal border bg-light my-5 text-center mx-auto" id="add_job">
+
+    <div class="add-job-header text-center">
+        <i class="bi bi-briefcase-plus-fill add-job-icon"></i>
+
+        <h1 class="fs-2 fw-bold">
+            Add Job Application
+        </h1>
+
+        <p class="text-muted">
+            Add a new job application to your tracker
+        </p>
+    </div>
+
+
+    <form
+        class="add-job-form"
+        action="/createjob"
+        method="POST"
+    >
+
+        <!-- Company -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="CompanyNameid"
+            >
+                <i class="bi bi-building"></i>
+                Company Name
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="CompanyNameid"
+                name="CompanyName"
+                placeholder="e.g. Microsoft"
+                required
+            >
+
+        </div>
+
+
+        <!-- Job title -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="JobTitleid"
+            >
+                <i class="bi bi-briefcase"></i>
+                Job Title
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="JobTitleid"
+                name="JobTitle"
+                placeholder="e.g. Junior Software Developer"
+                required
+            >
+
+        </div>
+
+
+        <!-- Date -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="companydateappliedid"
+            >
+                <i class="bi bi-calendar3"></i>
+                Application Sent Date
+            </label>
+
+            <input
+                type="date"
+                id="companydateappliedid"
+                name="DateCreated"
+                class="form-control"
+                required
+            >
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="companydescription"
+            >
+                <i class="bi bi-card-text"></i>
+                Job Description
+            </label>
+
+            <textarea
+                id="companydescription"
+                name="JobDescription"
+                class="form-control"
+                rows="5"
+                placeholder="Add details about the role..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- Submit -->
+        <div class="text-center mx-auto my-4">
+
+            <button
+                type="submit"
+                class="btn btn-primary add-job-button"
+            >
+                <i class="bi bi-plus-circle"></i>
+                Add Job
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
