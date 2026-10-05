@@ -4,7 +4,7 @@
         <i class="bi bi-briefcase-fill"></i>
     </h1>
 
-    <div class="text-center my-5" id="viewApplication">
+    <div class="text-center " id="viewApplication">
 
         <% if (Array.isArray(applications) && applications.length > 0) { %>
 
@@ -12,13 +12,13 @@
 
             <% applications.forEach((application, index) => { %>
 
-            <div class="application-card">
+            <div class="application-card " data-application-id="<%= application.id %>" >
 
                 <!-- Header -->
                 <button
                     class="application-header"
                     type="button"
-                    data-application="<%= index %>"
+                    data-application="<%= application.id %>"
                 >
 
                     <div class="application-main-info">
@@ -46,7 +46,7 @@
 
                     </div>
 
-                    <i class="bi bi-chevron-down application-chevron"></i>
+                    <i class="bi bi-chevron-down application-chevron "></i>
 
                 </button>
 
@@ -83,7 +83,47 @@
                         </p>
 
                     </div>
+                    <div class="applicationoptionsdiv hidden ">
+                    <div class="editapplicationopener application-actions">
+                            <input
+                                type="hidden"
+                                name="jobid"
+                                value="<%= application.id %>"
+                            >
 
+                            <button
+                                type="button"
+                                class="btn btn-outline-warning editapplicationopenerbutton"  data-bs-toggle="modal"
+                                    data-bs-target="#applicationeditModal"
+                                     data-application-id="<%= application.id %>">
+                            
+                               
+                            edit Job info ?
+                            </button>
+
+                  
+
+                    </div>
+                       <div class="editprogressopener application-actions">
+                            <input
+                                type="hidden"
+                                name="jobid"
+                                value="<%= application.id %>"
+                            >
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-warning mx-auto editprogressopener" data-bs-toggle="modal"
+                                    data-bs-target="#progressionModal"
+                                     data-application-id="<%= application.id %>">
+                            
+                              
+                           update progress?
+                            </button>
+
+                  
+
+                    </div>
 
                     <!-- Delete -->
                     <div class="application-actions">
@@ -104,7 +144,7 @@
                                 class="btn btn-outline-danger"
                             >
                                 <i class="bi bi-trash3"></i>
-                                Delete Application
+                                 Application
                             </button>
 
                         </form>
@@ -114,16 +154,19 @@
                 </div>
 
             </div>
-             <i> edit application </i>
+
+           
+             </div>
+     
             <% }); %>
 
-        </div>
 
         <% } else { %>
 
             <p>No applications set.</p>
 
         <% } %>
+        </div>
     
     </div>
 <p><i class="bi bi-card-list" id ="viewApplicationbutton"></p></i>

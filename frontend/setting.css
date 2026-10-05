@@ -1,0 +1,153 @@
+.settings-header {
+    margin-bottom: 30px;
+}
+
+.settings-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.settings-header h1 {
+    margin-bottom: 5px;
+}
+
+
+/* Settings list */
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* Individual setting */
+
+.settings-item {
+    background-color: white;
+
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* Left side */
+
+.settings-item-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.settings-item-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f1f3f5;
+    border-radius: 10px;
+
+    font-size: 1.2rem;
+}
+
+
+.settings-item h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    margin: 0 0 4px;
+}
+
+
+.settings-item p {
+    margin: 0;
+
+    color: #6c757d;
+}
+
+
+/* Buttons */
+
+.settings-item button {
+    white-space: nowrap;
+}
+
+.settings-save {
+    margin-top: 15px;
+}
+
+.settings-save button {
+    padding: 10px 25px;
+    font-weight: 600;
+}
+
+
+/* Empty state */
+
+.settings-empty {
+    background-color: white;
+
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+
+    padding: 40px 20px;
+}
+
+.settings-empty i {
+    font-size: 3rem;
+}
+
+.settings-empty h2 {
+    font-size: 1.3rem;
+    margin-top: 15px;
+}
+
+.settings-empty p {
+    color: #6c757d;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .user-settings-card {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .settings-item {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .settings-item-info {
+        align-items: flex-start;
+    }
+
+    .settings-item button {
+        margin-top: 5px;
+    }
+}
+.user-settings-card {
+    width: 66.666%;
+    max-width: 900px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+
+    padding: 30px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

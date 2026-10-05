@@ -1,14 +1,14 @@
- <div class="job_extra_adder border bg-light my-5 text-center mx-auto" id="add_job">
+ <div class="job_extra_adder border br-3 bg-light my-5 text-center mx-auto" id="add_job">
 
     <div class="add-job-header text-center">
         <i class="bi bi-briefcase-plus-fill add-job-icon"></i>
 
         <h1 class="fs-2 fw-bold">
-            current Job 
+            Application progression 
         </h1>
 
         <p class="text-muted">
-            Add a extra job info
+            change the progression status of your application 
         </p>
     </div>
 
@@ -22,16 +22,12 @@
         <!-- Company -->
         <div class="form-group">
 
-            <label
-                class="form-label"
-                for="CompanyNameid"
-            >
                 <i class="bi bi-building"></i>
                 Company Name
-            </label>
+         
 
             <p
-                class="form-control"
+                class=""
                 id="CompanyNameid"
                 name="CompanyName"
             >
@@ -44,17 +40,14 @@
         <!-- Job title -->
         <div class="form-group">
 
-            <label
-                class="form-label"
-                for="JobTitleid"
-            >
+           
                 <i class="bi bi-briefcase"></i>
                 Job Title
-            </label>
+           
 
             <p
               
-                class="form-control"
+                class=""
                 id="JobTitleid"
                 name="JobTitle"
             ></p>
@@ -78,7 +71,7 @@
                 id="ApplicationRoundid"
                 name="ApplicationRound"
                 class="form-control"
-                required
+              placeholder="leave blank for stage 1"
             >
 
         </div>
@@ -92,7 +85,7 @@
                 for="Status"
             >
                 <i class="bi bi-card-text"></i>
-                Job Description
+                Status
             </label>
 
             <input 
@@ -100,7 +93,7 @@
                 name="Status"
                 class="form-control"
                
-                placeholder="current status "
+                placeholder="will be left as pending "
             >
 
         </div>
@@ -111,10 +104,10 @@
 
             <button
                 type="submit"
-                class="btn btn-primary add-job-button"
+                class="btn btn-primary mx-auto "
             >
                 <i class="bi bi-plus-circle"></i>
-                Add Job
+               
             </button>
 
         </div>

@@ -1,0 +1,46 @@
+<div id="progressionModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content text-center">
+
+       
+        <div class="modal-header text text-center">
+        <h2 class="my-2 fs-5 modal-title mx-auto  text-center">Edit Job Progression</h2>
+        
+            </div>
+            <div class="modal-body">
+        <form id="progressionForm">
+
+            <input type="hidden" id="progApplicationId">
+             <div class="mb-3">
+            <label class="form-label" >Status</label>
+            <select id="status" class="form-select">
+                <option value="Pending">Pending</option>
+                <option value="Interview">Interview</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Offer">Offer</option>
+            </select>
+            </div> 
+            
+            <div class="mb-3">
+                <label>Interview round </label>
+            <input id="notes" type="number" class ="form-control"></input>
+
+            <label>Interview Type</label>
+            <input id="interviewType" type="text"class="form-control">
+
+     
+
+            <button type="submit mt-2" class="btn btn-outline-success">
+                Save
+            </button>
+            </div>
+        </form>
+        </div>
+         <button id="closeModal" type="button" 
+                    class="btn-close" 
+                    data-bs-dismiss="modal"></button>
+       
+    </div>
+    </div>
+</div>

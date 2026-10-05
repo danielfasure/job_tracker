@@ -12,6 +12,7 @@ if (button_change_register) {
 }
 
 
+
 let button_change_login =
     document.querySelector(".change_login_button");
 
@@ -43,7 +44,7 @@ if (viewApplicationButton && viewApplication) {
     });
 }
 
-
+/*application opener and closer  */
 const applicationHeaders = document.querySelectorAll(".application-header");
 
 applicationHeaders.forEach(header => {
@@ -52,6 +53,9 @@ applicationHeaders.forEach(header => {
 
         const card = header.closest(".application-card");
 
+       const buttonforjobs= card.querySelector(".applicationoptionsdiv")
+       buttonforjobs.classList.toggle("hidden")
+
         card.classList.toggle("active");
 
     });
@@ -59,6 +63,35 @@ applicationHeaders.forEach(header => {
 });
 
 
+// modal
+const applicationeditbutton = document.querySelectorAll(".editapplicationopenerbutton");
+const closeModalbutton = document.getElementById("closeModal");
+const modal = document.querySelector("#progressionModal");
+modal.addEventListener("show.bs.modal", function (event) {
+
+    const button = event.relatedTarget;
+
+    const applicationId = button.dataset.applicationId;
+
+    document.getElementById("progApplicationId").value = applicationId
+ 
+});
+
+const applicationmodal=document.querySelector("#applicationeditModal");
+ applicationmodal.addEventListener("show.bs.modal", function (event) {
+
+    const button = event.relatedTarget;
+
+    const applicationId = button.dataset.applicationId;
+
+    document.getElementById("ApplicationId").value = applicationId
+   
+
+})
+
+closeModalbutton.addEventListener("click", () => {
+    modal.style.display = "none";
+})
 // SETTINGS
 const editPasswordButton = document.querySelector("#edit_password_button");
 const editEmailButton = document.querySelector("#edit_email_button");

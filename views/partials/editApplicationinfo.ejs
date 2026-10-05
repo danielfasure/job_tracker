@@ -1,0 +1,45 @@
+<div id="applicationeditModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content text-center">
+
+       
+        <div class="modal-header text text-center">
+        <h2 class="my-2 fs-5 modal-title mx-auto  text-center">Edit application</h2>
+        
+            </div>
+            <div class="modal-body">
+        <form id="progressionForm">
+
+            <input type="hidden" id="ApplicationId" name ="Applicationnumber">
+            
+            
+            <div class="mb-3">
+                <label class="form-label" >company name </label>
+            <input id="CompanyNameId" type="text" class ="form-control" name="CompanyName">
+
+            <label class="form-label">Job Title </label>
+            <input id="JobTitleId" type="text"class="form-control" name="JobTitle">
+
+               <label class="form-label">Date submited</label>
+            <input id="Date" type="date" class="form-control" name ="DateCreated">
+
+            <label class="form-label">job description</label>
+            <textarea name="JobDescription"class="form-control"> </textarea>
+            
+
+     
+
+            <button type="submit mt-2" class="btn btn-outline-success">
+                Save
+            </button>
+            </div>
+        </form>
+        </div>
+         <button id="closeapplicationModal" type="button" 
+                    class="btn-close" 
+                    data-bs-dismiss="modal"></button>
+       
+    </div>
+    </div>
+</div>
