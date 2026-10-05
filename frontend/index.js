@@ -89,6 +89,19 @@ const applicationmodal=document.querySelector("#applicationeditModal");
 
 })
 
+
+const deletemodal=document.querySelector("#deleteModal");
+deletemodal.addEventListener("show.bs.modal", function (event) {
+
+    const button = event.relatedTarget;
+
+    const applicationId = button.dataset.applicationId;
+
+    document.getElementById("DeleteApplicationId").value = applicationId
+   
+
+})
+
 closeModalbutton.addEventListener("click", () => {
     modal.style.display = "none";
 })

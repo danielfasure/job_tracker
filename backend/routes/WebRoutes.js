@@ -21,7 +21,7 @@ router.post("/register",UserController.register)
 router.post("/logout",UserController.logout)
 router.post("/createjob",requireAuth,jobController.CreateJob)
 router.post("/creatextrajob",requireAuth,jobController.extraJobInfo)
-router.post("deletejob",requireAuth)
+router.post("/deletejob",requireAuth,jobController.removeJob)
 
 
 export default router;

@@ -1,7 +1,7 @@
 
 import { increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 
-import {  CreateMinimumJob, } from "../services/JobServices.js";
+import {  CreateMinimumJob,Deletejob } from "../services/JobServices.js";
 export async function CreateJob(req,res){
   
   const { JobTitle, CompanyName, JobDescription, DateCreated } = req.body;
@@ -28,11 +28,16 @@ export async function CreateJob(req,res){
 
 
 export async function removeJob(req,res){
+   
 
-  const { jobId } = req.body;
- 
-  const result = await decreaseapplicationcount(jobId);
-  console.log("Successfully removed job",result);
+  const { applicationId } = req.body;
+  console.log(applicationId)
+
+
+ await Deletejob(applicationId);
+  const result = await decreaseapplicationcount(applicationId);
+  console.log("Successfully removed job",);
+  res.redirect("/applicationportal")
 
 }
 
