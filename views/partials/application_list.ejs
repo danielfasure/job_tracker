@@ -1,19 +1,16 @@
-<div class="job_list border bg-light my-5 text-center mx-auto">
+<div class="job_list border bg-light my-5 text-center mx-auto" id="viewApplication">
 
-    <h1 class="fs-2 fw-bold my-2">
-        <i class="bi bi-briefcase-fill"></i>
-    </h1>
 
-    <div class="text-center " id="viewApplication">
+
+  
 
         <% if (Array.isArray(applications) && applications.length > 0) { %>
 
-        <div class="applications-list">
-
+        
             <% applications.forEach((application, index) => { %>
 
             <div class="application-card " data-application-id="<%= application.id %>" >
-
+                    
                 <!-- Header -->
                 <button
                     class="application-header"
@@ -83,6 +80,7 @@
                         </p>
 
                     </div>
+                    </div>
                     <div class="applicationoptionsdiv hidden ">
                     <div class="editapplicationopener application-actions">
                             <input
@@ -93,7 +91,7 @@
 
                             <button
                                 type="button"
-                                class="btn btn-outline-warning editapplicationopenerbutton"  data-bs-toggle="modal"
+                                class="btn btn-outline-secondary editapplicationopenerbutton btn-sm"  data-bs-toggle="modal"
                                     data-bs-target="#applicationeditModal"
                                      data-application-id="<%= application.id %>">
                             
@@ -113,7 +111,7 @@
 
                             <button
                                 type="button"
-                                class="btn btn-outline-warning mx-auto editprogressopener" data-bs-toggle="modal"
+                                class="btn btn-outline-secondary btn-sm mx-auto editprogressopener" data-bs-toggle="modal"
                                     data-bs-target="#progressionModal"
                                      data-application-id="<%= application.id %>">
                             
@@ -138,7 +136,7 @@
 
                             <button
                                 type="button"
-                                class="btn btn-outline-danger"
+                                class="btn btn-outline-danger btn-sm"
                               data-bs-target="#deleteModal" data-bs-toggle="modal"
                                      data-application-id="<%= application.id %>">
 
@@ -150,8 +148,9 @@
                     </div>
 
                 </div>
+                
 
-            </div>
+          
 
            
              </div>
@@ -166,7 +165,19 @@
         <% } %>
         </div>
     
-    </div>
-<p><i class="bi bi-card-list" id ="viewApplicationbutton"></p></i>
+    
+    <div class="text-center mx-auto my-4 col-4 "id="add-job-buttonopenerid ">
+
+            <button
+                type="button"
+                class="btn btn-secondary add-job-buttonopener mx-auto"
+               
+                data-bs-target="#applicationaddModal" data-bs-toggle="modal"
+            >
+                <i class="bi bi-plus-circle mx-auto"></i>
+                Add Job
+            </button>
+</div>
+
 
 </div>

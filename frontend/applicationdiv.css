@@ -137,6 +137,11 @@
 
 .application-card.active .application-details {
     max-height: 500px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 
     padding: 20px;
 

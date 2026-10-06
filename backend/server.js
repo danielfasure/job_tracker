@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
          maxAge: 1000 * 60 * 60 * 24
     }
 }));*/
-console.log("SESSION SECRET:", process.env.SESSION_SECRET);
+//console.log("SESSION SECRET:", process.env.SESSION_SECRET);
 app.use(cookieParser());
 
 

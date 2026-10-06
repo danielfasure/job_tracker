@@ -77,6 +77,10 @@ modal.addEventListener("show.bs.modal", function (event) {
  
 });
 
+
+
+
+
 const applicationmodal=document.querySelector("#applicationeditModal");
  applicationmodal.addEventListener("show.bs.modal", function (event) {
 

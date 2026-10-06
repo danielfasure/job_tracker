@@ -3,34 +3,73 @@
  
  export async function requireAuth(req, res, next) {
 
+
+    const token = req.cookies.acessToken;
+
+    console.log("ACCESS TOKEN:", token);
+
+    // No access token
+    if (!token) {
+
+        console.log("ACCESS TOKEN MISSING");
+
+        const refreshToken = req.cookies.jwt;
+
+        if (!refreshToken) {
+            return res.redirect("/");
+        }
+
+        try {
+
+            const decodedRefresh = jwt.verify(
+                refreshToken,
+                process.env.REFRESH_TOKEN_SECRET
+            );
+
+            const newAccessToken = jwt.sign(
+                { id: decodedRefresh.id },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1m" }
+            );
+
+            res.cookie("acessToken", newAccessToken, {
+                httpOnly: true,
+                maxAge: 60 * 1000
+            });
+
+            req.user = {
+                id: decodedRefresh.id
+            };
+
+            return next();
+
+        } catch (error) {
+
+            console.error("REFRESH ERROR:", error);
+
+            return res.redirect("/");
+        }
+    }
+
+    // Access token exists
     try {
-
-        const token = req.cookies.acessToken;
-
-console.log("ACCESS TOKEN:", req.cookies.acessToken);
 
         const decoded = jwt.verify(
             token,
-            process.env.ACCESS_TOKEN_SECRET,
-            
+            process.env.ACCESS_TOKEN_SECRET
         );
 
-      
         req.user = decoded;
-        console.log(req.user)
-      
-        next();
 
-       
+        return next();
 
-    } 
-    catch (error) {
+    } catch (error) {
 
-       
         if (error.name !== "TokenExpiredError") {
-        
-             console.error("AUTH ERROR:", error);
-              return res.redirect("/");
+
+            console.error("AUTH ERROR:", error);
+
+            return res.redirect("/");
         }
 
         // Access token expired
@@ -51,24 +90,26 @@ console.log("ACCESS TOKEN:", req.cookies.acessToken);
                 { id: decodedRefresh.id },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: "1m" }
-            );  
+            );
+
             res.cookie("acessToken", newAccessToken, {
-            httpOnly: true,
-            maxAge:  60 * 1000         
+                httpOnly: true,
+                maxAge: 60 * 1000
             });
 
+            req.user = {
+                id: decodedRefresh.id
+            };
 
-req.user ={id: decodedRefresh.id};
-        console.log(req.user)
-         next();
+            return next();
 
-         }
-         catch{
-                 
-                 console.error(error)
-                  return res.redirect("/");
-            }
-          
-      
+        } catch (error) {
+
+            console.error("REFRESH ERROR:", error);
+
+            return res.redirect("/");
+        }
     }
 }
+    
+

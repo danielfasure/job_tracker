@@ -1,4 +1,13 @@
- <div class="job_tracker_portal border bg-light my-5 text-center mx-auto" id="add_job">
+<div id="applicationaddModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content text-center">
+
+       
+       
+            <div class="modal-body">
+
+                 <div class="job_tracker_portal border bg-light my-5 text-center mx-auto" id="add_job">
 
     <div class="add-job-header text-center">
         <i class="bi bi-briefcase-plus-fill add-job-icon"></i>
@@ -12,7 +21,7 @@
         </p>
     </div>
 
-
+ <div class="mx-auto">
     <form
         class="add-job-form"
         action="/createjob"
@@ -110,18 +119,30 @@
 
 
         <!-- Submit -->
-        <div class="text-center mx-auto my-4">
+        <div class="text-center my-4 ">
 
             <button
                 type="submit"
-                class="btn btn-secondary add-job-button mx-auto"
+                class="btn btn-secondary add-job-button mx-auto "
             >
+                
                 <i class="bi bi-plus-circle mx-auto"></i>
-                Add Job
             </button>
 
         </div>
 
     </form>
+    </div>
 
+</div>
+     
+        </div>
+
+
+         <button id="closeapplicationModal" type="button" 
+                    class="btn-close" 
+                    data-bs-dismiss="modal"></button>
+       
+    </div>
+    </div>
 </div>

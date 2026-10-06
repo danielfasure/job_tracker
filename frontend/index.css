@@ -14,14 +14,16 @@ height: 100vh;
 }
 
 .job_tracker_portal {
-    width: 66.666%;
+    position: flex;
+    flex-direction: column;
+   left: 50%;
+    width: 90%;
     max-width: 900px;
+   
 
     border-radius: 15px;
     padding: 30px;
 
-    margin-left: auto;
-    margin-right: auto;
 }
 
 
@@ -46,37 +48,42 @@ height: 100vh;
 
 .add-job-form {
     max-width: 750px;
-    margin: 0 auto;
+   
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+   margin-top: auto;
 }
 
 
 /* Individual fields */
 
 .form-group {
-    text-align: left;
+     text-align: center;
+     justify-content: center;
 }
 
 .form-group label {
     font-weight: 600;
     margin-bottom: 8px;
+     
 }
 
 .form-group label i {
     margin-right: 5px;
 }
 .job_list {
-    width: 66.666%;
+    width: 90%;
     max-width: 900px;
+
 
     border-radius: 15px;
     padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 
-    margin-left: auto;
-    margin-right: auto;
+  
 }
 
 
