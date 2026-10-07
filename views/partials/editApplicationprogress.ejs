@@ -9,12 +9,13 @@
         
             </div>
             <div class="modal-body">
-        <form id="progressionForm">
+        <form id="progressionForm" action="/editextraJobInfo"
+        method="POST">
 
-            <input type="hidden" id="progApplicationId">
+            <input type="hidden" id="progApplicationId" name="JobApplicationid">
              <div class="mb-3">
             <label class="form-label" >Status</label>
-            <select id="status" class="form-select">
+            <select id="status" class="form-select" name="Status">
                 <option value="Pending">Pending</option>
                 <option value="Interview">Interview</option>
                 <option value="Rejected">Rejected</option>
@@ -24,14 +25,14 @@
             
             <div class="mb-3">
                 <label>Interview round </label>
-            <input id="notes" type="number" class ="form-control"></input>
+            <input id="notes" type="number" class ="form-control" name="ApplicationRound"></input>
 
             <label>Interview Type</label>
-            <input id="interviewType" type="text"class="form-control">
+            <input id="interviewType" type="text"class="form-control" name="RoundType">
 
      
 
-            <button type="submit mt-2" class="btn btn-outline-success">
+            <button type="submit my-2" class="btn btn-outline-success">
                 Save
             </button>
             </div>

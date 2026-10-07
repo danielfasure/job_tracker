@@ -41,11 +41,34 @@ export async function CreateMinimumJob(
     )
     return result.rows[0]
 }
+export async function editMinimumJob({
+    CompanyName,
+    jobdescription,
+    JobTitle,
+    companydateapplied,
+    applicationnumber}
+){
+    console.log("added ",applicationnumber)
+   await pool.query(
+        `UPDATE "JobTracker"
+         SET
+            "CompanyName" = COALESCE($1, "CompanyName"),
+            "JobTitle" = COALESCE($2, "JobTitle"),
+            "DateCreated" = COALESCE($3, "DateCreated"),
+            "JobDescription"= COALESCE($4, "JobDescription")
+         WHERE "id" = $5`,
+        [CompanyName, JobTitle, companydateapplied, jobdescription,applicationnumber]
+    );
 
+   
+}
 
 
 export async function Deletejob(applicationid){
     const result = await pool.query(
+        'DELETE FROM "JobTrackerExtra" WHERE "JobApplicationid"=$1 ',[applicationid]
+    )
+    const result2 = await pool.query(
         'DELETE FROM "JobTracker" WHERE "id"=$1 ',[applicationid]
     )
 }
@@ -86,7 +109,7 @@ export async function AddJobDetail({
 }
 
 export async function AlterJobDetail ({JobApplicationid,ApplicationRound,Status,RoundType}){
-    const query = `
+ /*   const query = `
     UPDATE "JobTrackerExtra"
     SET
         "RoundType" = COALESCE($1, "JobTitle"),
@@ -97,7 +120,17 @@ export async function AlterJobDetail ({JobApplicationid,ApplicationRound,Status,
 await pool.query(query,[RoundType??null,ApplicationRound??null,Status??null,
     JobApplicationid
 ])
-
+*/
+console.log(JobApplicationid,Status,RoundType)
+ await pool.query(
+        `UPDATE "JobTrackerExtra"
+         SET
+            "Status" = COALESCE($1, "Status"),
+            "ApplicationRound" = COALESCE($2, "ApplicationRound"),
+            "RoundType" = COALESCE($3, "RoundType")
+         WHERE "JobApplicationid" = $4`,
+        [Status, ApplicationRound, RoundType, JobApplicationid]
+    );
 }
 
 
