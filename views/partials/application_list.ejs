@@ -66,6 +66,31 @@
                         </p>
 
                     </div>
+
+                    <div class="application-detail">
+
+                        <span class="application-label">
+                            <i class="bi bi-card-text"></i>
+                           hour type
+                        </span>
+
+                        <p>
+                            <%= application.hourtype %>
+                        </p>
+
+                    </div>
+                       <div class="application-detail">
+
+                        <span class="application-label">
+                            <i class="bi bi-card-text"></i>
+                      work place
+                        </span>
+
+                        <p>
+                            <%= application.jobtype  %>
+                        </p>
+
+                    </div>
                    <% const extraapplication = extrajobs?.find(
     info => info.JobApplicationid === application.id
 ); %>

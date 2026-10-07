@@ -32,12 +32,12 @@ export async function CreateMinimumJob(
     jobdescription,
     JobTitle,
     companydateapplied,
-    Userid
+    Userid,hourtype,jobtype
 ){
     
 
     const result =  await pool.query(
-        'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid")  VALUES ($1, $2, $3, $4,$5)  RETURNING * ' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid]
+        'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid","hourtype","jobtype")  VALUES ($1, $2, $3, $4,$5,$6,$7)  RETURNING * ' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid,hourtype,jobtype]
     )
     return result.rows[0]
 }
@@ -46,18 +46,21 @@ export async function editMinimumJob({
     jobdescription,
     JobTitle,
     companydateapplied,
-    applicationnumber}
+    applicationnumber,hourtype,jobtype}
 ){
-    console.log("added ",applicationnumber)
+    console.log("added ",hourtype)
    await pool.query(
         `UPDATE "JobTracker"
          SET
             "CompanyName" = COALESCE($1, "CompanyName"),
             "JobTitle" = COALESCE($2, "JobTitle"),
             "DateCreated" = COALESCE($3, "DateCreated"),
-            "JobDescription"= COALESCE($4, "JobDescription")
+            "JobDescription"= COALESCE($4, "JobDescription"),
+            "hourtype"= COALESCE($6, "hourtype"),
+            "jobtype"= COALESCE($7, "jobtype")
+
          WHERE "id" = $5`,
-        [CompanyName, JobTitle, companydateapplied, jobdescription,applicationnumber]
+        [CompanyName, JobTitle, companydateapplied, jobdescription,applicationnumber,hourtype,jobtype]
     );
 
    

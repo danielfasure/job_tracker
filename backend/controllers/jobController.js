@@ -4,14 +4,14 @@ import { increaseapplicationcount,decreaseapplicationcount} from "../services/St
 import {  AddJobDetail, CreateMinimumJob,Deletejob,AlterJobDetail ,editMinimumJob} from "../services/JobServices.js";
 export async function CreateJob(req,res){
   
-  const { JobTitle, CompanyName, JobDescription, DateCreated } = req.body;
+  const { JobTitle, CompanyName, JobDescription, DateCreated,hourtype,jobtype } = req.body;
   const userid = req.user.id;
  const job = await CreateMinimumJob(
     CompanyName,
     JobDescription,
     JobTitle,
     DateCreated,
-    userid
+    userid,hourtype,jobtype
 );
 
 
@@ -24,10 +24,10 @@ const hey= await AddJobDetail({userid:userid,JobApplicationid:job.id})
 
 }
 export async function editapplication(req,res){
- const { JobTitle, CompanyName, JobDescription, DateCreated,Applicationnumber } = req.body;
+ const { JobTitle, CompanyName, JobDescription, DateCreated,Applicationnumber,hourtype,jobtype } = req.body;
  console.log("added",Applicationnumber)
  const userid= req.user.id;
- await editMinimumJob({JobTitle:JobTitle||null,CompanyName:CompanyName||null,jobdescription:JobDescription||null,companydateapplied:DateCreated||null,applicationnumber:Applicationnumber})
+ await editMinimumJob({JobTitle:JobTitle||null,CompanyName:CompanyName||null,jobdescription:JobDescription||null,companydateapplied:DateCreated||null,applicationnumber:Applicationnumber,jobtype:jobtype||null,hourtype:hourtype||null})
 res.redirect("/applicationportal")
 }
 
