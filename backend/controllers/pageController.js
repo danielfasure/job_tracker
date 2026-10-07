@@ -1,4 +1,4 @@
-import {  getUserJobs, } from "../services/JobServices.js";
+import {  getUserJobs,getextrajobs } from "../services/JobServices.js";
 
 import {getUserStats} from "../services/StatsUser.js";
 import {getuserbyId} from "../services/userServices.js";
@@ -25,12 +25,15 @@ export async function applicationPage(req, res) {
 
         const stats = await getUserStats(userid);
         const jobs = await getUserJobs(userid);
+        const extrajobs = await getextrajobs(userid)
+        console.log(jobs)
         
 
         return res.render("application_tracker", {
             stat: stats,
             userid: userid,
-            applications: jobs
+            applications: jobs,
+            extrajobs:extrajobs?? []
         });
 
     } catch (error) {

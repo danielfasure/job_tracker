@@ -18,6 +18,13 @@ export async function getUserJobs(id) {
 
     return result.rows;
 }
+export async function getextrajobs(id) {
+console.log("msss ",id)
+      const result = await pool.query(
+    'SELECT * FROM "JobTrackerExtra" WHERE "userid"=$1',[id])
+    console.log(result.rows[0])
+    return result.rows
+}
 
 
 export async function CreateMinimumJob(
@@ -32,8 +39,10 @@ export async function CreateMinimumJob(
     const result =  await pool.query(
         'INSERT INTO "JobTracker" ("JobTitle","JobDescription","DateCreated","CompanyName","Jobuserid")  VALUES ($1, $2, $3, $4,$5)  RETURNING * ' ,[JobTitle,jobdescription,companydateapplied,CompanyName,Userid]
     )
-    return result.rows
+    return result.rows[0]
 }
+
+
 
 export async function Deletejob(applicationid){
     const result = await pool.query(
@@ -43,10 +52,37 @@ export async function Deletejob(applicationid){
 
 
 
-export async function AddJobDetail({JobApplicationid,ApplicationRound,Status,RoundType}){
- const result =  await pool.query(
-        'INSERT INTO "JobTrackerExtra" ("ApplicationRound","RoundType","Status","JobApplicationid")  VALUES ($1, $2, $3, $4,$5)   ' ,[ApplicationRound??1,RoundType??"pending",Status??"pending",JobApplicationid]
-    )
+export async function AddJobDetail({
+    JobApplicationid,
+    ApplicationRound,
+    Status,
+    RoundType,userid
+}) {
+  
+    console.log("AddJobDetail values:", {
+        JobApplicationid,
+        ApplicationRound,
+        Status,
+        RoundType
+    });
+  
+
+    const result = await pool.query(
+        `INSERT INTO "JobTrackerExtra"
+        ("ApplicationRound", "RoundType", "Status", "JobApplicationid","userid")
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *`,
+        [
+            ApplicationRound ?? 1,
+            RoundType ?? "pending",
+            Status ?? "pending",
+            JobApplicationid,userid
+        ]
+    );
+
+    console.log("ADDED DETAIL:", result.rows[0]);
+
+    return result.rows[0];
 }
 
 export async function AlterJobDetail ({JobApplicationid,ApplicationRound,Status,RoundType}){
