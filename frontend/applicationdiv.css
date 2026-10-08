@@ -39,32 +39,28 @@
     border-radius: 12px;
     margin-bottom: 12px;
     overflow: hidden;
-   width: fit-content;
+    width: max-content; /* Changed from fit-content to prevent expansion from hidden siblings */
+    max-width: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-     display: flex;
+    display: flex;
     flex-direction: column;
-     max-width: 100%;
+    align-items: center;
 }
 
 
 /* Top clickable section */
 
 .application-header {
-   min-width: fit-content;
+   width: 100%; /* Spans full intrinsic width of card header */
     border: none;
     background: none;
-
     padding: 20px;
-
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-
+    gap: 8px;
     text-align: center;
     cursor: pointer;
-
-    min-width: 0;
 }
 
 
@@ -91,11 +87,10 @@
 }
 
 .application-title {
-    font-size: 1.25rem;
+   font-size: 1.25rem;
     font-weight: 600;
-
     margin: 0;
-     overflow-wrap: anywhere;
+    white-space: nowrap;
 }
 
 .application-company {
@@ -117,15 +112,14 @@
 
 
 .application-details {
-    max-height: 0;
+  max-height: 0;
     overflow: hidden;
-
     padding: 0 20px;
-
+    visibility: hidden; /* Prevents hidden expanded elements from affecting card width when collapsed */
     transition:
         max-height 0.3s ease,
-        padding 0.3s ease;
-
+        padding 0.3s ease,
+        visibility 0.3s ease;
     border-top: 0 solid #dee2e6;
 }
 .applicationoptionsdiv{
@@ -136,15 +130,14 @@
 
 
 .application-card.active .application-details {
-    max-height: 500px;
+    max-height: 1000px; /* Increased to accommodate content comfortably */
+    visibility: visible;
     display: flex;
     flex-direction: row;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
-
     padding: 20px;
-
     border-top: 1px solid #dee2e6;
 }
 
