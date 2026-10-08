@@ -17,12 +17,12 @@ export async function register(req,res) {
   }
 
 
-  console.log("User ID:", req.user.id);
- const stats =await setUserFirstStats(req.user.id);
+  console.log("User ID:", User.id);
+ const stats =await setUserFirstStats(User.id);
 
 console.log("Successfully added stats",stats);
 
- console.log("successfully added user and stats",req.user.id);
+ console.log("successfully added user and stats",User.id);
   return res.redirect("/applicationportal");
   
 
