@@ -1,85 +1,104 @@
 <%- include("partials/header.ejs") %>
 <%- include('partials/navbar.ejs') %>
-<div class="container"> 
-     
-    
-    <div class=" login_portal bg-light border mt-5">
+<div class="container my-5 mx-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      
+      <div class="card shadow-sm border-0 rounded-3 bg-light p-4">
+        
+        <!-- Login Card -->
+        <div class="login_div text-center">
+          <div class="mb-4">
+            <i class="bi bi-box-arrow-in-right fs-1 text-secondary"></i>
+            <h1 class="fw-bold fs-4 text-dark mt-2 mb-1">Welcome Back</h1>
+            <p class="text-muted small">Please enter your details to login</p>
+          </div>
 
+          <form action="/login" method="POST">
+            <div class="mb-3 text-start">
+              <label for="Username" class="form-label fw-semibold text-muted small mb-1">
+                <i class="bi bi-person me-1"></i>Username
+              </label>
+              <input class="form-control" type="text" id="Username" name="Username" placeholder="Enter your username" required>
+            </div>
 
-  
-    
-<div class=" mx-5 my-5  text-center login_div bg-light   "  >
- <h1 class="text-center fw-bold fs-4  text-center "> Login  page  </h1>
-<form class="  row  my-5  mx-auto" action="/login" method="POST" >
- 
-        <div class=" form-group  col-lg-6 col-12">
+            <div class="mb-4 text-start">
+              <label for="Passwordlogin" class="form-label fw-semibold text-muted small mb-1">
+                <i class="bi bi-lock me-1"></i>Password
+              </label>
+              <input class="form-control" type="password" id="Passwordlogin" name="Password" placeholder="••••••••" required>
+            </div>
 
-        <label for ="Username" class="form-label"> Username </label>
+            <button type="submit" class="btn btn-outline-secondary w-100 py-2 fw-semibold shadow-sm">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Login
+            </button>
+          </form>
 
-        <input class="form-control  " type="text" id="Username" name="Username">
+          <div class="border-top pt-3 mt-4">
+            <p class="text-muted small mb-2">Don't have an account yet?</p>
+            <button type="button" class="btn btn-outline-secondary btn-sm change_register_button px-3">
+              Switch to Register Page
+            </button>
+          </div>
         </div>
-          <div class=" form-group col-lg-6 col-12">
-        <label for ="Passwordlogin" class="form-label"> Password </label>
 
-        <input class="form-control " type="password" id="Passwordlogin" name="Password" >
+        <!-- Register Card -->
+        <div class="register_div text-center hidden">
+          <div class="mb-4">
+            <i class="bi bi-person-plus-fill fs-1 text-secondary"></i>
+            <h1 class="fw-bold fs-4 text-dark mt-2 mb-1">Create Account</h1>
+            <p class="text-muted small">Fill in the details below to register</p>
+          </div>
+
+          <form action="/register" method="POST">
+            <div class="row g-3">
+              
+              <div class="col-12 text-start">
+                <label for="usernameregister" class="form-label fw-semibold text-muted small mb-1">
+                  <i class="bi bi-person me-1"></i>Username
+                </label>
+                <input class="form-control" id="usernameregister" name="Username" placeholder="Choose a username" required>
+              </div>
+
+              <div class="col-12 text-start">
+                <label for="emailid" class="form-label fw-semibold text-muted small mb-1">
+                  <i class="bi bi-envelope me-1"></i>Email Address
+                </label>
+                <input type="email" class="form-control" id="emailid" name="Email" placeholder="name@example.com" required>
+              </div>
+
+              <div class="col-md-6 text-start">
+                <label for="passwordregister" class="form-label fw-semibold text-muted small mb-1">
+                  <i class="bi bi-lock me-1"></i>Password
+                </label>
+                <input class="form-control" id="passwordregister" name="Password" type="password" placeholder="••••••••" required>
+              </div>
+
+              <div class="col-md-6 text-start">
+                <label for="passwordregister2" class="form-label fw-semibold text-muted small mb-1">
+                  <i class="bi bi-shield-lock me-1"></i>Confirm Password
+                </label>
+                <input class="form-control" id="passwordregister2" name="Password2" type="password" placeholder="••••••••" required>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-outline-secondary w-100 py-2 fw-semibold shadow-sm mt-4">
+              <i class="bi bi-person-plus me-1"></i> Register
+            </button>
+          </form>
+
+          <div class="border-top pt-3 mt-4">
+            <p class="text-muted small mb-2">Already have an account?</p>
+            <button type="button" class="btn btn-outline-secondary btn-sm change_login_button px-3">
+              Switch to Login Page
+            </button>
+          </div>
         </div>
-   
-         <div class="col-12 mt-5 m-auto text-center">
- <input type="submit" class="btn btn-primary" value ="login"> 
 
-</div>
-
-</form>  
-<button class=" btn m-auto mt-5 text-center col-lg-3 change_register_button">Change to Register Page   </button>
-
-</div>
-
-<div class="mx-auto  register_div my-5 bg-light text-center hidden ">
-<h1 class="fs-4 fw-bold  mb-5"> Register page </h1>
-<form class="  row my-5  mx-5" action="/register" method="POST">
-     <div class=" form-group col-sm-12 col-lg-6 ">
-        <label for ="usernameregister" class="form-label col-2"> username </label>
-        <input class=" col-2 form-control my-2" id ="usernameregister" name="Username">
+      </div>
 
     </div>
-     <div class=" form-group col-sm-12 col-lg-6 ">
-        <label for ="passwordregister" class="form-label"> password </label>
-        <input class="form-control my-2" id ="passwordregister" name="Password" type="password"> 
-
-    </div>
-    <div class=" form-group col-sm-12 col-lg-6 my-5">
-        <label for ="passwordregister2" class="form-label"> password again  </label>
-        <input class="form-control my-2" id = "passwordregister2" name="Password2" type="password">
-
-    </div>
-      <div class=" form-group col-sm-12 col-lg-6 my-5 ">
-        <label for ="emailid" class="form-label"> email  </label>
-        <input class="form-control my-2" id ="emailid" name="Email">
-
-    </div>
-    <div class="col-12 mt-5 m-auto text-center">
-  <input class="m-auto btn btn-primary " type="submit" value="register" > 
-</div>
-
-</form>
-<button class="btn myy-5 change_login_button">  Change to Login Page </button>
-</div>
-<div>
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
+  </div>
 </div>
 <%- include("partials/footer.ejs") %>
