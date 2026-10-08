@@ -1,79 +1,24 @@
-.application-actions {
-    margin-top: 20px;
-    padding-top: 15px;
-
-    border-top: 1px solid #dee2e6;
-
-    text-align: center;
-     display: inline-flex;
-     
-     width: fit-content;
-     justify-content: center;
-      flex-wrap: wrap;
-      margin: auto;
-}
-
-.application-actions button {
-    font-weight: 600;
-}
 
 
 
-.applications-list {
-    width: 100%;
-    display: flex;
-    
-    margin: 0 auto;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-
-}
 
 
 /* Individual application */
-
-.application-card {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    width: max-content; /* Changed from fit-content to prevent expansion from hidden siblings */
-    max-width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 
 /* Top clickable section */
 
 .application-header {
    width: 100%; /* Spans full intrinsic width of card header */
-    border: none;
-    background: none;
+
     padding: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+   
+  
     gap: 8px;
     text-align: center;
     cursor: pointer;
 }
 
-
-/* Job title + company */
-
-.application-main-info {
-     display: flex;
-    flex-direction: column;
-    
-
-    width: fit-content;
-    align-self: center;
-}
 
 .application-label {
     display: block;
@@ -122,10 +67,6 @@
         visibility 0.3s ease;
     border-top: 0 solid #dee2e6;
 }
-.applicationoptionsdiv{
-   
-
-}
 
 
 
@@ -148,13 +89,9 @@
 
 
 
-.application-detail {
-    margin-bottom: 18px;
-}
 
-.application-detail:last-child {
-    margin-bottom: 0;
-}
+
+
 
 .application-detail p {
     margin: 5px 0 0;
@@ -164,13 +101,3 @@
 }
 
 /* application progress*/
-.job_extra_adder{
-     width: 66.666%;
-    max-width: 900px;
-
-    border-radius: 15px;
-    padding: 30px;
-
-    margin-left: auto;
-    margin-right: auto;
-}
