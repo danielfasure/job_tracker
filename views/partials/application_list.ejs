@@ -1,248 +1,174 @@
-<div class="job_list border bg-light my-5 text-center mx-auto" id="viewApplication">
+<div class="job_list border bg-light p-4 rounded-3 my-5 text-center mx-auto" id="viewApplication">
 
+  <% if (Array.isArray(applications) && applications.length > 0) { %>
 
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <% applications.forEach((application, index) => { %>
+        <% const extraapplication = extrajobs?.find(info => info.JobApplicationid === application.id) || {}; %>
 
-  
-
-        <% if (Array.isArray(applications) && applications.length > 0) { %>
-
-        
-            <% applications.forEach((application, index) => { %>
-
-            <div class="application-card " data-application-id="<%= application.id %>" >
-                    
-                <!-- Header -->
-                <button
-                    class="application-header"
-                    type="button"
-                    data-application="<%= application.id %>"
-                >
-
-                    <div class="application-main-info">
-
-                        <div>
-                            <span class="application-label">
-                                Job Title
-                            </span>
-
-                            <h2 class="application-title">
-                                <%= application.JobTitle %>
-                            </h2>
-                        </div>
-
-                        <div>
-                            <span class="application-label">
-                                Company
-                            </span>
-
-                            <p class="application-company">
-                                <i class="bi bi-building"></i>
-                                <%= application.CompanyName %>
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <i class="bi bi-chevron-down application-chevron "></i>
-
-                </button>
-
-
-                <!-- Expanded details -->
-                <div
-                    class="application-details hidden"
-                    data-details="<%= index %>"
-                >
-
-                    <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                            Description
-                        </span>
-
-                        <p>
-                            <%= application.JobDescription %>
-                        </p>
-
-                    </div>
-
-                    <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                           hour type
-                        </span>
-
-                        <p class="fs-1">
-                            <%= application.hourtype %>
-                        </p>
-
-                    </div>
-                       <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                      work place
-                        </span>
-
-                        <p class="fs-1">
-                            <%= application.jobtype  %>
-                        </p>
-
-                    </div>
-                   <% const extraapplication = extrajobs?.find(
-    info => info.JobApplicationid === application.id
-); %>
-                    <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                            current stage type
-                        </span>
-
-                        <p class="fs-1">
-                            <%= extraapplication.RoundType %>
-                        </p>
-
-                    </div>
-                          <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                            ApplicationRound
-                        </span>
-
-                        <p class="fs-1">
-                            <%= extraapplication.ApplicationRound %>
-                        </p>
-
-                    </div>
-                     <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-card-text"></i>
-                        Status
-                        </span>
-
-                        <p class="fs-1" >
-                            <%= extraapplication.Status %>
-                        </p>
-
-                    </div>
-
-
-
-                    <div class="application-detail">
-
-                        <span class="application-label">
-                            <i class="bi bi-calendar3"></i>
-                            Date Applied
-                        </span>
-
-                        <p class="fs-1">
-                            <%= new Date(application.DateCreated).toLocaleDateString('en-GB') %>
-                        </p>
-
-                    </div>
-                    </div>
-                    <div class="applicationoptionsdiv hidden ">
-                    <div class="editapplicationopener application-actions">
-                            <input
-                                type="hidden"
-                                name="jobid"
-                                value="<%= application.id %>"
-                            >
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-secondary editapplicationopenerbutton btn-sm"  data-bs-toggle="modal"
-                                    data-bs-target="#applicationeditModal"
-                                     data-application-id="<%= application.id %>">
-                            
-                               
-                            edit Job info ?
-                            </button>
-
-                  
-
-                    </div>
-                       <div class=" application-actions">
-                            <input
-                                type="hidden"
-                                name="jobid"
-                                value="<%= application.id %>"
-                            >
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-secondary btn-sm mx-auto editprogressopener" data-bs-toggle="modal"
-                                    data-bs-target="#progressionModal"
-                                     data-application-id="<%= application.id %>">
-                            
-                              
-                           update progress?
-                            </button>
-
-                  
-
-                    </div>
-
-                    <!-- Delete -->
-                    <div class="application-actions">
-
-                       
-
-                            <input
-                                type="hidden"
-                                name="jobid"
-                                value="<%= application.id %>"
-                            >
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-danger btn-sm"
-                              data-bs-target="#deleteModal" data-bs-toggle="modal"
-                                     data-application-id="<%= application.id %>">
-
-                                <i class="bi bi-trash3"></i>
-                                 Application
-                            </button>
-
-                    
-                    </div>
-
-                </div>
-                
-
+        <div class="application-card shadow-sm border rounded-3 bg-white" data-application-id="<%= application.id %>">
           
+          <!-- Header (Clickable Dropdown Toggle) -->
+          <button
+            class="application-header border-0 bg-transparent w-100 p-3 d-flex align-items-center justify-content-between text-start"
+            type="button"
+            data-application="<%= application.id %>"
+          >
+            <div class="application-main-info me-3">
+              <div class="mb-1">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  Job Title
+                </span>
+                <h2 class="application-title h5 text-dark fw-semibold m-0">
+                  <%= application.JobTitle %>
+                </h2>
+              </div>
 
-           
-             </div>
-     
-            <% }); %>
+              <div>
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  Company
+                </span>
+                <p class="application-company text-secondary m-0 small">
+                  <i class="bi bi-building me-1"></i><%= application.CompanyName %>
+                </p>
+              </div>
+            </div>
 
+            <i class="bi bi-chevron-down application-chevron text-muted"></i>
+          </button>
 
-        <% } else { %>
+          <!-- Expanded Details -->
+          <div class="application-details hidden border-top p-3 text-start bg-light" data-details="<%= index %>">
+            
+            <div class="application-detail mb-3">
+              <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                <i class="bi bi-card-text me-1"></i>Description
+              </span>
+              <p class="mb-0 text-dark small">
+                <%= application.JobDescription %>
+              </p>
+            </div>
 
-            <p>No applications set.</p>
+            <div class="row g-2 mb-2">
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-clock me-1"></i>Hour Type
+                </span>
+                <p class="fw-semibold text-dark mb-0 small">
+                  <%= application.hourtype %>
+                </p>
+              </div>
 
-        <% } %>
-        </div>
-    
-    
-    <div class="text-center mx-auto my-4 col-4 "id="add-job-buttonopenerid ">
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-geo-alt me-1"></i>Workplace
+                </span>
+                <p class="fw-semibold text-dark mb-0 small">
+                  <%= application.jobtype %>
+                </p>
+              </div>
+            </div>
 
-            <button
+            <div class="row g-2 mb-2">
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-diagram-3 me-1"></i>Current Stage
+                </span>
+                <p class="fw-semibold text-dark mb-0 small">
+                  <%= extraapplication.RoundType || 'N/A' %>
+                </p>
+              </div>
+
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-hash me-1"></i>Round
+                </span>
+                <p class="fw-semibold text-dark mb-0 small">
+                  <%= extraapplication.ApplicationRound || 'N/A' %>
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-2">
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-flag me-1"></i>Status
+                </span>
+                <span class="badge bg-secondary">
+                  <%= extraapplication.Status || 'Pending' %>
+                </span>
+              </div>
+
+              <div class="col-6 application-detail">
+                <span class="application-label text-uppercase text-muted fw-bold small d-block">
+                  <i class="bi bi-calendar3 me-1"></i>Date Applied
+                </span>
+                <p class="fw-semibold text-dark mb-0 small">
+                  <%= new Date(application.DateCreated).toLocaleDateString('en-GB') %>
+                </p>
+              </div>
+            </div>
+
+            <!-- Action Buttons Footer -->
+            <div class="applicationoptionsdiv border-top pt-3 mt-3 d-flex flex-wrap gap-2 justify-content-end">
+              
+              <button
                 type="button"
-                class="btn btn-secondary add-job-buttonopener mx-auto"
-               
-                data-bs-target="#applicationaddModal" data-bs-toggle="modal"
-            >
-                <i class="bi bi-plus-circle mx-auto"></i>
-                Add Job
-            </button>
-</div>
+                class="btn btn-outline-secondary btn-sm editapplicationopenerbutton"
+                data-bs-toggle="modal"
+                data-bs-target="#applicationeditModal"
+                data-application-id="<%= application.id %>"
+              >
+                <i class="bi bi-pencil me-1"></i>Edit Job
+              </button>
 
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm editprogressopener"
+                data-bs-toggle="modal"
+                data-bs-target="#progressionModal"
+                data-application-id="<%= application.id %>"
+              >
+                <i class="bi bi-arrow-repeat me-1"></i>Update Progress
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal"
+                data-application-id="<%= application.id %>"
+              >
+                <i class="bi bi-trash3 me-1"></i>Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      <% }); %>
+    </div>
+
+  <% } else { %>
+
+    <div class="p-5 text-muted">
+      <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+      <p class="mb-0">No applications set yet.</p>
+    </div>
+
+  <% } %>
+
+  <!-- Add Job Button -->
+  <div class="text-center my-4" id="add-job-buttonopenerid">
+    <button
+      type="button"
+      class="btn btn-primary add-job-buttonopener shadow-sm px-4"
+      data-bs-target="#applicationaddModal"
+      data-bs-toggle="modal"
+    >
+      <i class="bi bi-plus-circle me-1"></i> Add Job
+    </button>
+  </div>
 
 </div>
