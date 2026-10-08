@@ -1,103 +1,285 @@
+/* =========================================================
+   PAGE LAYOUT
+   ========================================================= */
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+}
 
 
+/*
+    Header is above this.
+
+    Sidebar and application sit next to each other.
+*/
+
+.page-layout {
+    display: flex;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    align-items: flex-start;
+}
 
 
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
-/* Individual application */
+.sidebar {
+
+        width: 70px;
+    min-width: 70px;
+    flex-shrink: 0;
+}
 
 
-/* Top clickable section */
+/*
+    Expand sidebar when mouse is over it
+*/
+
+.sidebar:hover {
+
+    width: 220px;
+}
+
+
+/* =========================================================
+   SIDEBAR LINKS
+   ========================================================= */
+
+.sidebar-link {
+
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 20px;
+
+    color: white;
+
+    text-decoration: none;
+
+    background: transparent;
+
+    border: none;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+
+.sidebar-link:hover {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+}
+
+
+/* =========================================================
+   SIDEBAR ICON
+   ========================================================= */
+
+.sidebar-icon {
+
+    min-width: 30px;
+
+    font-size: 1.3rem;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SIDEBAR TEXT
+   ========================================================= */
+
+.sidebar-text {
+
+    margin-left: 15px;
+
+    opacity: 0;
+
+    white-space: nowrap;
+
+    transition: opacity 0.15s ease;
+}
+
+
+/*
+    Show text when sidebar expands
+*/
+
+.sidebar:hover .sidebar-text {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout-button {
+
+    font-family: inherit;
+
+    font-size: inherit;
+}
+
+
+/* =========================================================
+   APPLICATION
+   ========================================================= */
+
+.application-container {
+
+   flex: 1;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   APPLICATION HEADER
+   ========================================================= */
 
 .application-header {
-   width: 100%; /* Spans full intrinsic width of card header */
+
+    width: 100%;
 
     padding: 20px;
-   
-  
+
     gap: 8px;
+
     text-align: center;
+
     cursor: pointer;
 }
 
 
 .application-label {
+
     display: block;
 
     font-size: 0.8rem;
+
     font-weight: 600;
+
     text-transform: uppercase;
 
     color: #6c757d;
+
     margin-bottom: 3px;
 }
 
+
 .application-title {
-   font-size: 1.25rem;
+
+    font-size: 1.25rem;
+
     font-weight: 600;
+
     margin: 0;
+
     white-space: nowrap;
 }
 
+
 .application-company {
+
     margin: 0;
 
     font-size: 1rem;
+
     color: #495057;
-    
 }
 
 
-/* Chevron */
+/* =========================================================
+   CHEVRON
+   ========================================================= */
 
 .application-chevron {
+
     font-size: 1.2rem;
 
     transition: transform 0.25s ease;
 }
 
 
+/* =========================================================
+   APPLICATION DETAILS
+   ========================================================= */
+
 .application-details {
-  max-height: 0;
+
+    max-height: 0;
+
     overflow: hidden;
+
     padding: 0 20px;
-    visibility: hidden; /* Prevents hidden expanded elements from affecting card width when collapsed */
+
+    visibility: hidden;
+
     transition:
         max-height 0.3s ease,
         padding 0.3s ease,
         visibility 0.3s ease;
+
     border-top: 0 solid #dee2e6;
 }
 
 
+/* Expanded application */
 
 .application-card.active .application-details {
-    max-height: 1000px; /* Increased to accommodate content comfortably */
+
+    max-height: 1000px;
+
     visibility: visible;
+
     display: flex;
+
     flex-direction: row;
+
     gap: 20px;
+
     flex-wrap: wrap;
+
     justify-content: center;
+
     padding: 20px;
+
     border-top: 1px solid #dee2e6;
 }
 
 
+/* Rotate chevron */
+
 .application-card.active .application-chevron {
+
     transform: rotate(180deg);
 }
 
 
-
-
-
-
+/* =========================================================
+   APPLICATION DETAILS TEXT
+   ========================================================= */
 
 .application-detail p {
+
     margin: 5px 0 0;
 
     color: #495057;
+
     line-height: 1.5;
 }
-
-/* application progress*/

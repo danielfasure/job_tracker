@@ -1,102 +1,36 @@
-<div class="d-flex flex-row gap-2">
-<%- include("partials/header.ejs") %>
+<div class="page">
 
-<div class="container">
- <%- include('partials/navbar.ejs') %>
-<div class="top-stats-card my-3 mx-auto" id ="top_stats">
-
-    <div class="top-stats-header text-center">
-
-        <i class="bi bi-activity"></i>
-
-        <h1>
-            Application Tracker
-        </h1>
-
-    </div>
+    <!-- HEADER -->
+    <%- include("partials/header.ejs") %>
 
 
-    <% if (stat) { %>
+    <!-- SIDEBAR + APPLICATION -->
+    <div class="page-layout">
 
-    <div class="top-stats-grid">
+        <!-- SIDEBAR -->
+        <%- include("partials/navbar.ejs") %>
 
-        <!-- Login Days -->
-        <div class="top-stat">
 
-            <div class="top-stat-icon">
-                <i class="bi bi-person-check-fill"></i>
-            </div>
+        <!-- APPLICATION -->
+        <div class="container my-5 application-container">
 
-            <div>
-                <span class="top-stat-label">
-                    Login Days
-                </span>
-
-                <span class="top-stat-value">
-                    <%= stat.TotalLoginDays %>
-                </span>
-            </div>
+           
 
         </div>
-
-
-        <!-- Login Streak -->
-        <div class="top-stat">
-
-            <div class="top-stat-icon">
-                <i class="bi bi-fire"></i>
-            </div>
-
-            <div>
-                <span class="top-stat-label">
-                    Login Streak
-                </span>
-
-                <span class="top-stat-value">
-                    <%= stat.LoginStreak %>
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <% } else { %>
-
-    <div class="top-stats-empty text-center">
-
-        <i class="bi bi-emoji-tear"></i>
-
-        <p>
-            No statistics available yet.
-        </p>
-
-    </div>
-
-    <% } %>
-
-</div>
- 
-
- <%- include("partials/application_list.ejs") %>
+<%- include("partials/application_list.ejs") %>
 <%- include("partials/editApplicationprogress.ejs") %>
 <%-include("partials/editApplicationinfo.ejs") %>
 <%-include("partials/modalApplicationadder.ejs") %>
  <%-include("partials/confirm_deletejob.ejs") %>
 
+    </div>
 
 
-  </div>
+<%- include("partials/footer.ejs") %>
+    <!-- FOOTER -->
+  
 
- 
 </div>
-   
-
-   
   
 
 
-    
-
-<%- include("partials/footer.ejs") %>

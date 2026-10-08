@@ -1,156 +1,183 @@
-<div class="d-flex flex-column gap-2">
-<%- include("partials/header.ejs") %>
+<div class="page">
+
+    <%- include("partials/header.ejs") %>
+
+    <div class="page-layout">
+
+        <!-- Sidebar -->
+        <%- include("./partials/navbar_extra.ejs") %>
 
 
-<div class="container">
-<%- include("./partials/navbar_extra.ejs") %>
-    <div class="user-settings-card my-4 mx-auto">
+        <!-- Settings content -->
+        <div class="container settings-container">
 
-        <div class="settings-header text-center">
-            <i class="bi bi-gear-fill settings-icon"></i>
+            <div class="user-settings-card my-4 mx-auto">
 
-            <h1 class="fw-bold fs-2">
-                User Settings
-            </h1>
+                <div class="settings-header text-center">
 
-            <p class="text-muted">
-                Manage your account details
-            </p>
-        </div>
+                    <i class="bi bi-gear-fill settings-icon"></i>
+
+                    <h1 class="fw-bold fs-2">
+                        User Settings
+                    </h1>
+
+                    <p class="text-muted">
+                        Manage your account details
+                    </p>
+
+                </div>
 
 
-        <% if (user) { %>
+                <% if (user) { %>
 
-        <form action="/updatesettings" method="POST" id="settings_form">
+                <form action="/updatesettings" method="POST" id="settings_form">
 
-            <div class="settings-list">
+                    <div class="settings-list">
 
-                <!-- Password -->
-                <div class="settings-item">
 
-                    <div class="settings-item-info">
+                        <!-- Password -->
+                        <div class="settings-item">
 
-                        <div class="settings-item-icon">
-                            <i class="bi bi-lock-fill"></i>
+                            <div class="settings-item-info">
+
+                                <div class="settings-item-icon">
+                                    <i class="bi bi-lock-fill"></i>
+                                </div>
+
+                                <div class="settings-field">
+
+                                    <h2>
+                                        Password
+                                    </h2>
+
+                                    <p id="password_display">
+                                        Your password is hidden
+                                    </p>
+
+                                    <input
+                                        type="password"
+                                        name="Password"
+                                        id="password_input"
+                                        class="form-control hidden"
+                                        placeholder="Enter new password"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary btn-sm mx-0"
+                                id="edit_password_button">
+
+                                <i class="bi bi-pencil-square"></i>
+                                Edit
+
+                            </button>
+
                         </div>
 
-                        <div class="settings-field">
 
-                            <h2>
-                                Password
-                            </h2>
+                        <!-- Email -->
+                        <div class="settings-item">
 
-                            <p id="password_display">
-                                Your password is hidden
-                            </p>
+                            <div class="settings-item-info">
 
-                            <input
-                                type="password"
-                                name="Password"
-                                id="password_input"
-                                class="form-control hidden"
-                                placeholder="Enter new password"
-                            >
+                                <div class="settings-item-icon">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </div>
+
+                                <div class="settings-field">
+
+                                    <h2>
+                                        Email
+                                    </h2>
+
+                                    <p id="email_display">
+                                        <%= user.Email %>
+                                    </p>
+
+                                    <input
+                                        type="email"
+                                        name="Email"
+                                        id="email_input"
+                                        class="form-control hidden"
+                                        value="<%= user.Email %>"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary btn-sm mx-0"
+                                id="edit_email_button">
+
+                                <i class="bi bi-pencil-square"></i>
+                                Edit
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- Save -->
+                        <div class="settings-save text-center">
+
+                            <button
+                                type="submit"
+                                class="btn btn-secondary btn-sm"
+                                id="submituser_button">
+
+                                <i class="bi bi-check-circle"></i>
+                                Save Changes
+
+                            </button>
 
                         </div>
 
                     </div>
 
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary btn-sm mx-0"
-                        id="edit_password_button"
-                    >
-                        <i class="bi bi-pencil-square"></i>
-                        Edit
-                    </button>
+                </form>
+
+
+                <% } else { %>
+
+
+                <!-- No user -->
+                <div class="settings-empty text-center">
+
+                    <i class="bi bi-person-x"></i>
+
+                    <h2>
+                        No user settings available
+                    </h2>
+
+                    <p>
+                        Your account settings will appear here once your account has been set up.
+                    </p>
 
                 </div>
 
 
-                <!-- Email -->
-                <div class="settings-item">
-
-                    <div class="settings-item-info">
-
-                        <div class="settings-item-icon">
-                            <i class="bi bi-envelope-fill"></i>
-                        </div>
-
-                        <div class="settings-field">
-
-                            <h2>
-                                Email
-                            </h2>
-
-                            <p id="email_display">
-                                <%= user.Email %>
-                            </p>
-
-                            <input
-                                type="email"
-                                name="Email"
-                                id="email_input"
-                                class="form-control hidden"
-                                value="<%= user.Email %>"
-                            >
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary btn-sm mx-0"
-                        id="edit_email_button"
-                    >
-                        <i class="bi bi-pencil-square"></i>
-                        Edit
-                    </button>
-
-                </div>
-
-
-                <!-- Save -->
-                <div class="settings-save text-center">
-
-                    <button
-                        type="submit"
-                        class="btn btn-secondary btn-sm"
-                        id="submituser_button"
-                    >
-                        <i class="bi bi-check-circle"></i>
-                        Save Changes
-                    </button>
-
-                </div>
+                <% } %>
 
             </div>
 
-        </form>
-
-
-        <% } else { %>
-
-        <div class="settings-empty text-center">
-
-            <i class="bi bi-person-x"></i>
-
-            <h2>
-                No user settings available
-            </h2>
-
-            <p>
-                Your account settings will appear here once your account has been set up.
-            </p>
-
         </div>
-
-        <% } %>
 
     </div>
 
-</div>
-<%-include("partials/modalApplicationadder.ejs") %>
-<%- include("partials/footer.ejs") %>
+
+    <!-- Modal -->
+    <%- include("partials/modalApplicationadder.ejs") %>
+
+
+    <!-- Footer -->
+    <%- include("partials/footer.ejs") %>
+
 </div>
