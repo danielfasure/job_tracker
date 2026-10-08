@@ -1,98 +1,94 @@
 .sidebar {
-    position: fixed ;
-
+    position: fixed;
     top: 0;
     left: 0;
 
     width: 70px;
     height: 100vh;
 
-    display: flex ;
-    flex-direction: column ;
+    background: #212529;
 
-    align-items: center;
+    display: flex;
+    flex-direction: column;
 
-    background-color: #212529;
+    padding-top: 20px;
 
-    overflow: hidden;
+    overflow-x: hidden;
 
-    transition: width 0.3s ease;
+    z-index: 1000;
 
-    z-index: 9999;
+    transition: width 0.25s ease;
 }
 
 
-
+/* Expand sidebar */
 
 .sidebar:hover {
-    width: 150px;
+    width: 220px;
 }
 
 
-
+/* Links */
 
 .sidebar-link {
-    display: flex ;
+    width: 100%;
+    min-height: 55px;
 
-    flex-direction: row ;
-
+    display: flex;
     align-items: center;
 
-    width: 100%;
-    min-height: 60px;
+    padding: 0 20px;
 
     color: white;
     text-decoration: none;
 
-    flex-shrink: 0;
+    background: transparent;
+    border: none;
+
+    white-space: nowrap;
+
+    cursor: pointer;
 }
 
 
+.sidebar-link:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
 
+
+/* Icons */
 
 .sidebar-icon {
-    width: 70px;
-    min-width: 70px;
+    min-width: 30px;
+
+    font-size: 1.3rem;
 
     text-align: center;
-
-    font-size: 22px;
 }
 
 
+/* Text */
 
-
-.sidebar-link span:last-child {
-    white-space: nowrap;
+.sidebar-text {
+    margin-left: 15px;
 
     opacity: 0;
 
-    transition: opacity 0.2s ease;
+    transition: opacity 0.15s ease;
 }
 
 
+/* Show text when sidebar expands */
 
-
-.sidebar:hover .sidebar-link span:last-child {
+.sidebar:hover .sidebar-text {
     opacity: 1;
 }
 
 
+/* Logout */
 
-
-.sidebar-link:hover {
-    background-color: #343a40;
-}
-
-.sidebar form {
-    width: 100%;
-    margin: 0;
-}
-
-.sidebar form button {
-    border: 0;
-    background: none;
-    font: inherit;
-    padding: 0;
-    cursor: pointer;
+.logout-button {
+    font-family: inherit;
+    font-size: inherit;
 }
