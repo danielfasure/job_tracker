@@ -1,4 +1,4 @@
-<div id="progressionModal" class="modal fade" tabindex="-1" aria-labelledby="progressionModalLabel" aria-hidden="true">
+<div id="progressionModal" class="modal fade" tabindex="-1"  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content shadow-sm position-relative">
 
@@ -13,9 +13,8 @@
       <!-- Modal Body -->
       <div class="modal-body p-4">
         <form id="progressionForm" action="/editextraJobInfo" method="POST">
-
-          <input type="hidden" id="progApplicationId" name="JobApplicationid">
-
+<!-- Example inside your modal form -->
+<input type="hidden" name="Applicationnumber" id="progressApplicationId">
           <!-- Status Dropdown -->
           <div class="mb-3 text-start">
             <label for="status" class="form-label fw-semibold text-muted small mb-1">

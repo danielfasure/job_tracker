@@ -67,7 +67,7 @@ export async function editMinimumJob({
 }
 
 
-export async function Deletejob(applicationid){
+export async function Deletejob({applicationid}){
     const result = await pool.query(
         'DELETE FROM "JobTrackerExtra" WHERE "JobApplicationid"=$1 ',[applicationid]
     )

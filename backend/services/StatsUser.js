@@ -41,7 +41,7 @@ export async function increaseapplicationcount(userid){
     return result.rows[0];
 }
 
-export async function decreaseapplicationcount(userid){
+export async function decreaseapplicationcount({userid}){
     const result = await pool.query(
         'UPDATE "UserStats" SET "TotalNumberOfApplication" = "TotalNumberOfApplication" - 1 WHERE "userid" = $1 RETURNING *',[userid]
     );

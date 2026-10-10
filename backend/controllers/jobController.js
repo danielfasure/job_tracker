@@ -38,12 +38,12 @@ res.redirect("/applicationportal")
 export async function removeJob(req,res){
    
 
-  const { applicationId } = req.body;
-  console.log(applicationId)
+  const { Applicationnumber } = req.body;
+  console.log(Applicationnumber)
 
-const result = await decreaseapplicationcount(applicationId);
+const result = await decreaseapplicationcount({userid:req.user.userid});
 
- await Deletejob(applicationId);
+ await Deletejob({applicationid:Applicationnumber});
   
   console.log("Successfully removed job",);
   res.redirect("/applicationportal")
@@ -62,9 +62,16 @@ export async function extraJobInfo(req,res){
 
 }
 export async function editextraJobInfo(req,res){
-const {Status,ApplicationRound,RoundType,JobApplicationid}= req.body;
-console.log(Status,JobApplicationid)
-const userid=req.user.id;
-await AlterJobDetail({Status:Status||null,ApplicationRound:ApplicationRound||null,RoundType:RoundType||null,JobApplicationid:JobApplicationid})
+
+const {Status,ApplicationRound,RoundType,Applicationnumber}= req.body;
+
+
+ await AlterJobDetail({
+        Status: Status || null,
+        ApplicationRound: ApplicationRound,
+        RoundType: RoundType || null,
+        JobApplicationid: Applicationnumber
+    });
+
 res.redirect("/applicationportal")
 }

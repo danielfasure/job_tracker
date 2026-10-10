@@ -45,71 +45,40 @@ if (viewApplicationButton && viewApplication) {
 }
 
 /*application opener and closer  */
-const applicationHeaders = document.querySelectorAll(".application-header");
+// modal listener fix
+document.addEventListener('DOMContentLoaded', () => {
+    // Map each modal ID to its specific hidden input ID
+    const modalMapping = {
+        'applicationeditModal': 'editApplicationId',
+        'progressionModal': 'progressApplicationId',
+        'deleteModal': 'deleteApplicationId'
+    };
 
-applicationHeaders.forEach(header => {
-
-    header.addEventListener("click", () => {
-
-        const card = header.closest(".application-card");
-
-       const buttonforjobs= card.querySelector(".applicationoptionsdiv")
-       buttonforjobs.classList.toggle("hidden")
-
-        card.classList.toggle("active");
-
+    Object.keys(modalMapping).forEach(modalId => {
+        const modalElement = document.getElementById(modalId);
+        
+        if (modalElement) {
+            modalElement.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                
+                if (!button) return;
+                
+                // Pull the ID from the button
+                const applicationId = button.getAttribute('data-application-id');
+                
+                // Find the specific hidden input for this modal
+                const hiddenInputId = modalMapping[modalId];
+                const hiddenInput = modalElement.querySelector(`#${hiddenInputId}`);
+                
+                if (hiddenInput) {
+                    hiddenInput.value = applicationId || '';
+                    console.log(`Assigned application ID ${applicationId} to #${hiddenInputId}`);
+                }
+            });
+        }
     });
-
 });
 
-
-// modal
-const applicationeditbutton = document.querySelectorAll(".editapplicationopenerbutton");
-const closeModalbutton = document.getElementById("closeModal");
-const modal = document.querySelector("#progressionModal");
-modal.addEventListener("show.bs.modal", function (event) {
-
-    const button = event.relatedTarget;
-
-    const applicationId = button.dataset.applicationId;
-
-    document.getElementById("progApplicationId").value = applicationId
- 
-});
-
-
-
-
-
-const applicationmodal=document.querySelector("#applicationeditModal");
- applicationmodal.addEventListener("show.bs.modal", function (event) {
-
-    const button = event.relatedTarget;
-
-    const applicationId = button.dataset.applicationId;
-
-    document.getElementById("ApplicationId").value = applicationId
-   
-
-})
-
-
-const deletemodal=document.querySelector("#deleteModal");
-deletemodal.addEventListener("show.bs.modal", function (event) {
-
-    const button = event.relatedTarget;
-
-    const applicationId = button.dataset.applicationId;
-
-    document.getElementById("DeleteApplicationId").value = applicationId
-   
-
-})
-
-closeModalbutton.addEventListener("click", () => {
-    modal.style.display = "none";
-})
-// SETTINGS
 const editPasswordButton = document.querySelector("#edit_password_button");
 const editEmailButton = document.querySelector("#edit_email_button");
 
