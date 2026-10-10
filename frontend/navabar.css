@@ -1,99 +1,92 @@
-.page-layout {
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-}
+
 .sidebar {
-     width: 70px;
-    min-width: 70px;
-
-    height: 100vh;
-
-    background: #212529;
-
     display: flex;
     flex-direction: column;
 
-    padding-top: 20px;
+    width: 70px;
+    min-height: 100vh;
 
-    overflow-x: hidden;
+    padding: 10px;
+
+    background-color: #212529;
 
     transition: width 0.25s ease;
 
-    flex-shrink: 0;
+    overflow-x: hidden;
+
 }
 
-
-/* Expand sidebar */
-
+/* Expand on hover */
 .sidebar:hover {
-    width: 220px;
+     flex-basis: 220px;
 }
 
-
-/* Links */
-
+/* Each navigation item */
 .sidebar-link {
-    width: 100%;
-    min-height: 55px;
-
     display: flex;
     align-items: center;
+    gap: 15px;
 
-    padding: 0 20px;
+    width: 100%;
+    min-height: 48px;
 
-    color: white;
+    padding: 12px;
+
+    color: #f8f9fa;
     text-decoration: none;
 
-    background: transparent;
-    border: none;
-
     white-space: nowrap;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    font: inherit;
+    text-align: left;
 
     cursor: pointer;
 }
 
-
+/* Hover effect */
 .sidebar-link:hover {
-    background: rgba(255,255,255,0.1);
+    background-color: #343a40;
     color: white;
 }
 
-
 /* Icons */
-
 .sidebar-icon {
-    min-width: 30px;
+    flex-shrink: 0;
+    font-size: 1.25rem;
 
-    font-size: 1.3rem;
-
+    width: 24px;
     text-align: center;
 }
 
-
-/* Text */
-
+/* Hide labels while collapsed */
 .sidebar-text {
-     margin-left: 15px;
-
     opacity: 0;
+    visibility: hidden;
 
-    white-space: nowrap;
-
-    transition: opacity 0.15s ease;
+    transition: opacity 0.2s ease;
 }
 
-
-/* Show text when sidebar expands */
-
+/* Show labels when expanded */
 .sidebar:hover .sidebar-text {
     opacity: 1;
+    visibility: visible;
 }
 
-
-/* Logout */
-
+/* Logout button */
 .logout-button {
-    font-family: inherit;
-    font-size: inherit;
+    appearance: none;
+}
+
+/* Keep logout form full width */
+.sidebar form {
+    width: 100%;
+}
+
+.page-layout > .sidebar {
+    transition: flex-basis 0.25s ease;
 }

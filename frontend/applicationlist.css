@@ -1,0 +1,115 @@
+
+/* Layout beside the sidebar */
+.page-layout {
+    display: flex;
+  flex-grow: 1;
+    min-height: 100vh;
+   
+}
+
+/* Main application content */
+
+/* Header panel */
+.application-summary {
+    width: 100%;
+    min-width: 0;
+    background: #f8f9fa;
+}
+
+/* Header title and icon */
+.application-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.application-summary-title > i {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+/* Three statistic cards */
+.application-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* Each statistic */
+.summary-stat {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 16px;
+
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+.summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+
+    border-radius: 10px;
+    background: #e9ecef;
+    font-size: 1.25rem;
+}
+
+.summary-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.summary-label {
+    color: #6c757d;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.summary-value small {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .application-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .application-main {
+        padding: 12px;
+    }
+
+    .application-summary {
+        padding: 16px !important;
+    }
+
+    .application-summary-title > i {
+        font-size: 1.6rem;
+    }
+
+    .application-summary-title h2 {
+        font-size: 1.35rem;
+    }
+}
+

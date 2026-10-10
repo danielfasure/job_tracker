@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page bg-light">
 
     <!-- HEADER -->
     <%- include("partials/header.ejs") %>
@@ -10,27 +10,25 @@
         <!-- SIDEBAR -->
         <%- include("partials/navbar.ejs") %>
 
-
+<main class="container-fluid py-3 py-md-5 px-3 px-md-4 ></div>  border-top border-bottom border-left">
         <!-- APPLICATION -->
-        <div class="container my-5 application-container">
-
-           
-
-        </div>
+       <%- include("partials/application_header.ejs") %>
+      
 <%- include("partials/application_list.ejs") %>
+</div>
 <%- include("partials/editApplicationprogress.ejs") %>
 <%-include("partials/editApplicationinfo.ejs") %>
 <%-include("partials/modalApplicationadder.ejs") %>
  <%-include("partials/confirm_deletejob.ejs") %>
 
-    </div>
+   
 
 
 
     <!-- FOOTER -->
   
 
-</div>
+</main>
   
-
+</div>
 

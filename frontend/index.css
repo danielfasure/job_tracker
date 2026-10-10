@@ -1,164 +1,44 @@
-.hidden{
+.hidden {
     display: none;
 }
-header{
-   
-    margin: auto;
+/* Login and register card */
+.login-register-card {
+    width: 100%;
+    max-width: 480px;
+    min-width: 0;
+    align-self: flex-start;
+}
+.page-layout {
+    display: flex; align-items: stretch; min-height: 100vh; width: 100%;
+}
+/* Prevent long input content from overflowing */
+.login-register-card .form-control {
+    width: 100%;
+    min-width: 0;
 }
 
-body{
-
-height: 100vh;
-
-  
+/* Register form columns */
+.login-register-card .row > * {
+    min-width: 0;
 }
 
-.job_tracker_portal {
-    position: flex;
-    flex-direction: column;
-   left: 50%;
-    width: 90%;
-    max-width: 900px;
-   
+/* Mobile styling */
+@media (max-width: 576px) {
 
-    border-radius: 15px;
-    padding: 30px;
+    .login-register-card {
+        border-radius: 12px;
+    }
 
-}
+    .login-register-card .card-body {
+        padding: 1rem;
+    }
 
+    .login-register-card h1 {
+        font-size: 1.35rem;
+    }
 
-/* Header */
+    .login-register-card .btn {
+        overflow-wrap: anywhere;
+    }
 
-.add-job-header {
-    margin-bottom: 30px;
-}
-
-.add-job-icon {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.add-job-header h1 {
-    margin-bottom: 5px;
-}
-
-
-/* Form */
-
-.add-job-form {
-    max-width: 750px;
-   
-
-   margin-top: auto;
-}
-
-
-/* Individual fields */
-
-.form-group {
-     text-align: center;
-     justify-content: center;
-}
-
-.form-group label {
-    font-weight: 600;
-    margin-bottom: 8px;
-     
-}
-
-.form-group label i {
-    margin-right: 5px;
-}
-.job_list {
-    width: 90%;
-    max-width: 900px;
-
-
-    border-radius: 15px;
-    padding: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-
-  
-}
-
-
-/* Make date and description full width */
-
-.form-group:nth-child(3),
-.form-group:nth-child(4) {
-    grid-column: 1 / -1;
-}
-
-
-/* Description */
-
-#companydescription {
-    resize: vertical;
-    min-height: 120px;
-}
-
-
-/* Submit */
-
-.add-job-button {
-    padding: 10px 25px;
-    font-weight: 600;
-}
-
-.add-job-button i {
-    margin-right: 5px;
-}
-
-
-
-footer{
-color: gray;
-}
-
-
-
-
-
-
-
-
-
-
-/* settings css */
-
-
-
-
-/* chages for statitits*/
-
-
-
-/* Header */
-
-.tracker-header {
-    margin-bottom: 30px;
-}
-
-.tracker-icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.tracker-header h1 {
-    margin-bottom: 5px;
-}
-
-
-/* Stats grid */
-
-
-main {
-    margin-left: 70px;
-    min-height: 100vh;
-    padding: 1px 20px;
 }
