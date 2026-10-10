@@ -25,7 +25,6 @@ const hey= await AddJobDetail({userid:userid,JobApplicationid:job.id})
 }
 export async function editapplication(req,res){
  const { JobTitle, CompanyName, JobDescription, DateCreated,Applicationnumber,hourtype,jobtype } = req.body;
- console.log("added",Applicationnumber)
  const userid= req.user.id;
  await editMinimumJob({JobTitle:JobTitle||null,CompanyName:CompanyName||null,jobdescription:JobDescription||null,companydateapplied:DateCreated||null,applicationnumber:Applicationnumber,jobtype:jobtype||null,hourtype:hourtype||null})
 res.redirect("/applicationportal")
