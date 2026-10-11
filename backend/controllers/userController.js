@@ -1,5 +1,5 @@
 import {  getUserJobs,CreateMinimumJob } from "../services/JobServices.js";
-import {setUser,getuser} from "../services/userServices.js";
+import {setUser,getuser,updateuserdetails,checkemail, checkuser} from "../services/userServices.js";
 import {updateLoginStats, setUserFirstStats,getUserStats, increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 
 import jwt from "jsonwebtoken";
@@ -85,3 +85,41 @@ export async function logout(req,res) {
 
 
     
+
+export async function updatesettings(req, res) {
+    const { Email, Password, Username } = req.body;
+
+    // Nothing entered
+    if (!Email?.trim() && !Password?.trim() && !Username?.trim()) {
+        return res.redirect("/setting");
+    }
+
+    // Validate email if provided
+    if (Email?.trim()) {
+        const check = await checkemail(Email);
+
+        if (check === true) {
+            // Adjust this condition to match your checkemail function
+            return res.redirect("/setting");
+        }
+    }
+
+    // Validate username if provided
+    if (Username?.trim()) {
+        const check = await checkuser(Username);
+
+        if (check === true) {
+            // Adjust this condition to match your checkuser function
+            return res.redirect("/setting");
+        }
+    }
+
+    await updateuserdetails({
+        Email: Email?.trim() || null,
+        Username: Username?.trim() || null,
+        Password: Password || null,
+        id: req.user.id
+    });
+
+    return res.redirect("/setting");
+}

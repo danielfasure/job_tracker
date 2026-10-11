@@ -21,7 +21,7 @@ router.post("/register",UserController.register)
 router.post("/logout",UserController.logout)
 router.post("/createjob",requireAuth,jobController.CreateJob)
 router.post("/editjobinfo",requireAuth,jobController.editapplication)
-
+router.post("/updatesettings",requireAuth,UserController.updatesettings)
 
 router.post("/creatextrajob",requireAuth,jobController.extraJobInfo)
 

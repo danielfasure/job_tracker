@@ -61,12 +61,41 @@ export async function getuserbyId(userId) {{
 
 
 
+export async function updateuserdetails({
+    Email,
+    Password,
+    Username,
+    id
+}) {
+    let hash = null;
+
+    if (Password?.trim()) {
+        hash = await bcrypt.hash(Password, saltRounds);
+    }
+
+    const result = await pool.query(
+        `UPDATE "JobUser"
+         SET
+            "Email" = COALESCE($1, "Email"),
+            "Password" = COALESCE($2, "Password"),
+            "Username" = COALESCE($3, "Username")
+         WHERE "id" = $4`,
+        [
+            Email || null,
+            hash,
+            Username || null,
+            id
+        ]
+    );
+
+    return result;
+}
 
 
 
       
      
-   
+ 
 
 
 export async function setUser(Username, Password, Email) {
@@ -96,3 +125,33 @@ export async function setUser(Username, Password, Email) {
 
     return user.rows[0];
 }
+
+export async function checkuser({Username}){
+        if (Username){
+             const results=await pool.query(`SELECT * FROM "JobUser WHERE "Username"= $1"`,[Username])
+             if (results.rows.length>0){
+                return results.rows[0]
+             }
+             return false
+
+        }
+
+
+
+
+}
+export async function checkemail({Email}){
+        if (Email){
+             const results=await pool.query(`SELECT * FROM "JobUser" WHERE "Username"= $1"`,[Email])
+             if (results.rows.length>0){
+                return results.rows[0]
+             }
+             return false
+
+        }
+
+
+
+
+}
+
