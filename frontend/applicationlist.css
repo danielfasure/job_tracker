@@ -113,3 +113,27 @@
     }
 }
 
+/* Normal pagination buttons */
+.pagination .page-link {
+    color: var(--bs-secondary-color);
+    background-color: var(--bs-secondary-bg);
+    border-color: var(--bs-border-color);
+}
+
+/* Hover effect */
+.pagination .page-link:hover {
+    color: #000;
+    background-color: var(--bs-secondary-bg-subtle);
+}
+
+/* Currently selected page */
+.pagination .page-item.active .page-link {
+    color: #000;
+    background-color: var(--bs-secondary-bg-subtle);
+    border-color: var(--bs-border-color);
+}
+
+/* Keyboard focus */
+.pagination .page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}

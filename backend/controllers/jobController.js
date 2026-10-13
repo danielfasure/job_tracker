@@ -1,7 +1,7 @@
 
 import { increaseapplicationcount,decreaseapplicationcount} from "../services/StatsUser.js";
 
-import {  AddJobDetail, CreateMinimumJob,Deletejob,AlterJobDetail ,editMinimumJob} from "../services/JobServices.js";
+import {  AddJobDetail, CreateMinimumJob,Deletejob,AlterJobDetail ,editMinimumJob    } from "../services/JobServices.js";
 export async function CreateJob(req,res){
   
   const { JobTitle, CompanyName, JobDescription, DateCreated,hourtype,jobtype } = req.body;

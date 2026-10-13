@@ -18,6 +18,42 @@ export async function getUserJobs(id) {
 
     return result.rows;
 }
+
+
+export async function getUserJobsPaginated(
+    userId,
+    limit,
+    offset
+) {
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM "JobTracker"
+        WHERE "Jobuserid" = $1
+        ORDER BY "DateCreated" DESC, id DESC
+        LIMIT $2 OFFSET $3
+        `,
+        [userId, limit, offset]
+    );
+
+    return result.rows;
+}
+
+
+export async function countUserJobs(userId) {
+    const result = await pool.query(
+        `
+        SELECT COUNT(*) AS total
+        FROM "JobTracker"
+        WHERE "Jobuserid" = $1
+        `,
+        [userId]
+    );
+
+    return Number(result.rows[0].total);
+}
+
+
 export async function getextrajobs(id) {
 console.log("msss ",id)
       const result = await pool.query(
