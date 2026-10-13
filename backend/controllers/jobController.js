@@ -4,15 +4,18 @@ import { increaseapplicationcount,decreaseapplicationcount} from "../services/St
 import {  AddJobDetail, CreateMinimumJob,Deletejob,AlterJobDetail ,editMinimumJob    } from "../services/JobServices.js";
 export async function CreateJob(req,res){
   
-  const { JobTitle, CompanyName, JobDescription, DateCreated,hourtype,jobtype } = req.body;
+  const { JobTitle, CompanyName, JobDescription, DateCreated,hourtype,jobtype,jobcategory } = req.body;
   const userid = req.user.id;
- const job = await CreateMinimumJob(
-    CompanyName,
-    JobDescription,
-    JobTitle,
-    DateCreated,
-    userid,hourtype,jobtype
-);
+ const job = await CreateMinimumJob({
+    CompanyName:CompanyName,
+    jobdescription:JobDescription,
+    JobTitle:JobTitle,
+    companydateapplied:DateCreated,
+    Userid:userid,
+    hourtype:hourtype,
+    jobtype:jobtype,
+    jobcategory:jobcategory
+});
 
 
 const hey= await AddJobDetail({userid:userid,JobApplicationid:job.id})
@@ -24,9 +27,9 @@ const hey= await AddJobDetail({userid:userid,JobApplicationid:job.id})
 
 }
 export async function editapplication(req,res){
- const { JobTitle, CompanyName, JobDescription, DateCreated,Applicationnumber,hourtype,jobtype } = req.body;
+ const { JobTitle, CompanyName, JobDescription, DateCreated,Applicationnumber,hourtype,jobtype,jobcategory } = req.body;
  const userid= req.user.id;
- await editMinimumJob({JobTitle:JobTitle||null,CompanyName:CompanyName||null,jobdescription:JobDescription||null,companydateapplied:DateCreated||null,applicationnumber:Applicationnumber,jobtype:jobtype||null,hourtype:hourtype||null})
+ await editMinimumJob({JobTitle:JobTitle||null,CompanyName:CompanyName||null,jobdescription:JobDescription||null,companydateapplied:DateCreated||null,applicationnumber:Applicationnumber,jobtype:jobtype||null,hourtype:hourtype||null,jobcategory:jobcategory||null})
 res.redirect("/applicationportal")
 }
 

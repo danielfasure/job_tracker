@@ -69,6 +69,27 @@
             </select>
           </div>
 
+               <div class="mb-3">
+            <label for="JobCategory" class="form-label">
+               Job category
+            </label>
+
+             <select
+             id="JobCategory"
+             name="jobcategory"
+             class="form-select"
+              required
+                 >
+              <option value="">Choose a category</option>
+
+           <% categories.forEach(cat => { %>
+               <option value="<%= cat %>">
+                   <%= cat %>
+               </option>
+             <% }) %>
+          </select>
+           </div>
+
           <!-- Actions Footer / Submit Button -->
           <div class="d-flex justify-content-end gap-2 pt-3 border-top">
             <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">

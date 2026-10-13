@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export async function register(req,res) {
-    console.log("REGISTER");
+  
    
 
   const {Username ,Password,Email} = req.body;
@@ -32,9 +32,9 @@ export async function Loginchecker(req,res){
     try {
         const {Username,Password}= req.body
         const user =  await getuser(Username)
-        console.log(Password)
+      
 
-        console.log(user.Password)
+     
         const match = await bcrypt.compare(Password,user.Password)
         if (match){
             const accessToken = jwt.sign({

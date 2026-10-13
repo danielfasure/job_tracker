@@ -6,7 +6,7 @@
 
     const token = req.cookies.acessToken;
 
-    console.log("ACCESS TOKEN:", token);
+  
 
     // No access token
     if (!token) {

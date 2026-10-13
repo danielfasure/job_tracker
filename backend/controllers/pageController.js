@@ -1,5 +1,4 @@
-import {  getUserJobs,getextrajobs,getUserJobsPaginated,
-    countUserJobs } from "../services/JobServices.js";
+import {  getextrajobs,getFilteredUserJobs,countFilteredUserJobs,JOB_CATEGORIES} from "../services/JobServices.js";
 
 import {getUserStats} from "../services/StatsUser.js";
 import {getuserbyId} from "../services/userServices.js";
@@ -19,56 +18,110 @@ export async function profilePage(req, res, next) {
 }
 
 
+
+
+// Keep your existing imports for getUserStats and getextrajobs.
+
 export async function applicationPage(req, res) {
     try {
         const userid = req.user.id;
 
-        // 1. Choose how many jobs appear on each page.
+        // SEARCH
+        const search =
+            typeof req.query.search === "string"
+                ? req.query.search.slice(0, 100)
+                : "";
+
+        // STATUS FILTER
+        const allowedStatuses = [
+            "pending",
+            "interview",
+            "rejected",
+            "offer"
+        ];
+
+        const requestedStatus =
+            typeof req.query.status === "string"
+                ? req.query.status.toLowerCase()
+                : "";
+
+        const status = allowedStatuses.includes(requestedStatus)
+            ? requestedStatus
+            : "";
+
+        // CATEGORY FILTER
+        const requestedCategory =
+            typeof req.query.category === "string"
+                ? req.query.category
+                : "";
+
+        const category = JOB_CATEGORIES.includes(
+            requestedCategory
+        )
+            ? requestedCategory
+            : "";
+
+        // All filters are passed to both SQL functions
+        const filters = {
+            search,
+            status,
+            category
+        };
+
+        // PAGINATION
         const limit = 10;
 
-        // 2. Find out which page the user requested.
-        const requestedPage = Math.max(
-            1,
-            Number.parseInt(req.query.page, 10) || 1
+        const parsedPage = Number.parseInt(
+            req.query.page,
+            10
         );
 
-        // 3. Get the total number of applications.
-        const totalJobs = await countUserJobs(userid);
+        const requestedPage =
+            Number.isSafeInteger(parsedPage) && parsedPage > 0
+                ? parsedPage
+                : 1;
 
-        // 4. Work out how many pages are needed.
+        // Count matching jobs before calculating pages
+        const totalJobs = await countFilteredUserJobs(
+            userid,
+            filters
+        );
+
         const totalPages = Math.ceil(totalJobs / limit);
 
-        // 5. Prevent requests for pages that do not exist.
         const currentPage = Math.min(
             requestedPage,
             Math.max(totalPages, 1)
         );
 
-        // 6. Work out how many jobs to skip.
         const offset = (currentPage - 1) * limit;
 
-        // 7. Fetch only the jobs for this page.
+        // Load page of matching jobs and existing page data
         const stats = await getUserStats(userid);
 
-        const jobs = await getUserJobsPaginated(
+        const jobs = await getFilteredUserJobs(
             userid,
+            filters,
             limit,
             offset
         );
 
-        // 8. Keep your existing extra information.
         const extrajobs = await getextrajobs(userid);
-        console.log("Extra page", currentPage, "of", totalPages, "for user", userid);
-        
 
-        // 9. Send everything to EJS.
         return res.render("application_tracker", {
             stat: stats,
-            userid: userid,
+            userid,
             applications: jobs,
             extrajobs: extrajobs ?? [],
+
             currentPage,
-            totalPages
+            totalPages,
+            totalJobs,
+
+            search,
+            status,
+            category,
+            categories: JOB_CATEGORIES
         });
 
     } catch (error) {
@@ -80,6 +133,8 @@ export async function applicationPage(req, res) {
     }
 }
 
+
+
 export async function statsPage(req,res){
  try {
 
@@ -90,7 +145,7 @@ export async function statsPage(req,res){
     res.render("statistics",
         {
     stat:userstats,
-    userid:userid
+    userid:userid,categories: JOB_CATEGORIES
  } );
 
 
@@ -126,7 +181,7 @@ export async function  settingPage(req,res){
  console.log("User ID:", userid);
 
   const User=  await getuserbyId(userid) 
-  res.render("setting", { user: User, userid: User.id });
+  res.render("setting", { user: User, userid: User.id,categories: JOB_CATEGORIES });
 
   }catch(error){
     console.error(error);

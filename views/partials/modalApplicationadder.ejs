@@ -90,6 +90,28 @@
               </select>
             </div>
           </div>
+             <div class="mb-3">
+            <label for="JobCategory" class="form-label">
+               Job category
+            </label>
+
+             <select
+             id="JobCategory"
+             name="jobcategory"
+             class="form-select"
+              required
+                 >
+              <option value="">Choose a category</option>
+
+           <% categories.forEach(cat => { %>
+               <option value="<%= cat %>">
+                   <%= cat %>
+               </option>
+             <% }) %>
+          </select>
+           </div>
+
+          
 
           <!-- Description -->
           <div class="mb-4 text-start">
@@ -114,6 +136,7 @@
               <i class="bi bi-plus-circle me-1"></i>Add Application
             </button>
           </div>
+       
 
         </form>
       </div>
