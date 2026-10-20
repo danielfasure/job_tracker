@@ -1,5 +1,6 @@
 import "dotenv/config";
 import pool from "../db.js";
+import {JOB_CATEGORIES} from "./list_of_job_categories.js";
 
 export async function getAllJobs() {
 
@@ -171,32 +172,7 @@ await pool.query(query,[RoundType??null,ApplicationRound??null,Status??null,
     );
 }
 
-const JOB_CATEGORIES = [
-    "Technology & IT",
-    "Data & Analytics",
-    "Engineering",
-    "Science & Research",
-    "Finance & Accounting",
-    "Business & Administration",
-    "Customer Service & Support",
-    "Sales & Business Development",
-    "Marketing & Communications",
-    "Retail & E-commerce",
-    "Warehouse & Logistics",
-    "Transport & Driving",
-    "Operations & Supply Chain",
-    "Healthcare & Social Care",
-    "Education & Training",
-    "Hospitality & Catering",
-    "Construction & Trades",
-    "Manufacturing & Production",
-    "Human Resources & Recruitment",
-    "Design & Creative",
-    "Legal",
-    "Property & Facilities",
-    "Public Sector & Charity",
-    "Other"
-];
+
 
 
 // Build shared search and filter conditions
@@ -245,11 +221,12 @@ function buildJobFilters(
     if (category) {
         values.push(category);
 
-        const categoryParam = `$${values.length}`;
+         const categoryParam = `$${values.length}`;
 
-        conditions.push(
-            `j."JobCategory" = ${categoryParam}`
-        );
+        conditions.push(`
+        LOWER(TRIM(j."JobCategory")) =
+        LOWER(TRIM(${categoryParam}))
+    `);
     }
 
     return {

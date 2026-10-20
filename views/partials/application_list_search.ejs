@@ -1,0 +1,111 @@
+
+
+<form
+    method="GET"
+    action="/applicationportal"
+    class="card border-0 shadow-sm p-3 mb-4"
+>
+    <div class="row g-3">
+
+        <!-- Search -->
+        <div class="col-12 ">
+            <label for="search" class="form-label">
+                Search applications
+            </label>
+
+            <input
+                type="search"
+                id="search"
+                name="search"
+                class="form-control"
+                placeholder="Job title or company..."
+                value="<%= search || '' %>"
+            >
+        </div>
+
+        <!-- Job category -->
+        <div class="col-12 col-md-6">
+            <label for="category" class="form-label">
+                Job category
+            </label>
+
+            <select
+                id="category"
+                name="category"
+                class="form-select"
+            >
+                <option value="">All categories</option>
+
+                <% categories.forEach(cat => { %>
+                    <option
+                        value="<%= cat %>"
+                        <%= category === cat ? 'selected' : '' %>
+                    >
+                        <%= cat %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <!-- Application status -->
+        <div class="col-12 col-md-6">
+            <label for="status" class="form-label">
+                Application status
+            </label>
+
+            <select
+                id="status"
+                name="status"
+                class="form-select"
+            >
+                <option value="">All statuses</option>
+
+                <option
+                    value="pending"
+                    <%= status === 'pending' ? 'selected' : '' %>
+                >
+                    Pending
+                </option>
+
+                <option
+                    value="interview"
+                    <%= status === 'interview' ? 'selected' : '' %>
+                >
+                    Interview
+                </option>
+
+                <option
+                    value="rejected"
+                    <%= status === 'rejected' ? 'selected' : '' %>
+                >
+                    Rejected
+                </option>
+
+                <option
+                    value="offer"
+                    <%= status === 'offer' ? 'selected' : '' %>
+                >
+                    Offer
+                </option>
+            </select>
+        </div>
+
+        <!-- Submit and clear -->
+        <div class="col-12 d-flex gap-2 align-items-end">
+            <button
+                type="submit"
+                class="btn btn-secondary"
+            >
+                Apply filters
+            </button>
+
+            <a
+                href="/applicationportal"
+                class="btn btn-outline-secondary"
+            >
+                Clear filters
+            </a>
+        </div>
+
+    </div>
+</form>
