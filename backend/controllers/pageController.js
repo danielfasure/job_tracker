@@ -61,10 +61,7 @@ export async function applicationPage(req, res) {
             ? requestedCategory
             : "";
 
-                    console.log("CATEGORY DEBUG:", {
-    query: req.query,
-    requestedCategory
-});        
+                     
 
 
         // All filters are passed to both SQL functions
